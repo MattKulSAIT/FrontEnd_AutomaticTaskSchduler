@@ -1,0 +1,5 @@
+const basicInput = (
+
+    <input></input>
+
+);
