@@ -1,8 +1,16 @@
 import React from 'react';
+import ATlogo from '../../assets/AutoTaskerTemp_Final.png';
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
 
 function Login() {
-    let username;
-    let password;
+
+    //Gets the data and login in as user, backend thing
+    function buttonLogin() {
+        //Banan
+    }
+    const username = "";
+    const password = "";
 
     return (
         <div className='login'>
@@ -11,6 +19,7 @@ function Login() {
                     id='ATlogo'
                     src={ATlogo} alt='AutoTask Logo'
                 />
+                <h1>AutoTask</h1>
             </div>
             <div className='loginTable'>
                 <table>
@@ -18,16 +27,16 @@ function Login() {
                         <th>Username</th>
                     </tr>
                     <tr>
-                        //Text field here (MaterialUI)
+                        <td><input type='text' value={username}/></td>
                     </tr>
                     <tr>
                         <th>Password</th>
                     </tr>
                     <tr>
-                        //Text field here (MaterialUI)
+                        <td><input type='text' value={password}/></td>
                     </tr>
                     <tr>
-                        //Button to login here (MaterialUI)
+                        <td><button onClick={buttonLogin}>Login</button></td>
                     </tr>
                 </table>
             </div>
@@ -36,3 +45,17 @@ function Login() {
 }
 
 export default Login;
+
+/*import * as React from 'react';
+
+
+export default function BasicButtons() {
+  return (
+    <Stack spacing={2} direction="row">
+      <Button variant="text">Text</Button>
+      <Button variant="contained">Contained</Button>
+      <Button variant="outlined">Outlined</Button>
+    </Stack>
+  );
+}
+*/
