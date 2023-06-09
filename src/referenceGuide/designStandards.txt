@@ -9,7 +9,8 @@ FFFFFF - General
 = Grey =
 9399A3 - Input
 757575 - Text
-F5F5F5 - BG  
+F5F5F5 - BG 
+dfdfdf - Input Box Shadows
 
 Fonts /////////////////////////////////////
 
