@@ -1,0 +1,47 @@
+/*Font*/
+th {
+    color: #CA3433;
+}
+
+td {
+    color: blue;
+}
+
+th, td {
+    font-family: bahnschrift;
+    padding: 10px;
+    text-align: left;
+    border: 2px solid black;
+    width: 225px;
+    min-width: 150px;
+}
+
+/*Img*/
+
+
+/*Page*/
+.splitter {
+    background-color: #CA3433;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.secondSplitter {
+    background-color: gray;
+}
+
+.leftSide {
+    border: 2px solid yellow;
+    width: 40%;
+    float: left;
+}
+
+.rightSide {
+    border: 2px solid blue;
+    width: 50%;
+    float: left;
+}
+
+.testComponent {
+    padding: 20px;
+}
