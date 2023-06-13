@@ -7,10 +7,9 @@ function Login() {
 
     //Gets the data and login in as user, backend thing
     function buttonLogin() {
-        //Banan
+        //let username = "";
+        //let password = "";
     }
-    const username = "";
-    const password = "";
 
     return (
         <div className='login'>
@@ -22,23 +21,25 @@ function Login() {
                 <h1>AutoTask</h1>
             </div>
             <div className='loginTable'>
-                <table>
-                    <tr>
-                        <th>Username</th>
-                    </tr>
-                    <tr>
-                        <td><input type='text' value={username}/></td>
-                    </tr>
-                    <tr>
-                        <th>Password</th>
-                    </tr>
-                    <tr>
-                        <td><input type='text' value={password}/></td>
-                    </tr>
-                    <tr>
-                        <td><button onClick={buttonLogin}>Login</button></td>
-                    </tr>
-                </table>
+                <form>
+                    <table>
+                        <tr>
+                            <th>Username</th>
+                        </tr>
+                        <tr>
+                            <td><input type='text' id='username'/></td>
+                        </tr>
+                        <tr>
+                            <th>Password</th>
+                        </tr>
+                        <tr>
+                            <td><input type='text' id='password'/></td>
+                        </tr>
+                        <tr>
+                            <td><button onClick={buttonLogin}>Login</button></td>
+                        </tr>
+                    </table>
+                </form>
             </div>
         </div>
     );
