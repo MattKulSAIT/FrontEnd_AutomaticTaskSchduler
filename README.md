@@ -1,2 +1,2 @@
 # FrontEnd_AutomaticTaskSchduler
-ITSD Capstone project from SAIT students
+This is just a back up of my current code, this will always be updated when the active branch is updated
