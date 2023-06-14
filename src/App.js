@@ -1,21 +1,23 @@
+import logo from './logo.svg';
 import './App.css';
-import DenseTable from'./componenets/Table'
-import PositionedMenu from'./componenets/topBar'
-import ProminentAppBar from'./componenets/SearchBar'
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <PositionedMenu style={{ marginTop: '0' }} />
-        
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>
+          Edit <code>src/App.js</code> and save to reload.
+        </p>
+        <a
+          className="App-link"
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn React
+        </a>
       </header>
-      <div>
-        <ProminentAppBar/>
-      </div>
-      <main>
-      <DenseTable />
-      </main>
     </div>
   );
 }
