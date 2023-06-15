@@ -1,5 +1,5 @@
 import './loginPage.css'
-import Login from "../../../components/Layout_Display/login"
+import Login from "../../../components/login"
 
 function LoginPage() {
     return (
