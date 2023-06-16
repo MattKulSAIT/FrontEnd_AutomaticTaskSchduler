@@ -1,12 +1,12 @@
-import './TestPage.css';
-import TitleDesc from './components/Layout_Display/tables/selectedViews/taskDetails/titleDesc'
-import TaskDetails from './components/Layout_Display/tables/selectedViews/taskDetails/taskDetails'
-import RescAssigned from './components/Layout_Display/tables/selectedViews/taskDetails/rescAssigned'
-import ECTdetails from './components/Layout_Display/tables/selectedViews/taskDetails/ectDetails'
-import PageHeader from'./components/Layout_Display/pageHeader'
-import PageTitle from'./components/Layout_Display/pageTitle'
+import './taskSelected_Resource.css';
+import TitleDesc from '../../../../components/selectedViews/taskDetails/titleDesc'
+import TaskDetails from '../../../../components/selectedViews/taskDetails/taskDetails'
+import RescAssigned from '../../../../components/selectedViews/taskDetails/rescAssigned'
+import ECTdetails from '../../../../components/selectedViews/taskDetails/ectDetails'
+//import PageHeader from '../../../../components/pageHeader'
+//import PageTitle from '../../../../components/pageTitle'
 
-function TaskSelectedAdmin() {
+function TaskSelectedResource() {
 
     function EditPage() {
         //
@@ -14,13 +14,14 @@ function TaskSelectedAdmin() {
 
     return (
         <div className="testPage">
-            <PageHeader/>
-            <PageTitle/>
             <div className='mainPage'>
-                <div className='leftSide'>
+                <div className='headers'>
+
+                </div>
+                <div className='leftSide' align="left">
                     <TitleDesc/>
                 </div>
-                <div className='rightSide'>
+                <div className='rightSide' left="0">
                     <TaskDetails/>
                     <hr/>
                     <RescAssigned/>
@@ -34,4 +35,4 @@ function TaskSelectedAdmin() {
     );
 }
 
-export default TaskSelectedAdmin;
+export default TaskSelectedResource;
