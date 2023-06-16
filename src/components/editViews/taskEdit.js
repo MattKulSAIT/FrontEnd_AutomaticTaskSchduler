@@ -66,43 +66,45 @@ const EditTaskResource = () => {
     return (
         <div className='editTask'>
             <div className='editTable'>
-                <h1>{taskTitle}</h1>
-                    <form method='GET' onSubmit={saveEdit}>
-                        <div className='mainPage'> 
-                            <hr align="left"/>
-                            <div className='taskStatus'>
-                                <h3>Change Task Status:</h3>
-                                <select name="selectTaskStatus" id="taskStatus">
-                                    <option value="" disabled selected>- Select Status -</option>
-                                    <option value="0">Pending</option>
-                                    <option value="1">Assigned</option>
-                                    <option value="2">In Progress</option>
-                                    <option value="3">Completed</option>
-                                </select>
-                                <p>Current Status: {currStatus}</p>
-                            </div>
-                            <div className='taskType'>
-                                <h3>Change Task Type:</h3>
-                                <select name="selectTaskStatus" id="taskStatus">
-                                    <option value="" disabled selected>- Select Status -</option>
-                                    <option value="0">Help Desk Support</option>
-                                    <option value="1">Database Support</option>
-                                    <option value="2">Network Support</option>
-                                    <option value="3">Completed Support</option>
-                                </select>
-                                <p>Current Type: {currType}</p>
-                            </div>
-                            <div className='ectTime'>
-                                <h3>Change Eestimated Time:</h3>
-                                <input type='text' placeholder='Ex. 8.0 (hrs)'/>
-                                <p>Current Time: {currTime}</p>
-                            </div>
-                            <div className='editButtons'>
-                                <button id='saveChanges' type="submit">Save Changes</button>
-                                <button id='exitEdit' type="submit">Exit</button>
-                            </div>           
+                <form method='GET' onSubmit={saveEdit}>
+                    <div className='mainPage'> 
+                        <div className='titleHeader'>
+                        <h1>{taskTitle}</h1>
                         </div>
-                    </form>
+                        <hr align="left"/>
+                        <div className='taskStatus'>
+                            <h3>Change Task Status:</h3>
+                            <select name="selectTaskStatus" id="taskStatus">
+                                <option value="" disabled selected>- Select Status -</option>
+                                <option value="0">Pending</option>
+                                <option value="1">Assigned</option>
+                                <option value="2">In Progress</option>
+                                <option value="3">Completed</option>
+                            </select>
+                            <p>Current Status: {currStatus}</p>
+                        </div>
+                        <div className='taskType'>
+                            <h3>Change Task Type:</h3>
+                            <select name="selectTaskStatus" id="taskStatus">
+                                <option value="" disabled selected>- Select Status -</option>
+                                <option value="0">Help Desk Support</option>
+                                <option value="1">Database Support</option>
+                                <option value="2">Network Support</option>
+                                <option value="3">Completed Support</option>
+                            </select>
+                            <p>Current Type: {currType}</p>
+                        </div>
+                        <div className='ectTime'>
+                            <h3>Change Eestimated Time:</h3>
+                            <input type='text' placeholder='Ex. 8.0 (hrs)'/>
+                            <p>Current Time: {currTime}</p>
+                        </div>
+                        <div className='editButtons'>
+                            <button id='saveChanges' type="submit">Save Changes</button>
+                            <button id='exitEdit' type="submit">Exit</button>
+                        </div>           
+                    </div>
+                </form>
                 <div className='errorMessage'>
                     {editError}
                 </div>
