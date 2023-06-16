@@ -1,9 +1,8 @@
-import GeneralTaskTable from'../../../../components/Layout_Display/tables/generalViews/taskGeneral/taskGeneralTable'
-import PageHeader from'../../../../components/Layout_Display/pageHeader'
-import PageTitle from'../../../../components/Layout_Display/pageTitle'
+import GeneralTaskTable from'../../../../components/generalViews/taskGeneralTable'
+import PageHeader from'../../../../components/pageHeader'
+import PageTitle from'../../../../components/pageTitle'
 import './taskGeneral_Resource.css'
 
-//This is the GeneralTaskView page
 function TaskGeneralResource() {
     return (
         <div className="TaskGeneralResource">
