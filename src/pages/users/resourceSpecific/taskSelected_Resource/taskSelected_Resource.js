@@ -1,4 +1,6 @@
 import './taskSelected_Resource.css';
+import { useNavigate  } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import TitleDesc from '../../../../components/selectedViews/taskDetails/titleDesc'
 import TaskDetails from '../../../../components/selectedViews/taskDetails/taskDetails'
 import RescAssigned from '../../../../components/selectedViews/taskDetails/rescAssigned'
@@ -8,8 +10,11 @@ import PageTitle from'../../../../components/pageTitle'
 
 function TaskSelectedAdmin() {
 
-    function EditPage() {
-        //
+    const history = useNavigate ();
+    const { id } = useParams();
+
+    const EditPage = (taskId) =>{
+        history(`/taskEdit_Resource/${id}`);
     }
 
     return (

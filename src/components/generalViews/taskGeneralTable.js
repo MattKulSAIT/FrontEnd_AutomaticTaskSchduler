@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { useNavigate  } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -35,10 +36,11 @@ const tableHeaderStyle = {
 };
 
 export default function TaskTable() {
-  const [rows, setRows] = useState([]);
-  const [error, setError] = useState(null);
+  const [rows, setRows] = React.useState([]);
+  const [error, setError] = React.useState(null);
+  const history = useNavigate ();
 
-  useEffect(() => {
+  React.useEffect(() => {
     fetchData();
   }, []);
 
@@ -59,6 +61,14 @@ export default function TaskTable() {
   if (error) {
     return <div>Error: {error}</div>;
   }
+
+  const viewTask = (taskId) => {
+    history(`/taskSelected_Resource/${taskId}`);
+  };
+
+  const editTask = (taskId) => {
+    history(`/taskEdit_Resource/${taskId}`);
+  };
 
   const rowHeight = 30; // Height of each row
   const maxRows = 13; // Maximum number of rows to display
@@ -96,10 +106,36 @@ export default function TaskTable() {
                 </TableCell>
                 <TableCell align="left">{row.title}</TableCell>
                 <TableCell align="left">{row.creationDate}</TableCell>
-                <TableCell align="left">{row.description}</TableCell>
-                <TableCell align="left">{row.status}</TableCell>
-                <TableCell>{row.title !== undefined && <Button sx={{ color: 'white', background: '#CA3433', ':hover': { background: '#FF0000' } }} id={row.taskNumber}>View</Button>}</TableCell>
-                <TableCell>{row.title !== undefined &&<Button sx={{ color: 'white', background: '#CA3433', ':hover': { background: '#FF0000' } }} id={row.taskNumber}>Edit</Button>}</TableCell>
+                <TableCell align="left">{row.category === 1 ? "Desk Side" :
+                                          row.category === 2 ? "Database" :
+                                          row.category === 3 ? "Network" :
+                                          row.category === 4 ? "Mobile Telephone" :
+                                        row.category}
+                </TableCell>
+                <TableCell align="left">{row.status === 1 ? "Pending" :
+                                          row.status === 2 ? "Assigned" :
+                                          row.status === 3 ? "In Progress" :
+                                          row.status === 4 ? "Complete" : row.status}</TableCell>
+                <TableCell>
+                  {row.title !== undefined && (
+                    <Button
+                      sx={{ color: 'white', background: '#CA3433', ':hover': { background: '#FF0000' } }}
+                      id={row.taskNumber}
+                      onClick={() => viewTask(row.taskNumber)}
+                    >
+                      View
+                    </Button>
+                  )}
+                </TableCell>
+                <TableCell>
+                  {row.title !== undefined && (
+                    <Button sx={{ color: 'white', background: '#CA3433', ':hover': { background: '#FF0000' } }} 
+                    id={row.taskNumber}
+                    onClick={() => editTask(row.taskNumber)}>
+                      Edit
+                    </Button>
+                  )}
+                </TableCell>
               </TableRow>
             );
           })}

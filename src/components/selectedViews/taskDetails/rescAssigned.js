@@ -1,5 +1,8 @@
 import React from "react";
 
+//Note for future matthew 
+//For this I think you will use the page call for viewResource since its the 
+//same functionality and you dont need to make a specific link for it
 function RescAssigned() {
     let rescName = "tempRescName";
     let availHrs = "tempAvailHrs";
@@ -9,7 +12,7 @@ function RescAssigned() {
         <div className="rescAssigned">
             <table className="rescAssigned">
                 <tr>
-                    <th>Resrouce Assigned:</th>
+                    <th>Resource Assigned:</th>
                 </tr>
                 <tr>
                     <th>Name</th>

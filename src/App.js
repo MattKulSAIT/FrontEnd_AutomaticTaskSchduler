@@ -12,8 +12,8 @@ const App = () => {
       <Routes>
         <Route path="/" element={<LoginPage />} />
         <Route path="/taskGeneral_Resource" element={<ResourceGeneralTaskViewPage />} />
-        <Route path="/taskSelected_Resource" element={<ResourceSelectedTaskViewPage />} />
-        <Route path="/taskEdit_Resource" element={<ResourceEditTaskView />} />
+        <Route path="/taskSelected_Resource/:id" element={<ResourceSelectedTaskViewPage />} />
+        <Route path="/taskEdit_Resource/:id" element={<ResourceEditTaskView />} />
       </Routes>
     </Router>
   );
