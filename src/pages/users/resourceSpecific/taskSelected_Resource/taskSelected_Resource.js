@@ -1,28 +1,33 @@
 import './taskSelected_Resource.css';
+import { useNavigate  } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import TitleDesc from '../../../../components/selectedViews/taskDetails/titleDesc'
 import TaskDetails from '../../../../components/selectedViews/taskDetails/taskDetails'
 import RescAssigned from '../../../../components/selectedViews/taskDetails/rescAssigned'
 import ECTdetails from '../../../../components/selectedViews/taskDetails/ectDetails'
-//import PageHeader from '../../../../components/pageHeader'
-//import PageTitle from '../../../../components/pageTitle'
+import PageHeader from'../../../../components/pageHeader'
+import PageTitle from'../../../../components/pageTitle'
 
-function TaskSelectedResource() {
+function TaskSelectedAdmin() {
 
-    function EditPage() {
-        //
+    const history = useNavigate ();
+    const { id } = useParams();
+    const currPage = "Selected Task";
+
+    const EditPage = (taskId) =>{
+        history(`/taskEdit_Resource/${id}`);
     }
 
     return (
         <div className="testPage">
+            <PageHeader/>
+            <PageTitle currPage={currPage}/>
             <div className='mainPage'>
-                <div className='headers'>
-
+                <div className='leftSide'>
+                <TitleDesc/>
                 </div>
-                <div className='leftSide' align="left">
-                    <TitleDesc/>
-                </div>
-                <div className='rightSide' left="0">
-                    <TaskDetails/>
+                <div className='rightSide'>
+                    <TaskDetails/> 
                     <hr/>
                     <RescAssigned/>
                     <hr/>
@@ -35,4 +40,4 @@ function TaskSelectedResource() {
     );
 }
 
-export default TaskSelectedResource;
+export default TaskSelectedAdmin;
