@@ -12,6 +12,8 @@ function TaskSelectedAdmin() {
 
     const history = useNavigate ();
     const { id } = useParams();
+    const currPage = "Selected Task";
+    const whereTheBackButtonsGoes = `http://localhost:3000/taskGeneral_Resource`;
 
     const EditPage = (taskId) =>{
         history(`/taskEdit_Resource/${id}`);
@@ -20,13 +22,13 @@ function TaskSelectedAdmin() {
     return (
         <div className="testPage">
             <PageHeader/>
-            <PageTitle/>
+            <PageTitle currPage={currPage} whereTheBackButtonsGoes={whereTheBackButtonsGoes}/>
             <div className='mainPage'>
                 <div className='leftSide'>
                 <TitleDesc/>
                 </div>
                 <div className='rightSide'>
-                    <TaskDetails/>
+                    <TaskDetails/> 
                     <hr/>
                     <RescAssigned/>
                     <hr/>

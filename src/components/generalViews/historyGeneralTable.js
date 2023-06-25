@@ -35,7 +35,7 @@ const tableHeaderStyle = {
   zIndex: 1,
 };
 
-export default function TaskTable() {
+export default function HistoryTable() {
   const [rows, setRows] = React.useState([]);
   const [error, setError] = React.useState(null);
   const history = useNavigate();
@@ -46,7 +46,7 @@ export default function TaskTable() {
 
   const fetchData = async () => {
     try {
-      const response = await fetch('http://localhost:8080/generalTask');
+      const response = await fetch('http://localhost:8080/generalArchivedTask');
       if (response.ok) {
         const data = await response.json();
         setRows(data);
@@ -62,10 +62,12 @@ export default function TaskTable() {
     return <div>Error: {error}</div>;
   }
 
+  //THESE NEED TO BE CHANGED BUT NO LANDING PAGES
   const viewTask = (taskId) => {
     history(`/taskSelected_Resource/${taskId}`);
   };
 
+  //THESE NEED TO BE CHANGED BUT NO LANDING PAGES
   const editTask = (taskId) => {
     history(`/taskEdit_Resource/${taskId}`);
   };
@@ -98,9 +100,10 @@ export default function TaskTable() {
             <TableCell sx={{ color: '#CA3433', fontWeight: 'bold' }}>Task #</TableCell>
             <TableCell align="left" sx={{ color: '#CA3433', fontWeight: 'bold' }}>Title</TableCell>
             <TableCell align="left" sx={{ color: '#CA3433', fontWeight: 'bold' }}>Date Created</TableCell>
+            <TableCell align="left" sx={{ color: '#CA3433', fontWeight: 'bold' }}>Date Completed</TableCell>
             <TableCell align="left" sx={{ color: '#CA3433', fontWeight: 'bold' }}>Type</TableCell>
+            <TableCell align="left" sx={{ color: '#CA3433', fontWeight: 'bold' }}>Employee Id</TableCell>
             <TableCell align="left" sx={{ color: '#CA3433', fontWeight: 'bold' }}>Status</TableCell>
-            <TableCell></TableCell>
             <TableCell></TableCell>
           </TableRow>
         </TableHead>
@@ -120,6 +123,7 @@ export default function TaskTable() {
                 </TableCell>
                 <TableCell align="left">{row.title}</TableCell>
                 <TableCell align="left">{formatDate(row.creationDate)}</TableCell>
+                <TableCell align="left">{formatDate(row.completionDate)}</TableCell>
                 <TableCell align="left">
                   {row.category === 1
                     ? 'Desk Side'
@@ -131,6 +135,7 @@ export default function TaskTable() {
                     ? 'Mobile Telephone'
                     : row.category}
                 </TableCell>
+                <TableCell align="left">{row.empId}</TableCell>
                 <TableCell align="left">
                   {row.status === 1
                     ? 'Pending'
@@ -150,13 +155,6 @@ export default function TaskTable() {
                       onClick={() => viewTask(row.taskNumber)}
                     >
                       View
-                    </Button>
-                  )}
-                </TableCell>
-                <TableCell>
-                  {row.title !== undefined && (
-                    <Button sx={{ color: 'white', background: '#CA3433', ':hover': { background: '#FF0000' } }} id={row.taskNumber} onClick={() => editTask(row.taskNumber)}>
-                      Edit
                     </Button>
                   )}
                 </TableCell>

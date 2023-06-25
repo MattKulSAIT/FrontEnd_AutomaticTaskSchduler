@@ -7,6 +7,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Button from '@mui/material/Button';
+import { AlignHorizontalCenter } from '@mui/icons-material';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -36,15 +37,17 @@ const tableHeaderStyle = {
 
 export default function TaskTable() {
   const [rows, setRows] = useState([]);
+  const [adminRows, setAdminRows] = useState([]);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     fetchData();
+    fetchAdminData();
   }, []);
 
   const fetchData = async () => {
     try {
-      const response = await fetch('http://localhost:8080/generalResource');
+      const response = await fetch('http://localhost:8080/generalResource/R');
       if (response.ok) {
         const data = await response.json();
         setRows(data);
@@ -55,6 +58,21 @@ export default function TaskTable() {
       setError(error.message);
     }
   };
+
+  const fetchAdminData = async () => {
+    try {
+      const response = await fetch('http://localhost:8080/generalResource/A');
+      if (response.ok) {
+        const data = await response.json();
+        setAdminRows(data);
+      } else {
+        throw new Error('Failed to fetch data');
+      }
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+
 
   if (error) {
     return <div>Error: {error}</div>;
@@ -67,44 +85,85 @@ export default function TaskTable() {
   const tableHeight = numRows <= maxRows ? numRows * rowHeight : `${maxRows * rowHeight}px`;
 
   return (
-    <TableContainer style={{ maxHeight: tableHeight, overflow: 'auto', marginTop: '10px', margin: 0 }}>
-      <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
-        <TableHead style={tableHeaderStyle}>
-          <TableRow>
-            <TableCell sx={{ color: '#CA3433', fontWeight: 'bold' }}>EmployeeID</TableCell>
-            <TableCell align="left" sx={{ color: '#CA3433', fontWeight: 'bold' }}>Name</TableCell>
-            <TableCell align="left" sx={{ color: '#CA3433', fontWeight: 'bold' }}>Avalilable Hours</TableCell>
-            <TableCell align="left" sx={{ color: '#CA3433', fontWeight: 'bold' }}>Total Hours</TableCell>
-            <TableCell align="left" sx={{ color: '#CA3433', fontWeight: 'bold' }}># of Current Tasks</TableCell>
-            <TableCell></TableCell>
-            <TableCell></TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody sx={{ backgroundColor: '#F5F5F5' }}>
-          {Array.from({ length: numRows }).map((_, index) => {
-            const row = rows[index] || {}; // Get the row if it exists or an empty object
-            return (
-              <TableRow
-                key={index}
-                sx={{
-                  '&:last-child td, &:last-child th': { border: 0 },
-                  height: `${rowHeight}px`,
-                }}
-              >
-                <TableCell component="th" scope="row">
-                  {row.taskNumber}
-                </TableCell>
-                <TableCell align="left">{row.title}</TableCell>
-                <TableCell align="left">{row.creationDate}</TableCell>
-                <TableCell align="left">{row.description}</TableCell>
-                <TableCell align="left">{row.status}</TableCell>
-                <TableCell>{row.title !== undefined && <Button sx={{ color: 'white', background: '#CA3433', ':hover': { background: '#FF0000' } }} id={row.taskNumber}>View</Button>}</TableCell>
-                <TableCell>{row.title !== undefined &&<Button sx={{ color: 'white', background: '#CA3433', ':hover': { background: '#FF0000' } }} id={row.taskNumber}>Edit</Button>}</TableCell>
+    <div>
+      <main>
+        <TableContainer style={{ maxHeight: tableHeight, overflow: 'auto', marginTop: '10px', margin: 0 }}>
+          <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
+            <TableHead style={tableHeaderStyle}>
+              <TableRow>
+                <TableCell sx={{ color: '#CA3433', fontWeight: 'bold' }}>EmployeeID</TableCell>
+                <TableCell align="left" sx={{ color: '#CA3433', fontWeight: 'bold' }}>Name</TableCell>
+                <TableCell align="left" sx={{ color: '#CA3433', fontWeight: 'bold' }}>Avalilable Hours</TableCell>
+                <TableCell align="left" sx={{ color: '#CA3433', fontWeight: 'bold' }}>Total Hours</TableCell>
+                <TableCell align="left" sx={{ color: '#CA3433', fontWeight: 'bold' }}># of Current Tasks</TableCell>
+                <TableCell></TableCell>
+                <TableCell></TableCell>
               </TableRow>
-            );
-          })}
-        </TableBody>
-      </Table>
-    </TableContainer>
+            </TableHead>
+            <TableBody sx={{ backgroundColor: '#F5F5F5' }}>
+              {Array.from({ length: numRows }).map((_, index) => {
+                const row = rows[index] || {}; // Get the row if it exists or an empty object
+                return (
+                  <TableRow
+                    key={index}
+                    sx={{
+                      '&:last-child td, &:last-child th': { border: 0 },
+                      height: `${rowHeight}px`,
+                    }}
+                  >
+                    <TableCell component="th" scope="row">
+                      {row.employeeId}
+                    </TableCell>
+                    <TableCell align="left">{row.name}</TableCell>
+                    <TableCell align="left">{row.creationDate}</TableCell>
+                    <TableCell align="left">{row.description}</TableCell>
+                    <TableCell align="left">{row.status}</TableCell>
+                    <TableCell>{row.employeeId !== undefined && <Button sx={{ color: 'white', background: '#CA3433', ':hover': { background: '#FF0000' } }} id={row.employeeId}>View</Button>}</TableCell>
+                    <TableCell>{row.employeeId !== undefined &&<Button sx={{ color: 'white', background: '#CA3433', ':hover': { background: '#FF0000' } }} id={row.employeeId}>Edit</Button>}</TableCell>
+                  </TableRow>
+                );
+              })}
+            </TableBody>
+          </Table>
+        </TableContainer>
+        </main>
+
+        <div>
+            <h1>Admins</h1>
+            <TableContainer style={{ maxHeight: tableHeight, overflow: 'auto', marginTop: '10px', margin: 0 }}>
+          <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
+            <TableHead style={tableHeaderStyle}>
+              <TableRow>
+                <TableCell sx={{ color: '#CA3433', fontWeight: 'bold' }}>EmployeeID</TableCell>
+                <TableCell align="left" sx={{ color: '#CA3433', fontWeight: 'bold' }}>Name</TableCell>
+                <TableCell></TableCell>
+                <TableCell></TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody sx={{ backgroundColor: '#F5F5F5' }}>
+              {Array.from({ length: numRows }).map((_, index) => {
+                const AdminRow = adminRows[index] || {}; // Get the row if it exists or an empty object
+                return (
+                  <TableRow
+                    key={index}
+                    sx={{
+                      '&:last-child td, &:last-child th': { border: 0 },
+                      height: `${rowHeight}px`,
+                    }}
+                  >
+                    <TableCell component="th" scope="row">
+                      {AdminRow.employeeId}
+                    </TableCell>
+                    <TableCell align="left">{AdminRow.name}</TableCell>
+                    <TableCell>{AdminRow.employeeId !== undefined && <Button sx={{ color: 'white', background: '#CA3433', ':hover': { background: '#FF0000' } }} id={AdminRow.employeeId}>View</Button>}</TableCell>
+                    <TableCell>{AdminRow.employeeId !== undefined &&<Button sx={{ color: 'white', background: '#CA3433', ':hover': { background: '#FF0000' } }} id={AdminRow.employeeId}>Edit</Button>}</TableCell>
+                  </TableRow>
+                );
+              })}
+            </TableBody>
+          </Table>
+        </TableContainer>
+        </div>
+      </div>
   );
 }

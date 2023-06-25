@@ -1,16 +1,20 @@
 import GeneralTaskTable from'../../../../components/generalViews/taskGeneralTable'
 import PageHeader from'../../../../components/pageHeader'
-import PageTitle from'../../../../components/pageTitle'
+import PageTitleSearch from'../../../../components/generalSearchTitle'
 import './taskGeneral_Resource.css'
 
 function TaskGeneralResource() {
+
+    const currPage = "General Task";
+    const whereTheBackButtonsGoes = `http://localhost:3000`;
+
     return (
         <div className="TaskGeneralResource">
             <header className="PageHeader">
                     <PageHeader style={{ marginTop: '0' }} />   
             </header>
             <div>
-                <PageTitle/>
+                <PageTitleSearch currPage={currPage} whereTheBackButtonsGoes={whereTheBackButtonsGoes}/>
             </div>
             <main>
                 <GeneralTaskTable/>
