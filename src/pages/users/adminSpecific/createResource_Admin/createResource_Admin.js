@@ -8,6 +8,10 @@ function CreateNewResource() {
     return (
         <div className="CreateResource">
             <div className="components">
+                <div className='headers'>
+                    //PageHeader
+                    //PageTitl
+                </div>
                 <CreateResource/>
             </div>
         </div>
