@@ -43,11 +43,6 @@ button{
     height: 30px;
 }
 
-.taskStatus, .taskType, .ectTime {
-    padding: 10px;
-    float: left;
-}
-
 .editButtons {
     padding: 10px;
     width: 225px;
@@ -61,6 +56,32 @@ button{
     text-align: left;
 }
 
-.titleHeader {
-    padding: 10px;
+.rescDetails {
+    position: relative;
+    text-align: left;
 }
+
+.rescFirstNameDiv, .rescLastNameDiv, .rescPhoneDiv, .rescEmailDiv {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.skillsButton, .roleButton {
+    width: 25px;
+    background-color: #CA3433;
+}
+
+.roleButton {
+    border-radius: 20px;
+}
+
+input[type=checkbox] {
+    position: relative;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+
+.tdTitle {
+    width: 320px;
+}
+
