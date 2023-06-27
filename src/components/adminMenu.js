@@ -27,7 +27,7 @@ const AdminMenu = () => {
     return (
         <div className='menuOptions'>
             <div className='manageTasksDiv'>
-                <button id='changeSchedButton' onClick={manageTasks}>
+                <button id='changeSchedButton' className='menuButton' onClick={manageTasks}>
                     <img
                         src={taskList}
                     />
@@ -36,7 +36,7 @@ const AdminMenu = () => {
                 <label>Manage Tasks</label>
             </div>
             <div className='viewHistoryDiv'>
-                <button id='changeSchedButton' onClick={viewHistory}>
+                <button id='changeSchedButton' className='menuButton' onClick={viewHistory}>
                     <img
                         src={historyList}
                     />
@@ -45,7 +45,7 @@ const AdminMenu = () => {
                 <label>View History</label>
             </div>
             <div className='manageResourcesDiv'>
-                <button id='changeSchedButton' onClick={manageResource}>
+                <button id='changeSchedButton' className='menuButton' onClick={manageResource}>
                     <img
                         src={resourceList}
                     />
@@ -54,7 +54,7 @@ const AdminMenu = () => {
                 <label>Manage Resource</label>
             </div>
             <div className='createResourceDiv'>
-                <button id='changeSchedButton' onClick={createResource}>
+                <button id='changeSchedButton' className='menuButton' onClick={createResource}>
                     <img
                         src={newResource}
                     />

@@ -15,7 +15,7 @@ const ResourceMenu = () => {
     return (
         <div className='menuOptions'>
             <div className='changeScheduleDiv'>
-                <button id='changeSchedButton' onClick={changeSchedule}>
+                <button id='changeSchedButton' className='menuButton' onClick={changeSchedule}>
                     <img
                         src={calendar}
                     />
@@ -23,8 +23,8 @@ const ResourceMenu = () => {
                 <br/>
                 <label>Change Schedule</label>
             </div>
-            <div className='manageTasksDiv' onClick={manageTasks}>
-                <button id='manTaskButton'>
+            <div className='manageTasksDiv'>
+                <button id='manTaskButton' className='menuButton' onClick={manageTasks}>
                     <img
                         src={taskList}
                     />
