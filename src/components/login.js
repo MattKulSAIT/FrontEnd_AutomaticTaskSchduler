@@ -20,8 +20,8 @@ const Login = () => {
                 body: JSON.stringify({ employeeId, password }),
             });
 
-            if (response.ok) {
-                window.location.href = 'http://localhost:3000/taskGeneral_Resource';
+            if (response.ok) { //We need to add some logic or either send to admin or resource 
+                window.location.href = 'http://localhost:3000/menu_Admin';
             } else {
                 const errorData = await response.json();
                 setLoginError(errorData.message || 'Incorrect ID or Password. Please try again.');

@@ -8,6 +8,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Button from '@mui/material/Button';
 import { AlignHorizontalCenter } from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -39,6 +40,8 @@ export default function TaskTable() {
   const [rows, setRows] = useState([]);
   const [adminRows, setAdminRows] = useState([]);
   const [error, setError] = useState(null);
+  const [taskCounts, setTaskCounts] = useState({});
+  const history = useNavigate();
 
   useEffect(() => {
     fetchData();
@@ -51,6 +54,20 @@ export default function TaskTable() {
       if (response.ok) {
         const data = await response.json();
         setRows(data);
+      } else {
+        throw new Error('Failed to fetch data');
+      }
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+
+  const fetchNumberOfTasks = async (employeeId) => {
+    try {
+      const response = await fetch(`http://localhost:8080/generalResource/${employeeId}`);
+      if (response.ok) {
+        const data = await response.json();
+        return data;
       } else {
         throw new Error('Failed to fetch data');
       }
@@ -73,10 +90,29 @@ export default function TaskTable() {
     }
   };
 
+  useEffect(() => {
+    const fetchTaskCounts = async () => {
+      const counts = {};
+      for (const row of rows) {
+        const count = await fetchNumberOfTasks(row.employeeId);
+        counts[row.employeeId] = count;
+      }
+      setTaskCounts(counts);
+    };
+  
+    fetchTaskCounts();
+  }, [rows]);
 
   if (error) {
     return <div>Error: {error}</div>;
   }
+
+  const viewResource = (employeeId) => {
+    history(`/resourceSelected_Admin/${employeeId}`);
+  };
+  const editResource = (employeeId) => {
+    history(`/resourceEdit_Admin/${employeeId}`);
+  };
 
   const rowHeight = 30; // Height of each row
   const maxRows = 13; // Maximum number of rows to display
@@ -117,9 +153,17 @@ export default function TaskTable() {
                     <TableCell align="left">{row.name}</TableCell>
                     <TableCell align="left">{row.creationDate}</TableCell>
                     <TableCell align="left">{row.description}</TableCell>
-                    <TableCell align="left">{row.status}</TableCell>
-                    <TableCell>{row.employeeId !== undefined && <Button sx={{ color: 'white', background: '#CA3433', ':hover': { background: '#FF0000' } }} id={row.employeeId}>View</Button>}</TableCell>
-                    <TableCell>{row.employeeId !== undefined &&<Button sx={{ color: 'white', background: '#CA3433', ':hover': { background: '#FF0000' } }} id={row.employeeId}>Edit</Button>}</TableCell>
+                    <TableCell align="left">{taskCounts[row.employeeId] !== undefined ? taskCounts[row.employeeId] : ''}</TableCell>
+                    <TableCell>{row.employeeId !== undefined && 
+                      <Button sx={{ color: 'white', background: '#CA3433', ':hover': { background: '#FF0000' } }} 
+                      id={row.employeeId} 
+                      onClick={() => viewResource(row.employeeId)}>View</Button>}
+                    </TableCell>
+                    <TableCell>{row.employeeId !== undefined &&
+                      <Button sx={{ color: 'white', background: '#CA3433', ':hover': { background: '#FF0000' } }} 
+                      id={row.employeeId} 
+                      onClick={() => editResource(row.employeeId)}>Edit</Button>}
+                    </TableCell>
                   </TableRow>
                 );
               })}
@@ -127,6 +171,7 @@ export default function TaskTable() {
           </Table>
         </TableContainer>
         </main>
+        
 
         <div>
             <h1>Admins</h1>

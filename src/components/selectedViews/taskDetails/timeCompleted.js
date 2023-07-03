@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-function ECTdetails() {
-    const [ectTime, setEctTime] = useState("tempECTtime");
+function CompDetails() {
+
+    /*
+    const [compTime, setCompTime] = useState("tempECTtime");
     const { id } = useParams();
 
     useEffect(() => {
@@ -23,19 +25,20 @@ function ECTdetails() {
         }
       };
 
+      */
 
     return(
-        <div className="ectTime">
-            <table className="ectTime" align='left'>
+        <div className="compTimeDiv">
+            <table className="compTimeTable">
                 <tr>
-                    <th>Estimated Completion Time:</th>
+                    <th>Completion Date:</th>
                 </tr>
                 <tr>
-                    <td id="ectTime">{ectTime} Hours</td>
+                    <td id="compTime">{compTime}</td>
                 </tr>
             </table>
         </div>
     );
 }
 
-export default ECTdetails;
+export default CompDetails;

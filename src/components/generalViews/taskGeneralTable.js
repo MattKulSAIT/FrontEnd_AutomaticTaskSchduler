@@ -35,7 +35,7 @@ const tableHeaderStyle = {
   zIndex: 1,
 };
 
-export default function TaskTable() {
+export default function TaskTable({EditPage, ViewPage}) {
   const [rows, setRows] = React.useState([]);
   const [error, setError] = React.useState(null);
   const history = useNavigate();
@@ -63,11 +63,11 @@ export default function TaskTable() {
   }
 
   const viewTask = (taskId) => {
-    history(`/taskSelected_Resource/${taskId}`);
+    history(`${ViewPage}${taskId}`);
   };
 
   const editTask = (taskId) => {
-    history(`/taskEdit_Resource/${taskId}`);
+    history(`${EditPage}${taskId}`);
   };
 
   const rowHeight = 30; // Height of each row

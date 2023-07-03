@@ -6,7 +6,7 @@ import './taskGeneral_Resource.css'
 function TaskGeneralResource() {
 
     const currPage = "General Task";
-    const whereTheBackButtonsGoes = `http://localhost:3000`;
+    const whereTheBackButtonsGoes = `http://localhost:3000/menu_Resource`;
 
     return (
         <div className="TaskGeneralResource">
@@ -17,7 +17,7 @@ function TaskGeneralResource() {
                 <PageTitleSearch currPage={currPage} whereTheBackButtonsGoes={whereTheBackButtonsGoes}/>
             </div>
             <main>
-                <GeneralTaskTable/>
+                <GeneralTaskTable EditPage={"/taskEdit_Resource/"} ViewPage={"/taskSelected_Resource/"}/>
             </main>
         </div>
     );

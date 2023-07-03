@@ -6,7 +6,7 @@ import PageTitle from'../../../../components/generalSearchTitle'
 function generalResourceView() {
 
     const currPage = "General Resource";
-    const whereTheBackButtonsGoes = `http://localhost:3000`;
+    const whereTheBackButtonsGoes = `http://localhost:3000/menu_Admin`;
 
     return (
         <div className="generalResourcePage">

@@ -28,7 +28,7 @@ function TitleDesc() {
 //But I got backend junk to do 
   return (
     <div className="titleDesc">
-      <table>
+      <table align='left'>
         <thead>
           <tr>
             <th>Title</th>
