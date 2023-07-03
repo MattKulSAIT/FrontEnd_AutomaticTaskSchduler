@@ -14,6 +14,7 @@ import AdminCreateResourceViewPage from './pages/users/adminSpecific/createResou
 import AdminSelectedTaskViewPage from './pages/users/adminSpecific/taskSelected_Admin/taskSelected_Admin';
 import AdminEditTaskViewPage from './pages/users/adminSpecific/taskEdit_Admin/taskEdit_Admin';
 import AdminSelectedResourceViewPage from './pages/users/adminSpecific/resourceSelected_Admin/resourceSelected_Admin';
+import AdminEditResourceViewPage from './pages/users/adminSpecific/resourceEdit_Admin/resourceEdit_Admin';
 
 const App = () => {
   return (
@@ -31,6 +32,7 @@ const App = () => {
         <Route path="/taskEdit_Admin/:id" element={<AdminEditTaskViewPage />} />
         <Route path="/resourceGeneral_Admin" element={<AdminGeneralResourceViewPage />} />
         <Route path="/resourceSelected_Admin/:id" element={<AdminSelectedResourceViewPage />} />
+        <Route path="/resourceEdit_Admin/:id" element={<AdminEditResourceViewPage/> } />
         <Route path="/historyGeneral_Admin" element={<AdminGeneralHistoryViewPage />} />
         <Route path="/newResource_Admin" element={<AdminCreateResourceViewPage />} />
       </Routes>
