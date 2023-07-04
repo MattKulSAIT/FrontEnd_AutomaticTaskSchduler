@@ -58,11 +58,12 @@ const TaskRestable = () =>{
 
   useEffect(() => {
     fetchCapableResources();
-  }, []);
+  }, [currType]);
  
+  //Method to get all resources that have the skills to complete the task 
   const fetchCapableResources = async () => {
     try {
-      const response = await fetch('http://localhost:8080/generalTask');
+      const response = await fetch(`http://localhost:8080/taskEdit/getCapableResource/${currType}`);
       if (response.ok) {
         const data = await response.json();
         setRows(data);
@@ -149,6 +150,42 @@ function exitEdit(){
                                 <input type='text' placeholder='Ex. 8.0 (hrs)' name="estimatedTime"/>
                                 <p>Current Time: {currTime} hrs</p>
                             </div>
+                            <div className='AssignedResourceTable'>
+                              <h3 style={{width: '200px'}}>Resource</h3>
+                              <TableContainer style={{ maxHeight: tableHeight, overflow: 'auto', marginTop: '10px', margin: 0 }}>
+                              <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
+                                  <TableHead style={tableHeaderStyle}>
+                                  <TableRow>
+                                      <TableCell sx={{ color: '#CA3433', fontWeight: 'bold' }}>EmployeeID</TableCell>
+                                      <TableCell align="left" sx={{ color: '#CA3433', fontWeight: 'bold' }}>Name</TableCell>
+                                      <TableCell align="left" sx={{ color: '#CA3433', fontWeight: 'bold' }}>Avalilable Hours</TableCell>
+                                      <TableCell align="left" sx={{ color: '#CA3433', fontWeight: 'bold' }}># of Current Tasks</TableCell>
+                                  </TableRow>
+                                  </TableHead>
+                                  <TableBody sx={{ backgroundColor: '#F5F5F5' }}>
+                                  {Array.from({ length: numRows }).map((_, index) => {
+                                      const row = rows[index] || {}; // Get the row if it exists or an empty object
+                                      return (
+                                      <TableRow
+                                          key={index}
+                                          sx={{
+                                          '&:last-child td, &:last-child th': { border: 0 },
+                                          height: `${rowHeight}px`,
+                                          }}
+                                      >
+                                          <TableCell component="th" scope="row">
+                                          {row.employeeId}
+                                          </TableCell>
+                                          <TableCell align="left">{row.name}</TableCell>
+                                          <TableCell align="left">{row.avainleHours}</TableCell> 
+                                          <TableCell align="left">{taskCounts[row.employeeId] !== undefined ? taskCounts[row.employeeId] : ''}</TableCell>
+                                      </TableRow>
+                                      );
+                                  })}
+                                  </TableBody>
+                              </Table>
+                              </TableContainer>
+                            </div>
                             <div className='editButtons'>
                                 <button id='saveChanges' type="submit">Save Changes</button>
                                 <button id='exitEdit' type="button" onClick={exitEdit}>Exit</button>
@@ -160,45 +197,7 @@ function exitEdit(){
                     </div>
                 </div>
             </div>
-                </div>
-                
-                <h3>Resource</h3>
-                <main>
-                <TableContainer style={{ maxHeight: tableHeight, overflow: 'auto', marginTop: '10px', margin: 0 }}>
-                <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
-                    <TableHead style={tableHeaderStyle}>
-                    <TableRow>
-                        <TableCell sx={{ color: '#CA3433', fontWeight: 'bold' }}>EmployeeID</TableCell>
-                        <TableCell align="left" sx={{ color: '#CA3433', fontWeight: 'bold' }}>Name</TableCell>
-                        <TableCell align="left" sx={{ color: '#CA3433', fontWeight: 'bold' }}>Avalilable Hours</TableCell>
-                        <TableCell align="left" sx={{ color: '#CA3433', fontWeight: 'bold' }}># of Current Tasks</TableCell>
-                    </TableRow>
-                    </TableHead>
-                    <TableBody sx={{ backgroundColor: '#F5F5F5' }}>
-                    {Array.from({ length: numRows }).map((_, index) => {
-                        const row = rows[index] || {}; // Get the row if it exists or an empty object
-                        return (
-                        <TableRow
-                            key={index}
-                            sx={{
-                            '&:last-child td, &:last-child th': { border: 0 },
-                            height: `${rowHeight}px`,
-                            }}
-                        >
-                            <TableCell component="th" scope="row">
-                            {row.employeeId}
-                            </TableCell>
-                            <TableCell align="left">{row.name}</TableCell>
-                            <TableCell align="left">{row.avainleHours}</TableCell> 
-                            <TableCell align="left">{taskCounts[row.employeeId] !== undefined ? taskCounts[row.employeeId] : ''}</TableCell>
-                        </TableRow>
-                        );
-                    })}
-                    </TableBody>
-                </Table>
-                </TableContainer>
-                </main>
-                
+                </div>               
             </div>
         </div>
     )

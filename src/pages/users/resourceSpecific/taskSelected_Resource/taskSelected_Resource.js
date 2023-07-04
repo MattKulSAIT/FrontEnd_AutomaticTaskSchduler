@@ -8,6 +8,11 @@ import ECTdetails from '../../../../components/selectedViews/taskDetails/ectDeta
 import PageHeader from'../../../../components/pageHeader'
 import PageTitle from'../../../../components/pageTitle'
 
+/**
+ * This funcation takes all the componets neede for the taskSelectedResource page 
+ * and combinds them to one component
+ * @returns TaskSelectedAdmin componet to be displayed on the page
+ */
 function TaskSelectedAdmin() {
 
     const history = useNavigate ();
