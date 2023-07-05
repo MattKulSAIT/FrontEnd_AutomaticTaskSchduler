@@ -8,6 +8,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Button from '@mui/material/Button';
 import { AlignHorizontalCenter } from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -40,6 +41,7 @@ export default function TaskTable() {
   const [adminRows, setAdminRows] = useState([]);
   const [error, setError] = useState(null);
   const [taskCounts, setTaskCounts] = useState({});
+  const history = useNavigate();
 
   useEffect(() => {
     fetchData();
@@ -105,6 +107,13 @@ export default function TaskTable() {
     return <div>Error: {error}</div>;
   }
 
+  const viewResource = (employeeId) => {
+    history(`/resourceSelected_Admin/${employeeId}`);
+  };
+  const editResource = (employeeId) => {
+    history(`/resourceEdit_Admin/${employeeId}`);
+  };
+
   const rowHeight = 30; // Height of each row
   const maxRows = 13; // Maximum number of rows to display
 
@@ -145,8 +154,16 @@ export default function TaskTable() {
                     <TableCell align="left">{row.creationDate}</TableCell>
                     <TableCell align="left">{row.description}</TableCell>
                     <TableCell align="left">{taskCounts[row.employeeId] !== undefined ? taskCounts[row.employeeId] : ''}</TableCell>
-                    <TableCell>{row.employeeId !== undefined && <Button sx={{ color: 'white', background: '#CA3433', ':hover': { background: '#FF0000' } }} id={row.employeeId}>View</Button>}</TableCell>
-                    <TableCell>{row.employeeId !== undefined &&<Button sx={{ color: 'white', background: '#CA3433', ':hover': { background: '#FF0000' } }} id={row.employeeId}>Edit</Button>}</TableCell>
+                    <TableCell>{row.employeeId !== undefined && 
+                      <Button sx={{ color: 'white', background: '#CA3433', ':hover': { background: '#FF0000' } }} 
+                      id={row.employeeId} 
+                      onClick={() => viewResource(row.employeeId)}>View</Button>}
+                    </TableCell>
+                    <TableCell>{row.employeeId !== undefined &&
+                      <Button sx={{ color: 'white', background: '#CA3433', ':hover': { background: '#FF0000' } }} 
+                      id={row.employeeId} 
+                      onClick={() => editResource(row.employeeId)}>Edit</Button>}
+                    </TableCell>
                   </TableRow>
                 );
               })}

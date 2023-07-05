@@ -1,5 +1,4 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -35,12 +34,11 @@ const tableHeaderStyle = {
   zIndex: 1,
 };
 
-export default function TaskTable({EditPage, ViewPage}) {
-  const [rows, setRows] = React.useState([]);
-  const [error, setError] = React.useState(null);
-  const history = useNavigate();
+export default function TaskTable() {
+  const [rows, setRows] = useState([]);
+  const [error, setError] = useState(null);
 
-  React.useEffect(() => {
+  useEffect(() => {
     fetchData();
   }, []);
 
@@ -62,36 +60,14 @@ export default function TaskTable({EditPage, ViewPage}) {
     return <div>Error: {error}</div>;
   }
 
-  const viewTask = (taskId) => {
-    history(`${ViewPage}${taskId}`);
-  };
-
-  const editTask = (taskId) => {
-    history(`${EditPage}${taskId}`);
-  };
-
   const rowHeight = 30; // Height of each row
   const maxRows = 13; // Maximum number of rows to display
 
   const numRows = Math.max(rows.length, maxRows); // Calculate the maximum number of rows
   const tableHeight = numRows <= maxRows ? numRows * rowHeight : `${maxRows * rowHeight}px`;
 
-  const formatDate = (dateString) => {
-    if (!dateString) {
-      return ''; // Return empty string for undefined or empty dates
-    }
-  
-    const date = new Date(dateString);
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
-    const hours = String(date.getHours()).padStart(2, '0');
-    const minutes = String(date.getMinutes()).padStart(2, '0');
-    return `${year}-${month}-${day} ${hours}:${minutes}`;
-  };
-
   return (
-    <TableContainer style={{ maxHeight: tableHeight, overflow: 'auto', marginTop: '10px'}}>
+    <TableContainer style={{ maxHeight: tableHeight, overflow: 'auto', marginTop: '10px', margin: 0 }}>
       <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
         <TableHead style={tableHeaderStyle}>
           <TableRow>
@@ -119,47 +95,11 @@ export default function TaskTable({EditPage, ViewPage}) {
                   {row.taskNumber}
                 </TableCell>
                 <TableCell align="left">{row.title}</TableCell>
-                <TableCell align="left">{formatDate(row.creationDate)}</TableCell>
-                <TableCell align="left">
-                  {row.category === 1
-                    ? 'Desk Side'
-                    : row.category === 2
-                    ? 'Database'
-                    : row.category === 3
-                    ? 'Network'
-                    : row.category === 4
-                    ? 'Mobile Telephone'
-                    : row.category}
-                </TableCell>
-                <TableCell align="left">
-                  {row.status === 1
-                    ? 'Pending'
-                    : row.status === 2
-                    ? 'Assigned'
-                    : row.status === 3
-                    ? 'In Progress'
-                    : row.status === 4
-                    ? 'Complete'
-                    : row.status}
-                </TableCell>
-                <TableCell>
-                  {row.title !== undefined && (
-                    <Button
-                      sx={{ color: 'white', background: '#CA3433', ':hover': { background: '#FF0000' } }}
-                      id={row.taskNumber}
-                      onClick={() => viewTask(row.taskNumber)}
-                    >
-                      View
-                    </Button>
-                  )}
-                </TableCell>
-                <TableCell>
-                  {row.title !== undefined && (
-                    <Button sx={{ color: 'white', background: '#CA3433', ':hover': { background: '#FF0000' } }} id={row.taskNumber} onClick={() => editTask(row.taskNumber)}>
-                      Edit
-                    </Button>
-                  )}
-                </TableCell>
+                <TableCell align="left">{row.creationDate}</TableCell>
+                <TableCell align="left">{row.description}</TableCell>
+                <TableCell align="left">{row.status}</TableCell>
+                <TableCell>{row.title !== undefined && <Button sx={{ color: 'white', background: '#CA3433', ':hover': { background: '#FF0000' } }} id={row.taskNumber}>View</Button>}</TableCell>
+                <TableCell>{row.title !== undefined &&<Button sx={{ color: 'white', background: '#CA3433', ':hover': { background: '#FF0000' } }} id={row.taskNumber}>Edit</Button>}</TableCell>
               </TableRow>
             );
           })}
