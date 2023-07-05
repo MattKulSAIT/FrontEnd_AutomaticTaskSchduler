@@ -8,7 +8,6 @@ function TaskEditResource() {
     return (
         <div className="TaskEditResource">
             <PageHeader />
-            <PageTitle/>
             <div className="components">
                 <TaskEdit/>
             </div>
