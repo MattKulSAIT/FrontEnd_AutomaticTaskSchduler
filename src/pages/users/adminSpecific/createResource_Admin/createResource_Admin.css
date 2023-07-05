@@ -8,13 +8,7 @@ h1, h3, p {
 
 
 
-/*Page
-html, body {
-    //margin: 0;
-    //padding: 20px;
-}
-*/
-
+/*Page*/
 hr {
     border: 2px solid #CA3433;
     border-radius: 5px;
@@ -86,3 +80,7 @@ input[type=checkbox] {
     width: 320px;
 }
 
+#helpdesk, #database, #network, #telecomm {
+    accent-color: #CA3433;
+    box-shadow: none;
+}

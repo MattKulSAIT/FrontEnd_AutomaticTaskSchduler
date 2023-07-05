@@ -26,7 +26,7 @@ function ECTdetails() {
 
     return(
         <div className="ectTime">
-            <table className="ectTime">
+            <table className="ectTime" align='left'>
                 <tr>
                     <th>Estimated Completion Time:</th>
                 </tr>

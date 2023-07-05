@@ -7,7 +7,7 @@ import CreateResource from '../../../../components/createResource'
 function CreateNewResource() {
 
     const currPage = "Create New Resource";
-    const whereTheBackButtonsGoes = `http://localhost:3000/menu_Admin`;
+    const backButtonLink = `http://localhost:3000/menu_Admin`;
 
 
     return (
@@ -15,7 +15,7 @@ function CreateNewResource() {
             <div className="components">
                 <div className='headers'>
                     <PageHeader/>
-                    <PageTitle currPage={currPage} whereTheBackButtonsGoes={whereTheBackButtonsGoes}/>
+                    <PageTitle currPage={currPage} backButtonLink={backButtonLink}/>
                 </div>
                 <CreateResource/> 
             </div>

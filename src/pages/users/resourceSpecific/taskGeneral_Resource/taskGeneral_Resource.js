@@ -17,7 +17,7 @@ function TaskGeneralResource() {
                 <PageTitleSearch currPage={currPage} whereTheBackButtonsGoes={whereTheBackButtonsGoes}/>
             </div>
             <main>
-                <GeneralTaskTable/>
+                <GeneralTaskTable EditPage={"/taskEdit_Resource/"} ViewPage={"/taskSelected_Resource/"}/>
             </main>
         </div>
     );

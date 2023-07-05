@@ -22,11 +22,6 @@ img {
 
 /*Page*/
 
-html, body {
-    margin: 0;
-    padding: 0;
-}
-
 .login {
     margin: auto;
     width: 75%;

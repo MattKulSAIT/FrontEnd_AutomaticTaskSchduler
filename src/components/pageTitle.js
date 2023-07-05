@@ -1,13 +1,14 @@
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
+//import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+
 import backArrow from '../assets/backArrow_pageTitle.png'
 
-export default function PageTitle({ currPage, whereTheBackButtonsGoes }) {
+export default function PageTitle({ currPage, backButtonLink }) {
   function backButton() {
-    window.location.href = whereTheBackButtonsGoes;
+    window.location.href = backButtonLink;
   }
 
   return (

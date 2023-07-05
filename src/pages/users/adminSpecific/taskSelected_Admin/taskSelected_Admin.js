@@ -1,12 +1,16 @@
-import './TestPage.css';
-import TitleDesc from './components/Layout_Display/tables/selectedViews/taskDetails/titleDesc'
-import TaskDetails from './components/Layout_Display/tables/selectedViews/taskDetails/taskDetails'
-import RescAssigned from './components/Layout_Display/tables/selectedViews/taskDetails/rescAssigned'
-import ECTdetails from './components/Layout_Display/tables/selectedViews/taskDetails/ectDetails'
-import PageHeader from'./components/Layout_Display/pageHeader'
-import PageTitle from'./components/Layout_Display/pageTitle'
+import './taskSelected_Admin.css';
+import TitleDesc from '../../../../components/selectedViews/taskDetails/titleDesc';
+import TaskDetails from '../../../../components/selectedViews/taskDetails/taskDetails'
+import RescAssigned from '../../../../components/selectedViews/taskDetails/rescAssigned'
+import ECTdetails from '../../../../components/selectedViews/taskDetails/ectDetails'
+import PageHeader from'../../../../components/pageHeader'
+import PageTitle from'../../../../components/pageTitle'
 
 function TaskSelectedAdmin() {
+
+    const currPage = "Selected Task";
+    const whereTheBackButtonsGoes = `http://localhost:3000/taskGeneral_Admin`;
+
 
     function EditPage() {
         //
@@ -15,7 +19,7 @@ function TaskSelectedAdmin() {
     return (
         <div className="testPage">
             <PageHeader/>
-            <PageTitle/>
+            <PageTitle currPage={currPage} whereTheBackButtonsGoes={whereTheBackButtonsGoes}/>
             <div className='mainPage'>
                 <div className='leftSide'>
                     <TitleDesc/>

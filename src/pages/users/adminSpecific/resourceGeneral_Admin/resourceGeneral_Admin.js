@@ -3,7 +3,7 @@ import PageHeader from'../../../../components/pageHeader'
 import PageTitle from'../../../../components/generalSearchTitle'
 
 //THis page is not tested as i need backend connection
-function generalResourceView() {
+function ResourceGeneralView() {
 
     const currPage = "General Resource";
     const whereTheBackButtonsGoes = `http://localhost:3000/menu_Admin`;
@@ -23,4 +23,4 @@ function generalResourceView() {
     );
 }
   
-export default generalResourceView;
+export default ResourceGeneralView;

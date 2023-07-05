@@ -1,11 +1,12 @@
 import * as React from 'react';
+
 import calendar from '../assets/changeSchedule.png'
 import taskList from '../assets/manageTasks.png'
 
 const ResourceMenu = () => {
 
     function changeSchedule() {
-        window.location.href = `http://localhost:3000/scheduleEdit`;
+        window.location.href = `http://localhost:3000/scheduleEdit_Resource`;
     }
 
     function manageTasks() {

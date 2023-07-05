@@ -1,8 +1,9 @@
 import * as React from 'react';
 import Button from '@mui/material/Button';
+
 import ATlogo from '../assets/AutoTaskerTemp_Final.png'
 
-export default function PageHeader() {
+function PageHeader() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
   const handleMenuOpen = () => {
@@ -33,3 +34,5 @@ export default function PageHeader() {
     </div>
   );
 }
+
+export default PageHeader;

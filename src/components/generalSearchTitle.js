@@ -18,7 +18,7 @@ const StyledToolbar = styled(Toolbar)(({ theme }) => ({
   },
 }));
 
-export default function PageTitle({ currPage, whereTheBackButtonsGoes }) {
+function PageTitle({ currPage, whereTheBackButtonsGoes }) {
 
   function backButton() {
     window.location.href = whereTheBackButtonsGoes;
@@ -51,3 +51,5 @@ export default function PageTitle({ currPage, whereTheBackButtonsGoes }) {
     </Box>
   );
 }
+
+export default PageTitle;

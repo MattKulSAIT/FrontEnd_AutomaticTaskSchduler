@@ -1,0 +1,30 @@
+/*Font*/
+td {
+    color: #757575;
+}
+
+th {
+    color: #CA3433;
+}
+
+th, td {
+    font-family: bahnschrift;
+    padding: 10px;
+    text-align: left;
+    width: 225px;
+    min-width: 150px;
+}
+
+
+/*Img*/
+
+/*Page*/
+.rescBasicDetails, .rescHours, .rescSkillRole {
+    padding: 10px;
+    margin: 10px;
+    float: left;
+    background-color: #F5F5F5;
+    border: none;
+    border-radius: 5px;
+    box-shadow: inset 0 5px 8px #dfdfdf;
+}
