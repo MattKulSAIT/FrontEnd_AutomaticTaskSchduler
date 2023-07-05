@@ -6,9 +6,9 @@ import Button from '@mui/material/Button';
 
 import backArrow from '../assets/backArrow_pageTitle.png'
 
-export default function PageTitle({ currPage, backButtonLink }) {
+export default function PageTitle({ currPage, whereTheBackButtonGoes }) {
   function backButton() {
-    window.location.href = backButtonLink;
+    window.location.href = whereTheBackButtonGoes;
   }
 
   return (
