@@ -1,0 +1,38 @@
+/*Text*/
+label {
+    font-family: bahnschrift;
+    color: #CA3433;
+    font-size: x-large;
+    font-weight: bolder;
+}
+
+/*Image*/
+img {
+    width: 150px;
+}
+
+/*Page*/
+.menuButton {
+    width: 250px;
+    height: 250px;
+    border-radius: 20px;
+}
+
+.menuButton:hover{
+    background-color: red;
+}
+
+.menuOptions {
+    margin: 20px;
+    padding: 50px;
+    position: relative;
+    text-align: center;
+}
+
+.manageTasksDiv, .viewHistoryDiv, .manageResourcesDiv, .createResourceDiv {
+    margin: 20px;
+    text-align: center;
+    width: 300px;
+    display: inline-block;
+    vertical-align: middle;
+}
