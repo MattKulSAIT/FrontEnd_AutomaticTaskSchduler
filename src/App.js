@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import CreateTask from './pages/customer/ticketCreation/ticketCreation/ticketCreation_Customer';
+import CreateTask from './pages/customer/ticketCreation/ticketCreation_Customer';
 import SentTask from './pages/customer/sentTicket/sentTicket_Customer';
 import LoginPage from './pages/users/login/loginPage';
 import AdminMenu from './pages/users/adminSpecific/menu_Admin/menu_Admin';
