@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useParams } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { useParams, useNavigate } from "react-router-dom";
 
 const EditResourceAdmin = () => {
 
@@ -27,18 +27,22 @@ const EditResourceAdmin = () => {
         phoneNum: phoneNum,
         email: email,
         password: password,
-        deskSkill: deskSkill,
-        dataSkill: dataSkill,
-        netSkill: netSkill,
-        mobileSkill: mobileSkill,
+        deskSkill: deskChecked ? 1 : 0,
+        dataSkill: dataChecked ? 1 : 0,
+        netSkill: netChecked ? 1 : 0,
+        mobileSkill: mobileChecked ? 1 : 0,
         role: role,
     };
+
+    useEffect(() => {
+        fetchData();
+    }, []);
 
     const handleCheckboxChange = (event) => {
         const checkboxValue = event.target.checked;
         const checkboxName = event.target.name;
 
-    const checkboxState = checkboxValue ? 1 : 0;
+        const checkboxState = checkboxValue ? 1 : 0;
 
         switch (checkboxName) {
             case 'helpdesk':
@@ -99,25 +103,25 @@ const EditResourceAdmin = () => {
         }
     };
 
-    
+    const navigate = useNavigate();
 
     const saveEdit = async (event) => {
         if (fName === "" || lName === "" || phoneNum === "" || password === "" || role === 0) {
             setErrorMsg("All fields must be filled");
         } else {
             event.preventDefault();
-            const url = `http://localhost:8080/resourceEdit/${employeeId}?}`;
+            const url = `http://localhost:8080/resourceEdit/${employeeId}`;
             try{
                 const response = await fetch(url, {
                     method:'PATCH', 
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ employeeId, editedResource }),
+                    body: JSON.stringify({ employeeId, ...editedResource }),
                 });
 
                 if (response.ok) {
-                    window.location.href = `http://localhost:3000/resourceGeneral_Admin/${employeeId}`;
+                    navigate(`/resourceGeneral_Admin`);
                 } 
 
             }catch(error){

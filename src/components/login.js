@@ -21,7 +21,12 @@ const Login = () => {
             });
 
             if (response.ok) { //We need to add some logic or either send to admin or resource 
-                window.location.href = 'http://localhost:3000/menu_Admin';
+                const loginUser = await response.json();
+                if (loginUser.role === 1) {
+                    window.location.href = 'http://localhost:3000/menu_Admin';
+                } else if (loginUser.role === 2) {
+                    window.location.href = 'http://localhost:3000/menu_Resource';
+                }
             } else {
                 const errorData = await response.json();
                 setLoginError(errorData.message || 'Incorrect ID or Password. Please try again.');
@@ -70,8 +75,3 @@ const Login = () => {
 }
 
 export default Login;
-
-/*import * as React from 'react';
-
-const url = "http://localhost:8080/login?employeeId=${encodeURIComponent(employeeId)}&password=${encodeURIComponent(password)}"
-*/
