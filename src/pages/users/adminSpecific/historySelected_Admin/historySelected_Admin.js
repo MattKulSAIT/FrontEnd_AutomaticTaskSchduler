@@ -2,7 +2,7 @@ import './historySelected_Admin.css';
 //import { useNavigate  } from 'react-router-dom';
 //import { useParams } from 'react-router-dom';
 import TitleDesc from '../../../../components/selectedViews/taskDetails/titleDesc'
-import TaskDetails from '../../../../components/selectedViews/taskDetails/taskDetails'
+import HistoryDetails from '../../../../components/selectedViews/taskDetails/historyDetails'
 import RescAssigned from '../../../../components/selectedViews/taskDetails/rescAssigned'
 import TimeCompleted from '../../../../components/selectedViews/taskDetails/timeCompleted'
 //import PageHeader from'../../../../components/pageHeader'
@@ -24,8 +24,8 @@ function HistorySelectedResource() {
         <div className="historySelectedResource">
             <div className='mainPage'>
                 <div className='headers'>
-                //PageHeader
-                //PageTitle
+                    <PageHeader/>
+                    <PageTitle/>
                 </div>
                 <div className='body'>
                     <div>
@@ -33,7 +33,7 @@ function HistorySelectedResource() {
                         <TitleDesc/>
                         </div>
                         <div className='rightSide'>
-                            <TaskDetails/> 
+                            <HistoryDetails/> 
                             <hr/>
                             <RescAssigned/>
                             <hr/>
