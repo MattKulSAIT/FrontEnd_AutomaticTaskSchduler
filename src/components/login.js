@@ -21,7 +21,7 @@ const Login = () => {
             });
 
             if (response.ok) { //We need to add some logic or either send to admin or resource 
-                window.location.href = 'http://localhost:3000/menu_Admin';
+                window.location.href = 'http://localhost:3000/menu_Resource';
             } else {
                 const errorData = await response.json();
                 setLoginError(errorData.message || 'Incorrect ID or Password. Please try again.');

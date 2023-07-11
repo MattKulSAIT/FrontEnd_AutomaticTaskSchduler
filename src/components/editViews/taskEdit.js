@@ -59,7 +59,7 @@ const EditTaskResource = () => {
         const selectedType = event.target.selectTaskType.value;
         const estimatedTime = event.target.estimatedTime.value;
 
-        event.preventDefault();
+        event.preventDefault(); //Sending the TaskEdit information to the back end
         const url = `http://localhost:8080/taskEdit/${id}?status=${encodeURIComponent(selectedStatus)}
                                                         &type=${encodeURIComponent(selectedType)}
                                                         &time=${encodeURIComponent(estimatedTime)}`;
@@ -110,11 +110,11 @@ const EditTaskResource = () => {
                         <div className='taskType'>
                             <h3>Change Task Type:</h3>
                             <select name="selectTaskType" id="taskStatus">
-                                <option value="" disabled selected>- Select Status -</option>
+                                <option value="" disabled selected>- Select Type -</option>
                                 <option value="1">Help Desk Support</option>
                                 <option value="2">Database Support</option>
                                 <option value="3">Network Support</option>
-                                <option value="4">Completed Support</option>
+                                <option value="4">Mobile Support</option>
                             </select>
                             <p>Current Type: {currType === 1 ? "Desk Side" : currType === 2 ? "Database" : currType === 3 ? "Network" : currType === 4 ? "Mobile Telephone" : "Unknown Type"}</p>
                         </div>
@@ -139,31 +139,3 @@ const EditTaskResource = () => {
 
 export default EditTaskResource;
 
-/*import * as React from 'react';
-
-<input type='text' value={employeeId} onChange={(e) => setEmployeeId(e.target.value)}/>
-
-<td><input type='password' value={password} onChange={(e) => setPassword(e.target.value)}/></td>
-
-<table>
-    <tr>
-        <th>Change Task Status:</th>
-        <th>Change Task Type:</th>
-        <th>Change Estimated Time:</th>
-    </tr>
-    <tr>
-        <td>
-            <select name="selectTaskStatus" id="taskStatus">
-                <option value={pending}>Pending</option>
-                <option value={assigned}>Assigned</option>
-                <option value={inProgress}>In Progress</option>
-                <option value={completed}>Completed</option>
-            </select>
-        </td>
-        <td><input type='text' placeholder='- Select Type -'/></td>
-        <td></td>
-    </tr>
-</table>
-
-const url = "http://localhost:8080/login?employeeId=${encodeURIComponent(employeeId)}&password=${encodeURIComponent(password)}"
-*/

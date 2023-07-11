@@ -1,4 +1,6 @@
 import './taskSelected_Admin.css';
+import { useNavigate  } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import TitleDesc from '../../../../components/selectedViews/taskDetails/titleDesc';
 import TaskDetails from '../../../../components/selectedViews/taskDetails/taskDetails'
 import RescAssigned from '../../../../components/selectedViews/taskDetails/rescAssigned'
@@ -8,12 +10,14 @@ import PageTitle from'../../../../components/pageTitle'
 
 function TaskSelectedAdmin() {
 
+    const history = useNavigate ();
+    const { id } = useParams();
     const currPage = "Selected Task";
     const whereTheBackButtonsGoes = `http://localhost:3000/taskGeneral_Admin`;
 
 
     function EditPage() {
-        //
+        history(`/taskEdit_Admin/${id}`);
     }
 
     return (

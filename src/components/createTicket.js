@@ -1,8 +1,75 @@
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import ATlogo from '../assets/AutoTaskerTemp_Final.png';
 
 function CreateNewTicket() {
-    
+    const [taskTitle, setTaskTitle] = useState("");
+    const [taskDesc, setTaskDesc] = useState("");
+    const [taskFirstName, setTaskFirstName] = useState("");
+    const [taskLastName, setTaskLastName] = useState("");
+    const [taskPhone, setTaskPhone] = useState("");
+    const [taskEmail, setTaskEmail] = useState("");
+    const [taskType, setTaskType] = useState(0);
+    const [timeToComplete, setTimeToComplete] = useState(0);
+    const [errorMsg, setErrorMsg] = useState("");
+    const navigate = useNavigate();
+
+    // Will verify user inputs and send them to the backend for creation if all is good
+    const createTask = async (event) => {
+        event.preventDefault();
+
+        //Checking for any of the areas to be null
+        if (!taskTitle || !taskDesc || !taskFirstName || !taskLastName || !taskPhone || !taskEmail || !taskType) {
+            setErrorMsg("Please fill in all required fields");
+            return;
+        }
+        else{
+
+            /**Setting the Time t ocomplete based on the type of class */
+            if (taskType === 1) {
+                setTimeToComplete(0.5);
+              } else if (taskType === 2) {
+                setTimeToComplete(1.5);
+              } else if (taskType === 3) {
+                setTimeToComplete(1.0);
+              } else if (taskType === 4) {
+                setTimeToComplete(0.5);
+              }
+
+              /**
+               * Const value holding what needs to be send to the backend
+               */
+            const newTask ={
+                title: taskTitle,
+                description: taskDesc,
+                name: taskFirstName + " " + taskLastName,
+                phoneNumber: taskPhone,
+                email: taskEmail,
+                category: taskType,
+                status: 1,
+                timeToComplete: timeToComplete,
+                creationDate: new Date().toISOString()
+            }
+
+            //Insert assignment Logic here Will do later when the schedule is good
+
+            await fetch("http://localhost:8080/newTask", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(newTask),
+            })
+                .then((response) => response.json(), navigate("/sentTask"))
+                .catch((error) => {
+                console.error('Error:', error);
+                });
+
+        }
+
+        
+    }
+
     return (
         <div className="createTicket">
             <div className="mainPage">
@@ -15,19 +82,33 @@ function CreateNewTicket() {
                     <h1 id="headerTitle" className="headerTitle">Ticket Creation</h1>
                 </div>
                 <div className="formDiv">
-                    <form>
+                    <form onSubmit={createTask}>
                         <div className="taskInputs">
                             <table className="titleDesc" align="left">
                                 <tr>
                                     <td id="taskTitleTD">
                                         <h2>Title <span className="subTitle">(Max 60 characters)</span></h2>
-                                        <input type="text" className="taskTitle" placeholder="Ex. Email is not working" id="taskTitle" maxLength="60"/>
+                                        <input
+                                            type="text"
+                                            className="taskTitle"
+                                            placeholder="Ex. Email is not working"
+                                            id="taskTitle"
+                                            maxLength="60"
+                                            value={taskTitle}
+                                            onChange={(e) => setTaskTitle(e.target.value)}
+                                        />
                                     </td>
                                 </tr>
                                 <tr>
                                     <td id="taskDescTD">
                                         <h2>Description <span className="subTitle">(Max 2000 characters)</span></h2>
-                                        <textarea className="taskDesc" placeholder="Ex. Email does not open when I click on the icon" id="taskDesc"/>
+                                        <textarea
+                                            className="taskDesc"
+                                            placeholder="Ex. Email does not open when I click on the icon"
+                                            id="taskDesc"
+                                            value={taskDesc}
+                                            onChange={(e) => setTaskDesc(e.target.value)}
+                                        />
                                     </td>
                                 </tr>
                             </table>
@@ -35,27 +116,56 @@ function CreateNewTicket() {
                                 <tr>
                                     <td id="taskFirstNameTD">
                                         <h2>First Name</h2>
-                                        <input type="text" placeholder="Ex. Jane" id="taskFirstName"/>
+                                        <input
+                                            type="text"
+                                            placeholder="Ex. Jane"
+                                            id="taskFirstName"
+                                            value={taskFirstName}
+                                            onChange={(e) => setTaskFirstName(e.target.value)}
+                                        />
                                     </td>
                                     <td id="taskLastNameTD">
                                         <h2>Last Name</h2>
-                                        <input type="text" placeholder="Ex. Doe" id="taskLastName"/>
+                                        <input
+                                            type="text"
+                                            placeholder="Ex. Doe"
+                                            id="taskLastName"
+                                            value={taskLastName}
+                                            onChange={(e) => setTaskLastName(e.target.value)}
+                                        />
                                     </td>
                                 </tr>
                                 <tr>
                                     <td id="taskPhoneTD">
                                         <h2>Phone</h2>
-                                        <input type="phone" placeholder="Ex. 123-123-1234" id="taskPhone"/>
+                                        <input
+                                            type="phone"
+                                            placeholder="Ex. 123-123-1234"
+                                            id="taskPhone"
+                                            value={taskPhone}
+                                            onChange={(e) => setTaskPhone(e.target.value)}
+                                        />
                                     </td>
                                     <td id="taskEmailTD">
                                         <h2>Email</h2>
-                                        <input type="email" placeholder="Ex. janedoe@work.ca" id="taskEmail"/>
+                                        <input
+                                            type="email"
+                                            placeholder="Ex. janedoe@work.ca"
+                                            id="taskEmail"
+                                            value={taskEmail}
+                                            onChange={(e) => setTaskEmail(e.target.value)}
+                                        />
                                     </td>
                                 </tr>
                                 <tr>
                                     <td id="taskWorkTypeTD">
                                         <h2>Work Type</h2>
-                                        <select name="taskType" id="taskType">
+                                        <select
+                                            name="taskType"
+                                            id="taskType"
+                                            value={taskType}
+                                            onChange={(e) => setTaskType(e.target.value)}
+                                        >
                                             <option value="" disabled selected>- Select Work Type -</option>
                                             <option value="1">Help Desk Support</option>
                                             <option value="2">Database Support</option>
@@ -71,6 +181,7 @@ function CreateNewTicket() {
                                 <tr>
                                     <td><button type="submit" className="submitTicket">Submit Ticket</button></td>
                                 </tr>
+                                <tr><td>{errorMsg}</td></tr>
                             </table>
                         </div>
                     </form>
@@ -78,11 +189,6 @@ function CreateNewTicket() {
             </div>
         </div>
     );
-
 }
 
 export default CreateNewTicket;
-
-/*
-For the form; method='GET' onSubmit={buttonCreateTask}
-*/

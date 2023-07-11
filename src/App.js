@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import CreateTask from './pages/customer/ticketCreation/ticketCreation_Customer';
+import CreateTask from './pages/customer/ticketCreation/ticketCreation/ticketCreation_Customer';
+import SentTask from './pages/customer/sentTicket/sentTicket_Customer';
 import LoginPage from './pages/users/login/loginPage';
 import AdminMenu from './pages/users/adminSpecific/menu_Admin/menu_Admin';
 import ResourceMenu from './pages/users/resourceSpecific/menu_Resource/menu_Resource';
@@ -22,6 +23,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<LoginPage />} />
         <Route path="/createTask" element={<CreateTask />} />
+        <Route path="/sentTask" element={<SentTask/>} />
         <Route path="/menu_Admin" element={<AdminMenu />} />
         <Route path="/menu_Resource" element={<ResourceMenu />} />
         <Route path="/taskGeneral_Resource" element={<ResourceGeneralTaskViewPage />} />

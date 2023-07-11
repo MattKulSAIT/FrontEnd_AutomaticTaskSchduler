@@ -16,12 +16,15 @@ const TaskRestable = () =>{
     const [currStatus, setCurrStatus] = useState("tempStatus");
     const [currType, setCurrType] = useState("tempType");
     const [currTime, setCurrTime] = useState("tempTime");
+    const [assignedEmpId, setAssignedEmpId] = useState(null);
     const { id } = useParams();
 
     useEffect(() => {
         fetchData();
       }, []);
 
+      
+      /**const to get the info specific to the selected Task  */
       const fetchData = async () => {
         try {
           const response = await fetch(`http://localhost:8080/taskView/${id}`); //it used id because thats what was useing the App.js
@@ -32,6 +35,7 @@ const TaskRestable = () =>{
             setCurrStatus(data.status);
             setCurrType(data.category);
             setCurrTime(data.timeToComplete)
+            setAssignedEmpId(data.empId)
           } else {
             throw new Error('Failed to fetch data');
           }
@@ -75,6 +79,33 @@ const TaskRestable = () =>{
     }
   };
 
+  const fetchNumberOfTasks = async (employeeId) => {
+    try {
+      const response = await fetch(`http://localhost:8080/generalResource/${employeeId}`);
+      if (response.ok) {
+        const data = await response.json();
+        return data;
+      } else {
+        throw new Error('Failed to fetch data');
+      }
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+  
+  useEffect(() => {
+    const fetchTaskCounts = async () => {
+      const counts = {};
+      for (const row of rows) {
+        const count = await fetchNumberOfTasks(row.employeeId);
+        counts[row.employeeId] = count;
+      }
+      setTaskCounts(counts);
+    };
+  
+    fetchTaskCounts();
+  }, [rows]);
+
   const saveEdit = async (event) => {
 
     event.preventDefault();
@@ -82,11 +113,15 @@ const TaskRestable = () =>{
     const selectedStatus = event.target.selectTaskStatus.value;
     const selectedType = event.target.selectTaskType.value;
     const estimatedTime = event.target.estimatedTime.value;
+    const newAssignedResource = assignedEmpId;
+
+
 
     event.preventDefault();
-    const url = `http://localhost:8080/taskEdit/${id}?status=${encodeURIComponent(selectedStatus)}
+    const url = `http://localhost:8080/taskEdit/admin/${id}?status=${encodeURIComponent(selectedStatus)}
                                                     &type=${encodeURIComponent(selectedType)}
-                                                    &time=${encodeURIComponent(estimatedTime)}`;
+                                                    &time=${encodeURIComponent(estimatedTime)}
+                                                    &empId=${encodeURIComponent(newAssignedResource)}`;
     try{
         const response = await fetch(url, {
             method:'PATCH', 
@@ -97,7 +132,7 @@ const TaskRestable = () =>{
         });
 
         if (response.ok) {
-            window.location.href = `http://localhost:3000/taskSelected_Resource/${id}`;
+            window.location.href = `http://localhost:3000/taskSelected_Admin/${id}`;
         } 
 
     }catch(error){
@@ -137,11 +172,11 @@ function exitEdit(){
                             <div className='taskType'>
                                 <h3>Change Task Type:</h3>
                                 <select name="selectTaskType" id="taskStatus">
-                                    <option value="" disabled selected>- Select Status -</option>
+                                    <option value="" disabled selected>- Select Type -</option>
                                     <option value="1">Help Desk Support</option>
                                     <option value="2">Database Support</option>
                                     <option value="3">Network Support</option>
-                                    <option value="4">Completed Support</option>
+                                    <option value="4">Mobile Support</option>
                                 </select>
                                 <p>Current Type: {currType === 1 ? "Desk Side" : currType === 2 ? "Database" : currType === 3 ? "Network" : currType === 4 ? "Mobile Telephone" : "Unknown Type"}</p>
                             </div>
@@ -153,37 +188,50 @@ function exitEdit(){
                             <div className='AssignedResourceTable'>
                               <h3 style={{width: '200px'}}>Resource</h3>
                               <TableContainer style={{ maxHeight: tableHeight, overflow: 'auto', marginTop: '10px', margin: 0 }}>
-                              <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
+                                <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
                                   <TableHead style={tableHeaderStyle}>
-                                  <TableRow>
+                                    <TableRow>
+                                      <TableCell></TableCell>
                                       <TableCell sx={{ color: '#CA3433', fontWeight: 'bold' }}>EmployeeID</TableCell>
                                       <TableCell align="left" sx={{ color: '#CA3433', fontWeight: 'bold' }}>Name</TableCell>
-                                      <TableCell align="left" sx={{ color: '#CA3433', fontWeight: 'bold' }}>Avalilable Hours</TableCell>
+                                      <TableCell align="left" sx={{ color: '#CA3433', fontWeight: 'bold' }}>Available Hours</TableCell>
                                       <TableCell align="left" sx={{ color: '#CA3433', fontWeight: 'bold' }}># of Current Tasks</TableCell>
-                                  </TableRow>
+                                    </TableRow>
                                   </TableHead>
                                   <TableBody sx={{ backgroundColor: '#F5F5F5' }}>
-                                  {Array.from({ length: numRows }).map((_, index) => {
+                                    {Array.from({ length: numRows }).map((_, index) => {
                                       const row = rows[index] || {}; // Get the row if it exists or an empty object
+                                      const isSelected = assignedEmpId === Number(row.employeeId); // Check if it matches the assignedEmpId
+
                                       return (
-                                      <TableRow
+                                        <TableRow
                                           key={index}
                                           sx={{
-                                          '&:last-child td, &:last-child th': { border: 0 },
-                                          height: `${rowHeight}px`,
+                                            '&:last-child td, &:last-child th': { border: 0 },
+                                            height: `${rowHeight}px`,
                                           }}
-                                      >
+                                        >
+                                          <TableCell>
+                                            {taskCounts[row.employeeId] !== undefined && (
+                                              <input
+                                              type="radio"
+                                              name="AssignedResource"
+                                              checked={isSelected}
+                                              onChange={() => setAssignedEmpId(row.employeeId)}
+                                            />
+                                            )}
+                                          </TableCell>
                                           <TableCell component="th" scope="row">
-                                          {row.employeeId}
+                                            {row.employeeId}
                                           </TableCell>
                                           <TableCell align="left">{row.name}</TableCell>
-                                          <TableCell align="left">{row.avainleHours}</TableCell> 
+                                          <TableCell align="left">{row.availableHours}</TableCell>
                                           <TableCell align="left">{taskCounts[row.employeeId] !== undefined ? taskCounts[row.employeeId] : ''}</TableCell>
-                                      </TableRow>
+                                        </TableRow>
                                       );
-                                  })}
+                                    })}
                                   </TableBody>
-                              </Table>
+                                </Table>
                               </TableContainer>
                             </div>
                             <div className='editButtons'>
