@@ -3,20 +3,22 @@ import { useParams } from 'react-router-dom';
 
 function CompDetails() {
 
-    /*
-    const [compTime, setCompTime] = useState("tempECTtime");
+    
+    const [taskCreation, setTaskCreation] = useState("tempTaskCreation");
+    const [taskCompletion, setTaskCompletion] = useState("tempTaskCompletion");
     const { id } = useParams();
-
+    
     useEffect(() => {
         fetchData();
       }, []);
-
+    
       const fetchData = async () => {
         try {
-          const response = await fetch(`http://localhost:8080/taskView/${id}`); //it used id because thats what was useing the App.js
+          const response = await fetch(`http://localhost:8080/archiveTask/${id}`); //it used id because thats what was useing the App.js
           if (response.ok) {
             const data = await response.json();
-            setEctTime(data.timeToComplete);
+            setTaskCreation(data.creationDate);
+            setTaskCompletion(data.completionDate);
           } else {
             throw new Error('Failed to fetch data');
           }
@@ -25,16 +27,16 @@ function CompDetails() {
         }
       };
 
-      */
-
     return(
         <div className="compTimeDiv">
             <table className="compTimeTable">
                 <tr>
+                    <th>Creation Date:</th>
                     <th>Completion Date:</th>
                 </tr>
                 <tr>
-                    <td id="compTime">{compTime}</td>
+                    <td id='createTime'>{taskCreation}</td>
+                    <td id="compTime">{taskCompletion}</td>
                 </tr>
             </table>
         </div>

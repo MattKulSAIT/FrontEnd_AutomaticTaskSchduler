@@ -24,32 +24,29 @@ function CreateNewTicket() {
             return;
         }
         else{
+            let timeToComplete;
 
-            /**Setting the Time t ocomplete based on the type of class */
-            if (taskType === 1) {
-                setTimeToComplete(0.5);
-              } else if (taskType === 2) {
-                setTimeToComplete(1.5);
-              } else if (taskType === 3) {
-                setTimeToComplete(1.0);
-              } else if (taskType === 4) {
-                setTimeToComplete(0.5);
-              }
-
-              /**
-               * Const value holding what needs to be send to the backend
-               */
-            const newTask ={
-                title: taskTitle,
-                description: taskDesc,
-                name: taskFirstName + " " + taskLastName,
-                phoneNumber: taskPhone,
-                email: taskEmail,
-                category: taskType,
-                status: 1,
-                timeToComplete: timeToComplete,
-                creationDate: new Date().toISOString()
+            if (taskType === "1") {
+              timeToComplete = 0.5;
+            } else if (taskType === "2") {
+              timeToComplete = 1.5;
+            } else if (taskType === "3") {
+              timeToComplete = 1.0;
+            } else if (taskType === "4") {
+              timeToComplete = 0.5;
             }
+        
+            const newTask = {
+              title: taskTitle,
+              description: taskDesc,
+              name: taskFirstName + " " + taskLastName,
+              phoneNumber: taskPhone,
+              email: taskEmail,
+              category: taskType,
+              status: 1,
+              timeToComplete: timeToComplete,
+              creationDate: new Date().toISOString(),
+            };
 
             //Insert assignment Logic here Will do later when the schedule is good
 
@@ -170,7 +167,7 @@ function CreateNewTicket() {
                                             <option value="1">Help Desk Support</option>
                                             <option value="2">Database Support</option>
                                             <option value="3">Network Support</option>
-                                            <option value="4">Completed Support</option>
+                                            <option value="4">Mobile Support</option>
                                         </select>
                                     </td>
                                 </tr>

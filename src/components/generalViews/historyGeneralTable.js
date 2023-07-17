@@ -64,7 +64,7 @@ export default function HistoryTable() {
 
   //THESE NEED TO BE CHANGED BUT NO LANDING PAGES
   const viewTask = (taskId) => {
-    history(`/taskSelected_Resource/${taskId}`);
+    history(`/historySelected_Admin/${taskId}`);
   };
 
   //THESE NEED TO BE CHANGED BUT NO LANDING PAGES

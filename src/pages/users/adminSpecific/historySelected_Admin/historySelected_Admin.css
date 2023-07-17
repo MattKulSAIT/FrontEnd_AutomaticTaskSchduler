@@ -20,9 +20,7 @@ th, td {
 
 /*Page*/
 
-html, body {
-    margin: 0;
-}
+
 
 hr {
     border: 2px solid #CA3433;
@@ -30,9 +28,11 @@ hr {
     margin: 20px;
 }
 
+/*
 .mainPage {
-    padding: 20px;
+   padding: 20px;
 }
+*/
 
 .buttonPos {
     padding: 20px;
