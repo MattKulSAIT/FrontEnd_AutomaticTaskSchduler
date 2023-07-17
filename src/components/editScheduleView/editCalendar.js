@@ -20,6 +20,7 @@ const EditCalendar = () => {
             <StaticDatePicker 
                 orientation="landscape"
                 disablePast="true"
+                // Put the 'onAccept' or 'value' here
                 sx={{
                     bgcolor: '#F5F5F5',
                     WebkitTextFillColor: '#757575',                   
