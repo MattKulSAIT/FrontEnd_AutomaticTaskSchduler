@@ -8,16 +8,17 @@ h1, h3, p {
 
 
 
-/*Page*/
+/*Page
 html, body {
     margin: 0;
     padding: 20px;
 }
+*/
 
 hr {
     border: 2px solid #CA3433;
     border-radius: 5px;
-    max-width: 950px
+    max-width: 950px;
 }
 
 select, input{
@@ -59,8 +60,4 @@ button{
     font-weight: bold;
     font-size: 20px;
     text-align: left;
-}
-
-.titleHeader {
-    padding: 10px;
 }

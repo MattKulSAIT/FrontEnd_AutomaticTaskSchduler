@@ -1,22 +1,32 @@
-import GeneralTaskTable from'../../../../components/Layout_Display/tables/generalViews/resourceDetails/rescGeneralTable'
-import PageHeader from'../../../../components/Layout_Display/pageHeader'
-import PageTitle from'../../../../components/Layout_Display/rescGeneralTitle'
+import GeneralResourceTable from'../../../../components/generalViews/rescGeneralTable'
+import PageHeader from'../../../../components/pageHeader'
+import PageTitle from'../../../../components/generalSearchTitle'
 
 //THis page is not tested as i need backend connection
-function generalResourceView() {
+
+/**
+ * General Resource Page (ADMIN)
+ *  The page that the Admin uses to see all the available users
+ */
+function GeneralResourceAdminPage() {
+
+    const currPage = "General Resource";
+    const backButtonLink = `http://localhost:3000/menu_Admin`;
+
     return (
-        <div className="generalResourcePage">
-            <header className="GeneralResourcePageHeader">
-                    <PageHeader style={{ marginTop: '0' }} />   
-            </header>
-            <div>
-                <PageTitle/>
+        <div className="generalResourceAdminPage">
+            <div className='components'>
+                <div className='header'>
+                    <PageHeader style={{ marginTop: '0' }} />
+                    <PageTitle currPage={currPage} backButtonLink={backButtonLink}/>
+                </div>
+                <div className='body'>
+                    <GeneralResourceTable/>
+                </div>
             </div>
-            <main>
-                <GeneralTaskTable/>
-            </main>
         </div>
     );
+
 }
   
-export default generalResourceView;
+export default GeneralResourceAdminPage;

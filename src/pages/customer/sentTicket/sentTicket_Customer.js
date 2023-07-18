@@ -1,10 +1,16 @@
 import React from "react";
+
 import './sentTicket_Customer.css'
+
 import ATlogo from '../../../assets/AutoTaskerTemp_Final.png'
 
-function SentTicket() {
+/* Sent Ticket Page
+    The page that confirms the task has been sent
+*/
+function SentTicketPage() {
+
     return (
-        <div className="sentTicket">
+        <div className="sentTicketPage">
             <div className="components">
                 <div className="body">
                     <div className="ATlogo">
@@ -22,6 +28,7 @@ function SentTicket() {
             </div>
         </div>
     ) ;
+
 }
 
-export default SentTicket;
+export default SentTicketPage;

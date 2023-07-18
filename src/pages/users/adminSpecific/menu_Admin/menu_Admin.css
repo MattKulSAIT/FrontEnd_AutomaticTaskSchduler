@@ -18,6 +18,10 @@ img {
     border-radius: 20px;
 }
 
+.menuButton:hover{
+    background-color: red;
+}
+
 .menuOptions {
     margin: 20px;
     padding: 50px;

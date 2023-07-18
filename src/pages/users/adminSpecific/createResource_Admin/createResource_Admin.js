@@ -1,21 +1,34 @@
 import React, { useState } from 'react';
+
 import './createResource_Admin.css'
-//import PageHeader from '../../../../components/Layout_Display/pageHeader';
-//import PageTitle from '../../../../components/Layout_Display/pageTitle';
+
+import PageHeader from'../../../../components/pageHeader'
+import PageTitle from '../../../../components/pageTitle';
 import CreateResource from '../../../../components/createResource'
 
-function CreateNewResource() {
+/**
+ * Create Resource Page (ADMIN)
+ *  The page the admin uses to create a new user
+ */
+function CreateResourceAdminPage() {
+
+    const currPage = "Create New Resource";
+    const backButtonLink = `http://localhost:3000/menu_Admin`;
+
     return (
-        <div className="CreateResource">
+        <div className="createResourceAdminPage">
             <div className="components">
-                <div className='headers'>
-                    //PageHeader
-                    //PageTitle
+                <div className='header'>
+                    <PageHeader/>
+                    <PageTitle currPage={currPage} backButtonLink={backButtonLink}/>
                 </div>
-                <CreateResource/> 
+                <div className='body'>
+                    <CreateResource/> 
+                </div>               
             </div>
         </div>
     );
+
 }
   
-export default CreateNewResource;
+export default CreateResourceAdminPage;

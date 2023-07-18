@@ -1,18 +1,24 @@
 import React from "react";
+
 import "./ticketCreation_Customer.css"
-import PageHeader from "../../../components/pageHeader";
-import PageTitle from "../../../components/pageTitle";
+
 import CreateTicket from "../../../components/createTicket";
 
+/* Create Ticket Page
+    The page where customers can create and send tickets
+*/
+function CreateTicketPage() {
 
-function CreateTicketView() {
     return (
-        <div className="createTicketView">
+        <div className="createTicketPage">
             <div className="components">
-                <CreateTicket/>
+                <div className="body">
+                    <CreateTicket/>
+                </div>
             </div>
         </div>
     );
+    
 }
 
-export default CreateTicket;
+export default CreateTicketPage;
