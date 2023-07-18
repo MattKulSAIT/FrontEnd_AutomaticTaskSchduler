@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react";
+
 import { useParams } from 'react-router-dom';
 
-function TaskDetails() {
+/**
+ * History Details Component
+ *  This displays specific details of the the task after it has been completed
+ */
+function HistoryDetails() {
     const [cusName, setcustName] = useState("tempCusName");
     const [cusPhone, setCusPhone] = useState("tempCusPhone");
     const [cusEmail, setCusEmail] = useState("tempCusEmail");
@@ -74,4 +79,4 @@ function TaskDetails() {
     );
 }
 
-export default TaskDetails;
+export default HistoryDetails;
