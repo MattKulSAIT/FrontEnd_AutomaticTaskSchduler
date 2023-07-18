@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
 
+/**
+ * Create Resource Component
+ *  This is used to create a new Resource
+ */
 const NewResource = () => {
+
+    // BackEnd //
 
     //All the variables for the page 
     const [fName, setFirstName] = useState("")
@@ -40,7 +46,8 @@ const NewResource = () => {
         default:
             break;
         }
-    }
+    };
+
     const newResource = {
         name: fName + " " + lName,
         phoneNum: phoneNum,
@@ -52,6 +59,7 @@ const NewResource = () => {
         mobileSkill: mobileChecked ? 1 : 0,
         role: role,
     };
+
     //The constant to send the contents to the backend
     const createResource = async (event) => {
         event.preventDefault();
@@ -84,9 +92,9 @@ const NewResource = () => {
             setErrorMsg("Resource Created Successfully");
         }
     };
-      
 
-    //FrontEnd
+    // FrontEnd //
+
     return (
         <div className='createResourceComponent'>
             <div className='newResource'>
@@ -95,36 +103,117 @@ const NewResource = () => {
                         <hr align="left"/>
                         <div className='rescFirstNameDiv'>
                             <h3>First Name:</h3>
-                            <input type='text' placeholder='Ex. John' name="rescFirstName" value={fName} onChange={(e) => setFirstName(e.target.value)}/>
+                            <input 
+                                type='text' 
+                                placeholder='Ex. John' 
+                                name="rescFirstName" 
+                                value={fName} 
+                                maxLength="20"
+                                pattern='[A-Za-z]'
+                                required
+                                onChange={(e) => setFirstName(e.target.value)}
+                            />
                         </div>
                         <div className='rescLastNameDiv'>
                             <h3>Last Name:</h3>
-                            <input type='text' placeholder='Ex. Doe' name="rescLastName" value={lName} onChange={(e) => setLastName(e.target.value)}/>
+                            <input 
+                                type='text' 
+                                placeholder='Ex. Doe' 
+                                name="rescLastName" 
+                                value={lName} 
+                                maxLength="20" 
+                                pattern='[A-Za-z]'
+                                required
+                                onChange={(e) => setLastName(e.target.value)}
+                            />
                         </div>
                         <div className='rescPhoneDiv'>
                             <h3>Phone Number:</h3>
-                            <input type='phone' placeholder='Ex. 123-123-1234' name="rescPhone" value={phoneNum} onChange={(e) => setPhoneNum(e.target.value)}/>
+                            <input 
+                                type='phone' 
+                                placeholder='Ex. 123-123-1234' 
+                                name="rescPhone" 
+                                value={phoneNum} 
+                                required
+                                onChange={(e) => setPhoneNum(e.target.value)}
+                            />
                         </div>
                         <div className='rescEmailDiv'>
                             <h3>Email Address:</h3>
-                            <input type='email' placeholder='Ex. johnd@work.com' name="rescEmail" value={email} onChange={(e) => setEmail(e.target.value)}/>
+                            <input 
+                                type='email' 
+                                placeholder='Ex. johnd@work.com' 
+                                name="rescEmail" 
+                                value={email} 
+                                required
+                                onChange={(e) => setEmail(e.target.value)}
+                            />
                         </div>
                         <div className='rescPasswordDiv'>
                             <h3>Password:</h3>
-                            <input type='text' placeholder='Ex. password' name="rescPassword" value={password} onChange={(e) => setPassword(e.target.value)}/>
+                            <input 
+                                type='text' 
+                                placeholder='Ex. password' 
+                                name="rescPassword" 
+                                value={password} 
+                                minLength="8" 
+                                maxLength="20"
+                                required
+                                onChange={(e) => setPassword(e.target.value)}
+                            />
                         </div>
-                        <div className='resourceSkills'>
-                        <table align='left'>
+                        <div className='resourceSkillsDiv'>
+                            <table align='left'>
                                 <tr>
                                     <td><h3>Skills:</h3></td>
                                 </tr>
                                 <tr>
-                                    <td className='tdButton'><h3><input type='checkbox' id='helpdesk' name='helpdesk' checked={deskChecked} className='skillsButton' onChange={handleCheckboxChange}/>Help Desk Support</h3></td>
-                                    <td className='tdButton'><h3><input type='checkbox' id='database' name='database' checked={dataChecked} className='skillsButton' onChange={handleCheckboxChange}/>Database Support</h3></td>
+                                    <td className='tdButton'>
+                                        <input 
+                                            type='checkbox' 
+                                            id='helpdesk' 
+                                            name='helpdesk' 
+                                            checked={deskChecked} 
+                                            className='skillsButton' 
+                                            onChange={handleCheckboxChange}
+                                        />
+                                        <h3>Help Desk Support</h3>
+                                    </td>
+                                    <td className='tdButton'>
+                                        <input 
+                                            type='checkbox' 
+                                            id='database' 
+                                            name='database' 
+                                            checked={dataChecked} 
+                                            className='skillsButton' 
+                                            onChange={handleCheckboxChange}
+                                        />
+                                        <h3>Database Support</h3>
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td className='tdButton'><h3><input type='checkbox' id='network' name='network' checked={netChecked} className='skillsButton' onChange={handleCheckboxChange}/>Network Supoort</h3></td>
-                                    <td className='tdButton'><h3><input type='checkbox' id='telecomm' name='telecomm' checked={mobileChecked} className='skillsButton' onChange={handleCheckboxChange}/>Mobile Support</h3></td>
+                                    <td className='tdButton'>
+                                        <input 
+                                            type='checkbox' 
+                                            id='network' 
+                                            name='network' 
+                                            checked={netChecked} 
+                                            className='skillsButton' 
+                                            onChange={handleCheckboxChange}
+                                            />
+                                        <h3>Network Supoort</h3>
+                                    </td>
+                                    <td className='tdButton'>
+                                        <input 
+                                            type='checkbox' 
+                                            id='telecomm' 
+                                            name='telecomm' 
+                                            checked={mobileChecked} 
+                                            className='skillsButton' 
+                                            onChange={handleCheckboxChange}
+                                        />
+                                        <h3>Mobile Support</h3>
+                                    </td>
                                 </tr>
                             </table>
                         </div>
@@ -135,11 +224,11 @@ const NewResource = () => {
                                 </tr>
                                 <tr>
                                     <td>
-                                    <select name="role" value={role} id="rescRole" onChange={(e) => setRole(e.target.value)}>
-                                        <option value="" disabled selected>- Select Role -</option>
-                                        <option value="2">Resource</option>
-                                        <option value="1">Admin</option>
-                                    </select> 
+                                        <select name="role" value={role} id="rescRole" required onChange={(e) => setRole(e.target.value)}>
+                                            <option value="" disabled selected>- Select Role -</option>
+                                            <option value="2">Resource</option>
+                                            <option value="1">Admin</option>
+                                        </select> 
                                     </td>
                                 </tr>
                             </table>
@@ -148,10 +237,14 @@ const NewResource = () => {
                             <button id='createResource' type="submit">Create</button>
                         </div>           
                     </div>
-                    {errorMsg}
                 </form>
+                <div className='errorMessage'>
+                    {errorMsg}
+                </div>
             </div>
         </div>
     );
+
 }
+
 export default NewResource;

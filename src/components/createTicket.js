@@ -1,8 +1,17 @@
 import React, { useState } from "react";
+
 import { useNavigate } from 'react-router-dom';
+
 import ATlogo from '../assets/AutoTaskerTemp_Final.png';
 
-function CreateNewTicket() {
+/**
+ * Create Task Component
+ *  This is used to create a new task
+ */
+function CreateTicket() {
+
+    // BackEnd //
+
     const [taskTitle, setTaskTitle] = useState("");
     const [taskDesc, setTaskDesc] = useState("");
     const [taskFirstName, setTaskFirstName] = useState("");
@@ -70,6 +79,8 @@ function CreateNewTicket() {
         
     }
 
+    // FrontEnd //
+
     return (
         <div className="createTicket">
             <div className="mainPage">
@@ -79,7 +90,7 @@ function CreateNewTicket() {
                        className="ATlogo"
                        src={ATlogo} alt='AutoTask Logo'
                     />
-                    <h1 id="headerTitle" className="headerTitle">Ticket Creation</h1>
+                    <h1 id="headerTitle" className="headerTitle">Task Creation</h1>
                 </div>
                 <div className="formDiv">
                     <form onSubmit={createTask}>
@@ -93,7 +104,9 @@ function CreateNewTicket() {
                                             className="taskTitle"
                                             placeholder="Ex. Email is not working"
                                             id="taskTitle"
+                                            minLength="5"
                                             maxLength="60"
+                                            required
                                             value={taskTitle}
                                             onChange={(e) => setTaskTitle(e.target.value)}
                                         />
@@ -106,6 +119,9 @@ function CreateNewTicket() {
                                             className="taskDesc"
                                             placeholder="Ex. Email does not open when I click on the icon"
                                             id="taskDesc"
+                                            minLength="10"
+                                            maxLength="2000"
+                                            required
                                             value={taskDesc}
                                             onChange={(e) => setTaskDesc(e.target.value)}
                                         />
@@ -113,13 +129,15 @@ function CreateNewTicket() {
                                 </tr>
                             </table>
                             <table className="customerDetails" align="left">
-                                <tr>
+                                <tr> 
                                     <td id="taskFirstNameTD">
                                         <h2>First Name</h2>
                                         <input
                                             type="text"
                                             placeholder="Ex. Jane"
                                             id="taskFirstName"
+                                            maxLength="20"
+                                            required
                                             value={taskFirstName}
                                             onChange={(e) => setTaskFirstName(e.target.value)}
                                         />
@@ -130,6 +148,8 @@ function CreateNewTicket() {
                                             type="text"
                                             placeholder="Ex. Doe"
                                             id="taskLastName"
+                                            maxLength="20"
+                                            required
                                             value={taskLastName}
                                             onChange={(e) => setTaskLastName(e.target.value)}
                                         />
@@ -142,6 +162,7 @@ function CreateNewTicket() {
                                             type="phone"
                                             placeholder="Ex. 123-123-1234"
                                             id="taskPhone"
+                                            required
                                             value={taskPhone}
                                             onChange={(e) => setTaskPhone(e.target.value)}
                                         />
@@ -152,6 +173,7 @@ function CreateNewTicket() {
                                             type="email"
                                             placeholder="Ex. janedoe@work.ca"
                                             id="taskEmail"
+                                            required
                                             value={taskEmail}
                                             onChange={(e) => setTaskEmail(e.target.value)}
                                         />
@@ -163,6 +185,7 @@ function CreateNewTicket() {
                                         <select
                                             name="taskType"
                                             id="taskType"
+                                            required
                                             value={taskType}
                                             onChange={(e) => setTaskType(e.target.value)}
                                         >
@@ -170,7 +193,7 @@ function CreateNewTicket() {
                                             <option value="1">Help Desk Support</option>
                                             <option value="2">Database Support</option>
                                             <option value="3">Network Support</option>
-                                            <option value="4">Completed Support</option>
+                                            <option value="4">Mobile Support</option>
                                         </select>
                                     </td>
                                 </tr>
@@ -189,6 +212,7 @@ function CreateNewTicket() {
             </div>
         </div>
     );
+    
 }
 
-export default CreateNewTicket;
+export default CreateTicket;
