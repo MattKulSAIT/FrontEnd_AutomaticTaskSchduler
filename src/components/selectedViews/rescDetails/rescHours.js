@@ -1,11 +1,20 @@
 import React from 'react';
 
+/**
+ * Resource Hours Component
+ *  This displays all the details regarding the selected Resource's hours
+ */
 function RescHours() {
 
+    // BackEnd //
+
+    // Variables
     let rescAvailHrs = "35.5";
     let rescEstWorkHrs = "0.5";
     let rescTotalHrs = "40.0";
     let rescNumCurrTasks = "34";
+
+    // FrontEnd //
 
     return (
         <div className='rescHours'>
@@ -24,6 +33,7 @@ function RescHours() {
             </table>
         </div>
     );
+    
 }
 
 export default RescHours;

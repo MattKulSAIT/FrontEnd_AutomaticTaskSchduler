@@ -1,15 +1,24 @@
 import React from 'react';
 
+/**
+ * Resource Basic Details Component
+ *  This displays the basic details about the selected Resource
+ */
 function RescBasicDetails() {
 
+    // BackEnd //
+
+    // Variables
     let rescName = "tempRescName";
     let rescID = "tempRescID";
     let rescPhone = "tempRescPhone";
     let rescEmail = "tempRescEmail";
 
+    // FrontEnd //
+    
     return (
         <div className='rescBasicDetails'>
-            <table align='left' className='tableComp'>
+            <table align='left'>
                 <tr>
                     <th id='rescTableTitle'>Basic Details:</th>
                 </tr>
@@ -24,6 +33,7 @@ function RescBasicDetails() {
             </table>
         </div>
     );
+
 }
 
 export default RescBasicDetails;
