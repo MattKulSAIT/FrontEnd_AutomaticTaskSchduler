@@ -1,11 +1,16 @@
 import * as React from 'react';
+import React, { useEffect, useState } from 'react';
+
+import { useParams } from 'react-router-dom';
 
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { StaticDatePicker } from '@mui/x-date-pickers/StaticDatePicker';
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
 
+/**
+ * Edit Calendar component (RESOURCE)
+ *  This shows a visible calendar
+ */
 const EditCalendar = () => {
 
   //Get Value of date function
@@ -13,14 +18,14 @@ const EditCalendar = () => {
   //Maybe use the onAccept to get the hours of employee
   //to be displayed on the 'editHours' component
 
+  // FrontEnd //
+  
   return (
-
-    <div className='component'>
+    <div className='editCalendar'>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
             <StaticDatePicker 
                 orientation="landscape"
                 disablePast="true"
-                // Put the 'onAccept' or 'value' here
                 sx={{
                     bgcolor: '#F5F5F5',
                     WebkitTextFillColor: '#757575',                   
