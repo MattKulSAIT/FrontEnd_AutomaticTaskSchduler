@@ -41,14 +41,10 @@ const tableHeaderStyle = {
 };
 
 /**
- * General Task Table Component
- *  This component displays the general view of available tasks
+ * General History Table Component (ADMIN)
+ *  This component displays the general view of all completed tasks 
  */
-function TaskTable({EditPage, ViewPage}) {
-
-  // BackEnd //
-
-  // Variables
+function HistoryTable() {
   const [rows, setRows] = React.useState([]);
   const [error, setError] = React.useState(null);
   const history = useNavigate();
@@ -57,10 +53,10 @@ function TaskTable({EditPage, ViewPage}) {
     fetchData();
   }, []);
 
-  //Gathers the available non-completed tasks from the database
+  //Gathers the completed tasks from the database
   const fetchData = async () => {
     try {
-      const response = await fetch('http://localhost:8080/generalTask');
+      const response = await fetch('http://localhost:8080/generalArchivedTask');
       if (response.ok) {
         const data = await response.json();
         setRows(data);
@@ -76,14 +72,9 @@ function TaskTable({EditPage, ViewPage}) {
     return <div>Error: {error}</div>;
   }
 
-  // viewTask is used to go to the Selected Task view matching the taskID
+  // viewTask is used to go to the Selected History view matching the taskID
   const viewTask = (taskId) => {
-    history(`${ViewPage}${taskId}`);
-  };
-
-  // editTask is used to go to the Edit Task view matching the taskID
-  const editTask = (taskId) => {
-    history(`${EditPage}${taskId}`);
+    history(`/historySelected_Admin/${taskId}`);
   };
 
   // Table Variables
@@ -93,7 +84,7 @@ function TaskTable({EditPage, ViewPage}) {
   const numRows = Math.max(rows.length, maxRows); // Calculate the maximum number of rows
   const tableHeight = numRows <= maxRows ? numRows * rowHeight : `${maxRows * rowHeight}px`;
 
-  // Formats date String
+  // Formats date string
   const formatDate = (dateString) => {
     if (!dateString) {
       return ''; // Return empty string for undefined or empty dates
@@ -111,7 +102,7 @@ function TaskTable({EditPage, ViewPage}) {
   // FrontEnd //
 
   return (
-    <div className='taskTable'>
+    <div className='historyTable'>
       <TableContainer style={{ maxHeight: tableHeight, overflow: 'auto', marginTop: '10px'}}>
         <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
           <TableHead style={tableHeaderStyle}>
@@ -119,9 +110,10 @@ function TaskTable({EditPage, ViewPage}) {
               <TableCell sx={{ color: '#CA3433', fontWeight: 'bold' }}>Task #</TableCell>
               <TableCell align="left" sx={{ color: '#CA3433', fontWeight: 'bold' }}>Title</TableCell>
               <TableCell align="left" sx={{ color: '#CA3433', fontWeight: 'bold' }}>Date Created</TableCell>
+              <TableCell align="left" sx={{ color: '#CA3433', fontWeight: 'bold' }}>Date Completed</TableCell>
               <TableCell align="left" sx={{ color: '#CA3433', fontWeight: 'bold' }}>Type</TableCell>
+              <TableCell align="left" sx={{ color: '#CA3433', fontWeight: 'bold' }}>Employee Id</TableCell>
               <TableCell align="left" sx={{ color: '#CA3433', fontWeight: 'bold' }}>Status</TableCell>
-              <TableCell></TableCell>
               <TableCell></TableCell>
             </TableRow>
           </TableHead>
@@ -141,6 +133,7 @@ function TaskTable({EditPage, ViewPage}) {
                   </TableCell>
                   <TableCell align="left">{row.title}</TableCell>
                   <TableCell align="left">{formatDate(row.creationDate)}</TableCell>
+                  <TableCell align="left">{formatDate(row.completionDate)}</TableCell>
                   <TableCell align="left">
                     {row.category === 1
                       ? 'Desk Side'
@@ -152,6 +145,7 @@ function TaskTable({EditPage, ViewPage}) {
                       ? 'Mobile Telephone'
                       : row.category}
                   </TableCell>
+                  <TableCell align="left">{row.empId}</TableCell>
                   <TableCell align="left">
                     {row.status === 1
                       ? 'Pending'
@@ -174,13 +168,6 @@ function TaskTable({EditPage, ViewPage}) {
                       </Button>
                     )}
                   </TableCell>
-                  <TableCell>
-                    {row.title !== undefined && (
-                      <Button sx={{ color: 'white', background: '#CA3433', ':hover': { background: '#FF0000' } }} id={row.taskNumber} onClick={() => editTask(row.taskNumber)}>
-                        Edit
-                      </Button>
-                    )}
-                  </TableCell>
                 </TableRow>
               );
             })}
@@ -192,4 +179,4 @@ function TaskTable({EditPage, ViewPage}) {
 
 }
 
-export default TaskTable;
+export default HistoryTable;
