@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom';
  * resourceEdit Component (ADMIN)
  *  This is used to edit resource details on the selected resource
  */
-const ResourceEdit = () => {
+const AdminEdit = () => {
 
     // Variables
     let rescID = '000123123'
@@ -86,54 +86,7 @@ const ResourceEdit = () => {
                             />
                         </div>
                     </div>
-                    <hr align="left"/>
-                    <div className='taskSkillsDiv'>
-                        <table align='left'>
-                            <tr>
-                                <td><h3>Skills:</h3></td>
-                            </tr>
-                            <tr>
-                                <td className='tdButton'>
-                                    <input 
-                                        type='checkbox' 
-                                        id='helpdesk' 
-                                        name='helpdesk' 
-                                        className='skillsButton'
-                                    />
-                                    <h3>Help Desk Support</h3>
-                                </td>
-                                <td className='tdButton'>
-                                    <input 
-                                        type='checkbox' 
-                                        id='database' 
-                                        name='database' 
-                                        className='skillsButton'
-                                    />
-                                    <h3>Database Support</h3>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td className='tdButton'>
-                                    <input 
-                                        type='checkbox' 
-                                        id='network' 
-                                        name='network' 
-                                        className='skillsButton'
-                                    />
-                                    <h3>Network Support</h3>
-                                </td>
-                                <td className='tdButton'>
-                                    <input 
-                                        type='checkbox' 
-                                        id='telecomm' 
-                                        name='telecomm' 
-                                        className='skillsButton'
-                                    />
-                                    <h3>Mobile Support</h3>
-                                </td>
-                            </tr>
-                        </table>                    
-                    </div>  
+                    <hr align="left"/> 
                     <div className='editButtonsDiv'>
                         <button id='saveChanges' type="submit">Save Changes</button>
                         <button id='exitEdit' type="button" onClick={exitEdit}>Exit</button>
@@ -147,4 +100,4 @@ const ResourceEdit = () => {
     );
 }
 
-export default ResourceEdit;
+export default AdminEdit;

@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
+
 import { useParams } from 'react-router-dom';
 
-const EditTaskResource = () => {
+/**
+ * taskEdit Component (RESOURCE)
+ *  This is used to edit task details on the selected task
+ */
+const TaskEdit = () => {
 
-
-    
-
-    //Other Variables
+    // Variables
   const [editError, setEditError] = useState("");
   const [taskId, setTaskId] = useState("0000")
   const [taskTitle, setTaskTitle] = useState("0101 - Broken laptop");
@@ -15,11 +17,11 @@ const EditTaskResource = () => {
   const [currTime, setCurrTime] = useState("tempTime");
   const { id } = useParams();
 
-
   useEffect(() => {
     fetchData();
   }, []);
 
+  // Gathers the data from the selected task matching the task id
   const fetchData = async () => {
     try {
       const response = await fetch(`http://localhost:8080/taskView/${id}`); //it used id because thats what was useing the App.js
@@ -33,24 +35,12 @@ const EditTaskResource = () => {
       } else {
         throw new Error('Failed to fetch data');
       }
-    } catch (error) {
-      console.error(error);
-    }
-  };
-    /*
-    //TaskStatus
-    let pending = "0";
-    let assigned = "1";
-    let inProgress = "2";
-    let completed = "3";
+        } catch (error) {
+            console.error(error);
+        }
+    };
 
-    //TaskType
-    let helpDesk = "0";
-    let database = "1";
-    let network = "2";
-    let teleComm = "3";
-    */
-
+    // saveEdit saves the new data to the selected
     const saveEdit = async (event) => {
 
         event.preventDefault();
@@ -86,56 +76,61 @@ const EditTaskResource = () => {
         window.location.href = 'http://localhost:3000/taskGeneral_Resource';
     }
 
-    //FrontEnd
+    // FrontEnd //
+
     return (
-        <div className='editTask'>
-            <div className='editTable'>
-                <form method='GET' onSubmit={saveEdit}>
-                    <div className='mainPage'> 
-                        <div className='titleHeader'>
+        <div className='taskEdit'>
+            <form method='GET' onSubmit={saveEdit}>
+                <div className='mainPage'> 
+                    <div className='titleHeader'>
                         <h1>{taskId} - {taskTitle}</h1>
-                        </div>
-                        <hr align="left"/>
-                        <div className='taskStatus'>
-                            <h3>Change Task Status:</h3>
-                            <select name="selectTaskStatus" id="taskStatus">
-                                <option value="" disabled selected>- Select Status -</option>
-                                <option value="1">Pending</option>
-                                <option value="2">Assigned</option>
-                                <option value="3">In Progress</option>
-                                <option value="4">Completed</option>
-                            </select>
-                            <p>Current Status: {currStatus === 1 ? "Pending" : currStatus === 2 ? "Assigned" : currStatus === 3 ? "In Progress" : currStatus === 4 ? "Complete" : "Unknown Status"}</p>
-                        </div>
-                        <div className='taskType'>
-                            <h3>Change Task Type:</h3>
-                            <select name="selectTaskType" id="taskStatus">
-                                <option value="" disabled selected>- Select Type -</option>
-                                <option value="1">Help Desk Support</option>
-                                <option value="2">Database Support</option>
-                                <option value="3">Network Support</option>
-                                <option value="4">Mobile Support</option>
-                            </select>
-                            <p>Current Type: {currType === 1 ? "Desk Side" : currType === 2 ? "Database" : currType === 3 ? "Network" : currType === 4 ? "Mobile Telephone" : "Unknown Type"}</p>
-                        </div>
-                        <div className='ectTime'>
-                            <h3>Change Eestimated Time:</h3>
-                            <input type='text' placeholder='Ex. 8.0 (hrs)' name="estimatedTime"/>
-                            <p>Current Time: {currTime} hrs</p>
-                        </div>
-                        <div className='editButtons'>
-                            <button id='saveChanges' type="submit">Save Changes</button>
-                            <button id='exitEdit' type="button" onClick={exitEdit}>Exit</button>
-                        </div>           
                     </div>
-                </form>
-                <div className='errorMessage'>
-                    {editError}
+                    <hr align="left"/>
+                    <div className='taskStatusDiv'>
+                        <h3>Change Task Status:</h3>
+                        <select name="selectTaskStatus" id="taskStatus">
+                            <option value="" disabled selected>- Select Status -</option>
+                            <option value="1">Pending</option>
+                            <option value="2">Assigned</option>
+                            <option value="3">In Progress</option>
+                            <option value="4">Completed</option>
+                        </select>
+                        <p>Current Status: {currStatus === 1 ? "Pending" : currStatus === 2 ? "Assigned" : currStatus === 3 ? "In Progress" : currStatus === 4 ? "Complete" : "Unknown Status"}</p>
+                    </div>
+                    <div className='taskTypeDiv'>
+                        <h3>Change Task Type:</h3>
+                        <select name="selectTaskType" id="taskType">
+                            <option value="" disabled selected>- Select Type -</option>
+                            <option value="1">Help Desk Support</option>
+                            <option value="2">Database Support</option>
+                            <option value="3">Network Support</option>
+                            <option value="4">Mobile Support</option>
+                        </select>
+                        <p>Current Type: {currType === 1 ? "Desk Side" : currType === 2 ? "Database" : currType === 3 ? "Network" : currType === 4 ? "Mobile Telephone" : "Unknown Type"}</p>
+                    </div>
+                    <div className='ectTimeDiv'>
+                        <h3>Change Eestimated Time:</h3>
+                        <input 
+                            type='text' 
+                            id='ectTime' 
+                            placeholder='Ex. 8.0 (hrs)' 
+                            min="0"
+                            max="8"
+                            name="estimatedTime"
+                        />
+                        <p>Current Time: {currTime} hrs</p>
+                    </div>
+                    <div className='editButtonsDiv'>
+                        <button id='saveChanges' type="submit">Save Changes</button>
+                        <button id='exitEdit' type="button" onClick={exitEdit}>Exit</button>
+                    </div>           
                 </div>
+            </form>
+            <div className='errorMessage'>
+                {editError}
             </div>
         </div>
     );
 }
 
-export default EditTaskResource;
-
+export default TaskEdit;
