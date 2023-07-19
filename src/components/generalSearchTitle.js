@@ -9,7 +9,6 @@ import Button from '@mui/material/Button';
 
 import backArrow from '../assets/backArrow_pageTitle.png'
 
-
 const StyledToolbar = styled(Toolbar)(({ theme }) => ({
   alignItems: 'flex-start',
   paddingTop: theme.spacing(1),
@@ -20,10 +19,10 @@ const StyledToolbar = styled(Toolbar)(({ theme }) => ({
   },
 }));
 
-export default function PageTitle({ currPage, whereTheBackButtonsGoes }) {
+export default function PageTitle({ currPage, backButtonLink }) {
 
   function backButton() {
-    window.location.href = whereTheBackButtonsGoes;
+    backButtonLink.location.href = backButtonLink;
   }
 
   return (

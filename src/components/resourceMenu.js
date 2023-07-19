@@ -3,7 +3,7 @@ import * as React from 'react';
 import calendar from '../assets/changeSchedule.png'
 import taskList from '../assets/manageTasks.png'
 
-/** ResourceMenu Component
+/** ResourceMenu Component (RESOURCE)
  *   This displays the pages/options the Resource can use after logging in 
  */
 const ResourceMenu = () => {

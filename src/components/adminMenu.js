@@ -5,7 +5,7 @@ import historyList from '../assets/history.png'
 import resourceList from '../assets/manageResources.png'
 import newResource from '../assets/createResource.png'
 
-/** AdminMenu Component
+/** AdminMenu Component (ADMIN)
  *   This displays the pages/options the Admin can use after logging in 
  */
 const AdminMenu = () => {

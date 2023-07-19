@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import ATlogo from '../assets/AutoTaskerTemp_Final.png';
 
 /**
- * Create Task Component
+ * Create Task Component (CUSTOMER)
  *  This is used to create a new task
  */
 function CreateTicket() {

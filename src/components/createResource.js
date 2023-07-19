@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 /**
- * Create Resource Component
+ * Create Resource Component (ADMIN)
  *  This is used to create a new Resource
  */
 const NewResource = () => {
