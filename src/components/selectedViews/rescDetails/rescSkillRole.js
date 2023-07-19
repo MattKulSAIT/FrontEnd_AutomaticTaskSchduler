@@ -1,7 +1,7 @@
 import React from 'react';
 
 /**
- * Resource Skills and Role Component
+ * Resource Skills and Role Component (ADMIN)
  *  This displays the skills and role of the selected Resource
  */
 function RescSkillRole() {

@@ -1,7 +1,7 @@
 import React from 'react';
 
 /**
- * Resource Hours Component
+ * Resource Hours Component (ADMIN)
  *  This displays all the details regarding the selected Resource's hours
  */
 function RescHours() {

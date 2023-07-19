@@ -11,7 +11,7 @@ import Button from '@mui/material/Button';
 import { AlignHorizontalCenter, WidthFull } from '@mui/icons-material';
 
 /**
- * Resource Current Task Details
+ * Resource Current Task Details (ADMIN)
  *  This contains the current tasks the selected 
  */
 function RescDetails(){

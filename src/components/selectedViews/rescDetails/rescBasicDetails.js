@@ -1,7 +1,7 @@
 import React from 'react';
 
 /**
- * Resource Basic Details Component
+ * Resource Basic Details Component (ADMIN)
  *  This displays the basic details about the selected Resource
  */
 function RescBasicDetails() {
