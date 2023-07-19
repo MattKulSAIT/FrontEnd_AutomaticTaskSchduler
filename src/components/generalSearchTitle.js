@@ -9,6 +9,8 @@ import Button from '@mui/material/Button';
 
 import backArrow from '../assets/backArrow_pageTitle.png'
 
+// Tool Bar Styling
+
 const StyledToolbar = styled(Toolbar)(({ theme }) => ({
   alignItems: 'flex-start',
   paddingTop: theme.spacing(1),
@@ -19,19 +21,22 @@ const StyledToolbar = styled(Toolbar)(({ theme }) => ({
   },
 }));
 
-export default function PageTitle({ currPage, backButtonLink }) {
+/** PageTitleSearch Component
+ *   This displays the current page the user is on with a search button
+ */
+function PageTitleSearch({ currPage, backButtonLink }) {
 
   function backButton() {
-    backButtonLink.location.href = backButtonLink;
+    window.location.href = backButtonLink;
   }
 
   return (
     <Box sx={{ flexGrow: 1}}>
       <AppBar position="static" sx={{backgroundColor: '#FFFFFF' }}>
           <div style={{display: 'flex', alignItems: 'center', marginBottom: '2.5%'}}>
-          <Button sx={{ color: 'white', background: '#CA3433', marginLeft: '20px', height: '70px', width: '70px', borderRadius: 100, ':hover': { background: '#FF0000' } }}
-          onClick={backButton}>
-          <div style={{ fontSize: '70px', marginRight: '13px' }}><img src={backArrow} alt='something' style={{ width: '42px', height: '50px', marginLeft: '2px'}}></img></div>
+            <Button sx={{ color: 'white', background: '# CA3433', marginLeft: '20px', height: '70px', width: '70px', borderRadius: 100, ':hover': { background: '#FF0000' } }}
+              onClick={backButton}>
+              <div style={{ fontSize: '70px', marginRight: '13px' }}><img src={backArrow} alt='something' style={{ width: '42px', height: '50px', marginLeft: '2px'}}></img></div>
             </Button>
             <div style={{fontSize: '75px', marginLeft: '40px', color: '#CA3433', fontWeight: "bold"}}>{currPage}</div>
           </div>
@@ -52,3 +57,5 @@ export default function PageTitle({ currPage, backButtonLink }) {
     </Box>
   );
 }
+
+export default PageTitleSearch;
