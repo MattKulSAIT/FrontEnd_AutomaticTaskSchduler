@@ -42,34 +42,46 @@ const TaskEdit = () => {
 
     // saveEdit saves the new data to the selected
     const saveEdit = async (event) => {
-
         event.preventDefault();
-        // Get the selected values
+      
+        // Get the selected values from the form
         const selectedStatus = event.target.selectTaskStatus.value;
         const selectedType = event.target.selectTaskType.value;
         const estimatedTime = event.target.estimatedTime.value;
-
-        event.preventDefault(); //Sending the TaskEdit information to the back end
-        const url = `http://localhost:8080/taskEdit/${id}?status=${encodeURIComponent(selectedStatus)}
-                                                        &type=${encodeURIComponent(selectedType)}
-                                                        &time=${encodeURIComponent(estimatedTime)}`;
-        try{
-            const response = await fetch(url, {
-                method:'PATCH', 
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ selectedStatus, selectedType, estimatedTime }),
-            });
-
-            if (response.ok) {
+      
+        // If any of the dropdowns are empty, use the current state values
+        const finalStatus = selectedStatus || currStatus;
+        const finalType = selectedType || currType;
+        const finalTime = estimatedTime || currTime;
+      
+        const url = `http://localhost:8080/taskEdit/${id}?status=${encodeURIComponent(finalStatus)}
+                                                        &type=${encodeURIComponent(finalType)}
+                                                        &time=${encodeURIComponent(finalTime)}`;
+        try {
+          const response = await fetch(url, {
+            method: 'PATCH',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ selectedStatus: finalStatus, selectedType: finalType, estimatedTime: finalTime }),
+          });
+      
+          if (response.ok) {
+            if(finalStatus === "4"){
+                window.location.href = `http://localhost:3000/taskGeneral_Resource`;
+              }
+              else{
                 window.location.href = `http://localhost:3000/taskSelected_Resource/${id}`;
-            } 
-
-        }catch(error){
-            
+              }
+          } else {
+            // Handle error response
+            setEditError('Failed to save changes.');
+          }
+        } catch (error) {
+          // Handle fetch error
+          setEditError('Failed to save changes.');
         }
-    };
+      };
     
     //Function to send you back to the general view page 
     function exitEdit(){
@@ -116,6 +128,7 @@ const TaskEdit = () => {
                             placeholder='Ex. 8.0 (hrs)' 
                             min="0"
                             max="8"
+                            step="0.1" //This allows decimal values
                             name="estimatedTime"
                         />
                         <p>Current Time: {currTime} hrs</p>

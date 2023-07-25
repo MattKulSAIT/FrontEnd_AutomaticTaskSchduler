@@ -118,34 +118,47 @@ const TaskEditAdmin = () =>{
 
   // saveEdit gathers the data and changes overrides the data of the selected task
   const saveEdit = async (event) => {
-
     event.preventDefault();
-    // Get the selected values
+  
+    // Get the selected values from the form
     const selectedStatus = event.target.selectTaskStatus.value;
     const selectedType = event.target.selectTaskType.value;
     const estimatedTime = event.target.estimatedTime.value;
+  
+    // If any of the dropdowns are empty, use the current state values
+    const finalStatus = selectedStatus || currStatus;
+    const finalType = selectedType || currType;
+    const finalTime = estimatedTime || currTime;
+  
     const newAssignedResource = assignedEmpId;
-
-    event.preventDefault();
-    const url = `http://localhost:8080/taskEdit/admin/${id}?status=${encodeURIComponent(selectedStatus)}
-                                                    &type=${encodeURIComponent(selectedType)}
-                                                    &time=${encodeURIComponent(estimatedTime)}
-                                                    &empId=${encodeURIComponent(newAssignedResource)}`;
-    try{
-        const response = await fetch(url, {
-            method:'PATCH', 
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ selectedStatus, selectedType, estimatedTime }),
-        });
-
-        if (response.ok) {
-            window.location.href = `http://localhost:3000/taskSelected_Admin/${id}`;
-        } 
-
-    }catch(error){
-        
+  
+    const url = `http://localhost:8080/taskEdit/admin/${id}?status=${encodeURIComponent(finalStatus)}
+                                                &type=${encodeURIComponent(finalType)}
+                                                &time=${encodeURIComponent(finalTime)}
+                                                &empId=${encodeURIComponent(newAssignedResource)}`;
+    try {
+      const response = await fetch(url, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ selectedStatus: finalStatus, selectedType: finalType, estimatedTime: finalTime }),
+      });
+  
+      if (response.ok) {
+        if(finalStatus === "4"){
+          window.location.href = `http://localhost:3000/taskGeneral_Admin`;
+        }
+        else{
+          window.location.href = `http://localhost:3000/taskSelected_Admin/${id}`;
+        }
+      } else {
+        // Handle error response
+        setEditError('Failed to save changes.');
+      }
+    } catch (error) {
+      // Handle fetch error
+      setEditError('Failed to save changes.');
     }
   };
 
@@ -187,12 +200,13 @@ const TaskEditAdmin = () =>{
               <p>Current Type: {currType === 1 ? "Desk Side" : currType === 2 ? "Database" : currType === 3 ? "Network" : currType === 4 ? "Mobile Telephone" : "Unknown Type"}</p>
           </div>
           <div className='ectTimeDiv'>
-              <h3>Change Eestimated Time:</h3>
+              <h3>Change Estimated Time:</h3>
                 <input 
                   type='number' 
                   placeholder='Ex. 8.0 (hrs)'
                   min="0"
                   max="8" 
+                  step="0.1" //This allows decimal values
                   name="estimatedTime"
                 />
               <p>Current Time: {currTime} hrs</p>
