@@ -133,6 +133,11 @@ function RescTable() {
     history(`/resourceEdit_Admin/${employeeId}`);
   };
 
+  // editAdmin is used to go to the Edit Resource view matching the employeeID
+  const editAdmin = (employeeId) => {
+    history(`/adminEdit_Admin/${employeeId}`);
+  };
+
   // Table Variables
   const rowHeight = 30; // Height of each row
   const maxRows = 13; // Maximum number of rows to display
@@ -146,6 +151,7 @@ function RescTable() {
     <div className='rescTable'>
       <div className='resources'>
         <main>
+          
           <TableContainer style={{ maxHeight: tableHeight, overflow: 'auto', marginTop: '10px', margin: 0 }}>
             <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
               <TableHead style={tableHeaderStyle}>
@@ -203,7 +209,8 @@ function RescTable() {
               <TableRow>
                 <TableCell sx={{ color: '#CA3433', fontWeight: 'bold' }}>EmployeeID</TableCell>
                 <TableCell align="left" sx={{ color: '#CA3433', fontWeight: 'bold' }}>Name</TableCell>
-                <TableCell></TableCell>
+                <TableCell align="left" sx={{ color: '#CA3433', fontWeight: 'bold' }}>Email</TableCell>
+                <TableCell align="left" sx={{ color: '#CA3433', fontWeight: 'bold' }}>Phone Number</TableCell>
                 <TableCell></TableCell>
               </TableRow>
             </TableHead>
@@ -222,8 +229,12 @@ function RescTable() {
                       {AdminRow.employeeId}
                     </TableCell>
                     <TableCell align="left">{AdminRow.name}</TableCell>
-                    <TableCell>{AdminRow.employeeId !== undefined && <Button sx={{ color: 'white', background: '#CA3433', ':hover': { background: '#FF0000' } }} id={AdminRow.employeeId}>View</Button>}</TableCell>
-                    <TableCell>{AdminRow.employeeId !== undefined &&<Button sx={{ color: 'white', background: '#CA3433', ':hover': { background: '#FF0000' } }} id={AdminRow.employeeId}>Edit</Button>}</TableCell>
+                    <TableCell align="left">{AdminRow.email}</TableCell>
+                    <TableCell align="left">{AdminRow.phoneNum}</TableCell>
+                    <TableCell>{AdminRow.employeeId !== undefined &&
+                    <Button sx={{ color: 'white', background: '#CA3433', ':hover': { background: '#FF0000' } }} 
+                    id={AdminRow.employeeId}
+                    onClick={() => editAdmin(AdminRow.employeeId)}>Edit</Button>}</TableCell>
                   </TableRow>
                 );
               })}

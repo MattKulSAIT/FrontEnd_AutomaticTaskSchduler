@@ -64,6 +64,7 @@ const Login = () => {
                                     type='text' 
                                     value={employeeId}
                                     maxLength="10"
+                                    pattern='[0-9]+'
                                     onChange={(e) => setEmployeeId(e.target.value)}
                                 />
                             </td>

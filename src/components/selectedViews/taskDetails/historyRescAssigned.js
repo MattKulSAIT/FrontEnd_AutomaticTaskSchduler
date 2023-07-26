@@ -7,32 +7,33 @@ import { useParams } from 'react-router-dom';
 //same functionality and you dont need to make a specific link for it
 
 /**
- * Resource Assigned Component (ADMIN)
- *  This displays the resource currently assigned to the task selected
+ * History Resource Assigned Component (ADMIN)
+ *  This is used to see the resource details in the history view
  */
-function RescAssigned() {
+function HistoryRescAssigned() {
 
   // BackEnd //
 
+  // Variables
   const [rescName, setRescName] = useState("tempRescName");
   const [empId, setEmpId] = useState("tempEmpId");
   const [empEmail, setEmpEmail] = useState("tempEmpEmail");
   const { id } = useParams();
 
   useEffect(() =>{
-    fetchData();
-  }, []);
+      fetchData();
+      }, []);
 
   useEffect(() => {
-    if (empId) {
-        fetchAdditionalData();
-    }
+      if (empId) {
+          fetchAdditionalData();
+      }
   }, [empId]);
 
-  //Gets the data from the batabase matching the empID
+  //Gathers data of the resource using the employee id
   const fetchData = async () => {
     try {
-      const response = await fetch(`http://localhost:8080/taskView/${id}`); //it used id because thats what was useing the App.js
+      const response = await fetch(`http://localhost:8080/archiveTask/${id}`); //it used id because thats what was useing the App.js
       if (response.ok) {
         const data = await response.json();
         setEmpId(data.empId);
@@ -45,7 +46,7 @@ function RescAssigned() {
     }
   };
 
-  //Gets extra data from the batabase matching the empID
+  //Fetching additional data
   const fetchAdditionalData = async () => {
     try {
       const response = await fetch(`http://localhost:8080/resourceView/${empId}`);
@@ -66,25 +67,21 @@ function RescAssigned() {
   // FrontEnd //
 
   return(
-      <div className="rescAssigned">
-          <table className="rescAssigned">
-              <tr>
-                  <th>Resource Assigned:</th>
-              </tr>
-              <tr>
-                  <th>Name</th>
-                  <th>Employee ID</th>
-                  <th>Email</th>
-              </tr>
-              <tr>
-                  <td id="rescName">{rescName}</td>
-                  <td id="empId">{empId}</td>
-                  <td id="empEmail">{empEmail}</td>
-              </tr>
-          </table>
-      </div>
+    <div className="HistoryRescAssigned">
+      <table>
+        <tr>
+            <th>Resource Assigned:</th>
+        </tr>
+        <tr>
+            <th>Employee ID</th>
+        </tr>
+        <tr>
+            <td id="empId">{empId}</td>
+        </tr>
+      </table>
+    </div>
   );
-  
+
 }
 
-export default RescAssigned;
+export default HistoryRescAssigned;

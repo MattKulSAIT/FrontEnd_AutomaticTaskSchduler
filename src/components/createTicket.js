@@ -106,6 +106,7 @@ function CreateTicket() {
                                             id="taskTitle"
                                             minLength="5"
                                             maxLength="60"
+                                            pattern="[A-Za-z]+"
                                             required
                                             value={taskTitle}
                                             onChange={(e) => setTaskTitle(e.target.value)}
@@ -121,6 +122,7 @@ function CreateTicket() {
                                             id="taskDesc"
                                             minLength="10"
                                             maxLength="2000"
+                                            pattern="[A-Za-z0-9]+"
                                             required
                                             value={taskDesc}
                                             onChange={(e) => setTaskDesc(e.target.value)}
@@ -137,6 +139,7 @@ function CreateTicket() {
                                             placeholder="Ex. Jane"
                                             id="taskFirstName"
                                             maxLength="20"
+                                            pattern="[A-Za-z]+"
                                             required
                                             value={taskFirstName}
                                             onChange={(e) => setTaskFirstName(e.target.value)}
@@ -149,6 +152,7 @@ function CreateTicket() {
                                             placeholder="Ex. Doe"
                                             id="taskLastName"
                                             maxLength="20"
+                                            pattern="[A-Za-z]+"
                                             required
                                             value={taskLastName}
                                             onChange={(e) => setTaskLastName(e.target.value)}
@@ -159,9 +163,10 @@ function CreateTicket() {
                                     <td id="taskPhoneTD">
                                         <h2>Phone</h2>
                                         <input
-                                            type="phone"
+                                            type="tel"
                                             placeholder="Ex. 123-123-1234"
                                             id="taskPhone"
+                                            pattern="\d{3}[\-]\d{3}[\-]\d{4}"
                                             required
                                             value={taskPhone}
                                             onChange={(e) => setTaskPhone(e.target.value)}

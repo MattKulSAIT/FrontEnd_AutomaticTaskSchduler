@@ -32,6 +32,7 @@ function EditHours() {
                         id="inputHrs"
                         min="0"
                         max="8"
+                        step="0.1"
                         placeholder='Ex. 8.0 (hrs)' 
                         name="estimatedTime"
                     />

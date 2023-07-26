@@ -32,15 +32,13 @@ function PageHeader() {
   return (
     <div className='pageHeader'>
       <div style={{ backgroundColor: '#CA3433', display: 'flex', alignItems: 'center', justifyContent: 'flex-end', padding: '0 10px' }}>
-        <div className='leftHeader'>
           <img 
             src={ATlogo} 
             alt="AutoTasker Logo" 
             style={{ width: '50px'}}
           />
           <div style={{ marginLeft: '10px', color:'white', fontSize:'40px', fontWeight:'bold'}}>AutoTask</div>
-        </div>
-        <div className='rightHeader' style={{ marginLeft: 'auto', color:'white', fontSize:'20px', fontWeight:'bold' }}>
+        <div  style={{ marginLeft: 'auto', color:'white', fontSize:'20px', fontWeight:'bold' }}>
           ${'userName'}&nbsp;&nbsp;&nbsp;&nbsp;
           <Button
               id="demo-positioned-button"
@@ -48,7 +46,7 @@ function PageHeader() {
               aria-haspopup="true"
               aria-expanded={isMenuOpen ? 'true' : undefined}
               onClick={handleMenuOpen}
-              sx={{ color: '#CA3433', background: '#FFFFFF', marginRight: '%', ':hover': { background: '#FFFFFF' } }}
+              sx={{ color: '#CA3433',fontFamily: 'bahnschrift',fontWeight: 'bold',background: '#FFFFFF',paddingTop: '10px' , marginRight: '%', ':hover': { background: '#FFFFFF' } }}
           >
               Logout
           </Button>

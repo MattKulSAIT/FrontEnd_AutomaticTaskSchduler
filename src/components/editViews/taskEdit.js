@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom';
  * taskEdit Component (RESOURCE)
  *  This is used to edit task details on the selected task
  */
-const taskEdit = () => {
+const TaskEdit = () => {
 
     // Variables
   const [editError, setEditError] = useState("");
@@ -111,11 +111,12 @@ const taskEdit = () => {
                     <div className='ectTimeDiv'>
                         <h3>Change Eestimated Time:</h3>
                         <input 
-                            type='text' 
+                            type='number' 
                             id='ectTime' 
                             placeholder='Ex. 8.0 (hrs)' 
                             min="0"
                             max="8"
+                            step="0.1"
                             name="estimatedTime"
                         />
                         <p>Current Time: {currTime} hrs</p>
@@ -133,5 +134,4 @@ const taskEdit = () => {
     );
 }
 
-export default taskEdit;
-
+export default TaskEdit;

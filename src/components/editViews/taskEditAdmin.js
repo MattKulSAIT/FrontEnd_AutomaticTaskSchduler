@@ -12,14 +12,14 @@ import TableRow from '@mui/material/TableRow';
 import Button from '@mui/material/Button';
 
 /**
- * taskEdit Component (ADMIN)
+ * Edit Task Component (ADMIN)
  *  This is used to edit task details on the selected task 
  */
-const taskEditAdmin = () =>{
+const TaskEditAdmin = () =>{
 
   // BackEnd //
 
-  // Variable
+  // Variables
   const [editError, setEditError] = useState("");
   const [taskId, setTaskId] = useState("0000")
   const [taskTitle, setTaskTitle] = useState("0101 - Broken laptop");
@@ -193,6 +193,7 @@ const taskEditAdmin = () =>{
                   placeholder='Ex. 8.0 (hrs)'
                   min="0"
                   max="8" 
+                  step="0.1"
                   name="estimatedTime"
                 />
               <p>Current Time: {currTime} hrs</p>
@@ -227,6 +228,7 @@ const taskEditAdmin = () =>{
                           {taskCounts[row.employeeId] !== undefined && (
                             <input
                             type="radio"
+                            className='radioButton'
                             name="AssignedResource"
                             checked={isSelected}
                             onChange={() => setAssignedEmpId(row.employeeId)}
@@ -260,4 +262,4 @@ const taskEditAdmin = () =>{
 
 }
 
-export default taskEditAdmin;
+export default TaskEditAdmin;

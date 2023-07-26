@@ -34,7 +34,7 @@ function PageTitleSearch({ currPage, backButtonLink }) {
     <Box sx={{ flexGrow: 1}}>
       <AppBar position="static" sx={{backgroundColor: '#FFFFFF' }}>
           <div style={{display: 'flex', alignItems: 'center', marginBottom: '2.5%'}}>
-            <Button sx={{ color: 'white', background: '# CA3433', marginLeft: '20px', height: '70px', width: '70px', borderRadius: 100, ':hover': { background: '#FF0000' } }}
+            <Button sx={{ color: 'white', background: '#CA3433', marginLeft: '20px', height: '70px', width: '70px', borderRadius: 100, ':hover': { background: '#FF0000' } }}
               onClick={backButton}>
               <div style={{ fontSize: '70px', marginRight: '13px' }}><img src={backArrow} alt='something' style={{ width: '42px', height: '50px', marginLeft: '2px'}}></img></div>
             </Button>
