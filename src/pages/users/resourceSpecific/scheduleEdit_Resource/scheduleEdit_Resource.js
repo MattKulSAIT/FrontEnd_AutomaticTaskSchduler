@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import './scheduleEdit_Resource.css'
 
@@ -17,6 +17,13 @@ function ScheduleEditResourcePage() {
     const currPage = "Change Schedule";
     const backButtonLink = `http://localhost:3000/menu_Resource`;
 
+    //Component Comunication 
+    const [selectedDate, setSelectedDate] = useState(null);
+    const handleDateSelection = (date) => {
+        setSelectedDate(date);
+    };
+
+    //FrontEnd
     return (
         <div className="scheduleEditResourcePage">
             <div className="components">
@@ -26,8 +33,8 @@ function ScheduleEditResourcePage() {
                 </div>
                 <div className='body'>
                     <div className='leftSide'>
-                        <EditCalendar/>
-                        <EditHours/>
+                        <EditCalendar onDateSelect={handleDateSelection}/>
+                        <EditHours selectedDate={selectedDate}/>
                     </div>
                     <div className='rightSide'>
                         <DisplayHours/>
