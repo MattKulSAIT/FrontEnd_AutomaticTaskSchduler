@@ -1,21 +1,13 @@
 import React, { useState } from 'react';
-
 import ATlogo from '../assets/AutoTaskerTemp_Final.png';
 
-/** Login Component
- *   This is used to access the tasks as a user
- */
 const Login = () => {
-
-    // BackEnd //
 
     const [employeeId, setEmployeeId] = useState('');
     const [password, setPassword] = useState('');
     const [loginError, setLoginError] = useState('');
 
-    /** buttonLogin() method
-     * Gets the data and login in as user
-     */ 
+    //Gets the data and login in as user, backend thing
     const buttonLogin = async (event) => {
         event.preventDefault();
         const url = "http://localhost:8080/login?employeeId=" + encodeURIComponent(employeeId) + "&password=" + encodeURIComponent(password);
@@ -27,9 +19,13 @@ const Login = () => {
                 },
                 body: JSON.stringify({ employeeId, password }),
             });
-
             if (response.ok) { //We need to add some logic or either send to admin or resource 
-                window.location.href = 'http://localhost:3000/menu_Resource';
+                const loginUser = await response.json();
+                if (loginUser.role === 1) {
+                    window.location.href = 'http://localhost:3000/menu_Admin';
+                } else if (loginUser.role === 2) {
+                    window.location.href = 'http://localhost:3000/menu_Resource';
+                }
             } else {
                 const errorData = await response.json();
                 setLoginError(errorData.message || 'Incorrect ID or Password. Please try again.');
@@ -40,15 +36,12 @@ const Login = () => {
         }
     };
 
-    // FrontEnd //
-
     return (
         <div className='login'>
             <div className='ATdisplay'>
                 <img
-                    src={ATlogo} 
-                    alt='AutoTask Logo'
                     id='ATlogo'
+                    src={ATlogo} alt='AutoTask Logo'
                 />
                 <h1>AutoTask</h1>
             </div>
@@ -59,27 +52,13 @@ const Login = () => {
                             <th>Employee Id</th>
                         </tr>
                         <tr>
-                            <td>
-                                <input 
-                                    type='text' 
-                                    value={employeeId}
-                                    maxLength="10"
-                                    onChange={(e) => setEmployeeId(e.target.value)}
-                                />
-                            </td>
+                            <td><input type='text' value={employeeId} onChange={(e) => setEmployeeId(e.target.value)}/></td>
                         </tr>
                         <tr>
                             <th>Password</th>
                         </tr>
                         <tr>
-                            <td>
-                                <input 
-                                    type='password' 
-                                    value={password}
-                                    maxLength="20"
-                                    onChange={(e) => setPassword(e.target.value)}
-                                />
-                            </td>
+                            <td><input type='password' value={password} onChange={(e) => setPassword(e.target.value)}/></td>
                         </tr>
                         <tr>
                             <td><button type="submit">Login</button></td>
@@ -92,7 +71,6 @@ const Login = () => {
             </div>
         </div>
     );
-
 }
 
 export default Login;

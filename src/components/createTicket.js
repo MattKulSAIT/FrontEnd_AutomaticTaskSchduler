@@ -33,35 +33,34 @@ function CreateTicket() {
             return;
         }
         else{
-
+            debugger;
             /**Setting the Time t ocomplete based on the type of class */
-            if (taskType === 1) {
-                setTimeToComplete(0.5);
-              } else if (taskType === 2) {
-                setTimeToComplete(1.5);
-              } else if (taskType === 3) {
-                setTimeToComplete(1.0);
-              } else if (taskType === 4) {
-                setTimeToComplete(0.5);
-              }
+            let timeToComplete;
 
-              /**
-               * Const value holding what needs to be send to the backend
-               */
-            const newTask ={
-                title: taskTitle,
-                description: taskDesc,
-                name: taskFirstName + " " + taskLastName,
-                phoneNumber: taskPhone,
-                email: taskEmail,
-                category: taskType,
-                status: 1,
-                timeToComplete: timeToComplete,
-                creationDate: new Date().toISOString()
+            if (taskType === "1") {
+              timeToComplete = 0.5;
+            } else if (taskType === "2") {
+              timeToComplete = 1.5;
+            } else if (taskType === "3") {
+              timeToComplete = 1.0;
+            } else if (taskType === "4") {
+              timeToComplete = 0.5;
             }
 
-            //Insert assignment Logic here Will do later when the schedule is good
+            const newTask = {
+              title: taskTitle,
+              description: taskDesc,
+              name: taskFirstName + " " + taskLastName,
+              phoneNumber: taskPhone,
+              email: taskEmail,
+              category: taskType,
+              status: 1,
+              timeToComplete: timeToComplete,
+              creationDate: new Date().toISOString(),
+            };
 
+            //Insert assignment Logic here Will do later when the schedule is good
+            //debugger;
             await fetch("http://localhost:8080/newTask", {
                 method: 'POST',
                 headers: {
@@ -106,6 +105,7 @@ function CreateTicket() {
                                             id="taskTitle"
                                             minLength="5"
                                             maxLength="60"
+                                            pattern="[A-Za-z ]+"
                                             required
                                             value={taskTitle}
                                             onChange={(e) => setTaskTitle(e.target.value)}
@@ -121,6 +121,7 @@ function CreateTicket() {
                                             id="taskDesc"
                                             minLength="10"
                                             maxLength="2000"
+                                            pattern="[A-Za-z0-9]+"
                                             required
                                             value={taskDesc}
                                             onChange={(e) => setTaskDesc(e.target.value)}
@@ -137,6 +138,7 @@ function CreateTicket() {
                                             placeholder="Ex. Jane"
                                             id="taskFirstName"
                                             maxLength="20"
+                                            pattern="[A-Za-z]+"
                                             required
                                             value={taskFirstName}
                                             onChange={(e) => setTaskFirstName(e.target.value)}
@@ -149,6 +151,7 @@ function CreateTicket() {
                                             placeholder="Ex. Doe"
                                             id="taskLastName"
                                             maxLength="20"
+                                            pattern="[A-Za-z]+"
                                             required
                                             value={taskLastName}
                                             onChange={(e) => setTaskLastName(e.target.value)}
@@ -159,9 +162,10 @@ function CreateTicket() {
                                     <td id="taskPhoneTD">
                                         <h2>Phone</h2>
                                         <input
-                                            type="phone"
+                                            type="tel"
                                             placeholder="Ex. 123-123-1234"
                                             id="taskPhone"
+                                            pattern="\d{3}[\-]\d{3}[\-]\d{4}"
                                             required
                                             value={taskPhone}
                                             onChange={(e) => setTaskPhone(e.target.value)}

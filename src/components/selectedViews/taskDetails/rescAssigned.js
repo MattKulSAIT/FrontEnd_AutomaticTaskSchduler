@@ -7,7 +7,7 @@ import { useParams } from 'react-router-dom';
 //same functionality and you dont need to make a specific link for it
 
 /**
- * Resource Assigned Component
+ * Resource Assigned Component (ADMIN)
  *  This displays the resource currently assigned to the task selected
  */
 function RescAssigned() {
@@ -63,7 +63,7 @@ function RescAssigned() {
     }
   };
 
-  // FrontEnd
+  // FrontEnd //
 
   return(
       <div className="rescAssigned">
@@ -84,6 +84,7 @@ function RescAssigned() {
           </table>
       </div>
   );
+  
 }
 
 export default RescAssigned;

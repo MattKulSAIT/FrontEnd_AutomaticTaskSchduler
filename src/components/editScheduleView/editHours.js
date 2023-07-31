@@ -4,7 +4,7 @@ import React from "react";
  * Edit Hours component (RESOURCE)
  *  This allow Resource to change their work hours
  */
-function EditHours() {
+function EditHours({ selectedDate }) {
 
     // BackEnd //
 
@@ -32,6 +32,7 @@ function EditHours() {
                         id="inputHrs"
                         min="0"
                         max="8"
+                        step="0.1"
                         placeholder='Ex. 8.0 (hrs)' 
                         name="estimatedTime"
                     />

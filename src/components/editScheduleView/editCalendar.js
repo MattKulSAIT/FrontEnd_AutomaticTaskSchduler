@@ -1,5 +1,5 @@
 import * as React from 'react';
-import React, { useEffect, useState } from 'react';
+//import { useEffect, useState } from 'react';
 
 import { useParams } from 'react-router-dom';
 
@@ -11,10 +11,21 @@ import { StaticDatePicker } from '@mui/x-date-pickers/StaticDatePicker';
  * Edit Calendar component (RESOURCE)
  *  This shows a visible calendar
  */
-const EditCalendar = () => {
+const EditCalendar = ({ onDateSelect }) => {
 
   //Get Value of date function
+  const [selectedDate, setSelectedDate] = React.useState(null);
 
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
+    // If you need to pass the selected date back to the parent component
+    // you can call the onDateSelect callback here
+    if (onDateSelect) {
+      onDateSelect(date);
+    }
+  };
+
+  
   //Maybe use the onAccept to get the hours of employee
   //to be displayed on the 'editHours' component
 

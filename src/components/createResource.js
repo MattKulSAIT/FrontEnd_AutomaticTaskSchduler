@@ -109,6 +109,7 @@ const NewResource = () => {
                                 name="rescFirstName" 
                                 value={fName} 
                                 maxLength="20"
+                                pattern="[A-Za-z]+"
                                 required
                                 onChange={(e) => setFirstName(e.target.value)}
                             />
@@ -121,6 +122,7 @@ const NewResource = () => {
                                 name="rescLastName" 
                                 value={lName} 
                                 maxLength="20" 
+                                pattern="[A-Za-z]+"
                                 required
                                 onChange={(e) => setLastName(e.target.value)}
                             />
@@ -128,10 +130,11 @@ const NewResource = () => {
                         <div className='rescPhoneDiv'>
                             <h3>Phone Number:</h3>
                             <input 
-                                type='phone' 
+                                type='tel ' 
                                 placeholder='Ex. 123-123-1234' 
                                 name="rescPhone" 
                                 value={phoneNum} 
+                                pattern="\d{3}[\-]\d{3}[\-]\d{4}"
                                 required
                                 onChange={(e) => setPhoneNum(e.target.value)}
                             />
@@ -148,14 +151,15 @@ const NewResource = () => {
                             />
                         </div>
                         <div className='rescPasswordDiv'>
-                            <h3>Password:</h3>
+                            <h3>Password: <span>(One UpperCase, One lowerCase, One number)</span></h3>
                             <input 
-                                type='text' 
+                                type='password' 
                                 placeholder='Ex. password' 
-                                name="rescPassword" 
+                                name="rescPassword"  
                                 value={password} 
                                 minLength="8" 
                                 maxLength="20"
+                                pattern='^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$'
                                 required
                                 onChange={(e) => setPassword(e.target.value)}
                             />

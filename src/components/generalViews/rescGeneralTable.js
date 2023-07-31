@@ -11,6 +11,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Button from '@mui/material/Button';
 import { AlignHorizontalCenter } from '@mui/icons-material';
+import { useCalendarState } from '@mui/x-date-pickers/internals';
 
 //Table cell styling
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -54,6 +55,8 @@ function RescTable() {
   const [adminRows, setAdminRows] = useState([]);
   const [error, setError] = useState(null);
   const [taskCounts, setTaskCounts] = useState({});
+  const [avaiableHours, setAvaiableHours] = useState({});
+  const [totalHours, setTotalHours] = useState({});
   const history = useNavigate();
 
   useEffect(() => {
@@ -91,6 +94,44 @@ function RescTable() {
     }
   };
 
+  //Gathers the total number of hours that that a resouce can work for this week 
+  const fetchTotalHours = async (employeeId) => {
+    try {
+      if (employeeId === null || employeeId === undefined) {
+        return {}; // Return an empty object if employeeId is null
+      }
+      
+      const response = await fetch(`http://localhost:8080/schedule/total/${employeeId}`);
+      if (response.ok) {
+        const data = await response.json();
+        return data; // Return just the total hours value
+      } else {
+        throw new Error('Failed to fetch data');
+      }
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+
+  //Gathers the avaiable hours a resouce can still be assigned this week
+  const fetchAvaliable = async (employeeId) => {
+    try {
+      if (employeeId === null || employeeId === undefined) {
+        return {}; // Return an empty object if employeeId is null
+      }
+
+      const response = await fetch(`http://localhost:8080/schedule/available/${employeeId}`);
+      if (response.ok) {
+        const data = await response.json();
+        return data;
+      } else {
+        throw new Error('Failed to fetch data');
+      }
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+
   //Gathers the available resources from the database who are an Admin
   const fetchAdminData = async () => {
     try {
@@ -106,22 +147,38 @@ function RescTable() {
     }
   };
 
+  //Use effect for all row specific calles
   useEffect(() => {
     const fetchTaskCounts = async () => {
       const counts = {};
+      const someonesTotalHours = {}
+      const someonesAvaiableHours = {}
       for (const row of rows) {
         const count = await fetchNumberOfTasks(row.employeeId);
+        const totalH = await fetchTotalHours(row.employeeId);
+        const avaiableH = await fetchAvaliable(row.employeeId);
         counts[row.employeeId] = count;
+        someonesTotalHours[row.employeeId] = totalH;
+        someonesAvaiableHours[row.employeeId] = avaiableH;
       }
       setTaskCounts(counts);
+      setTotalHours(someonesTotalHours);
+      setAvaiableHours(someonesAvaiableHours);
     };
-  
+
     fetchTaskCounts();
+    fetchTotalHours();
+    fetchAvaliable();
   }, [rows]);
 
   if (error) {
     return <div>Error: {error}</div>;
   }
+
+
+  
+
+
 
   // viewResource is used to go to the Selected Resource view matching the employeeID
   const viewResource = (employeeId) => {
@@ -180,8 +237,8 @@ function RescTable() {
                         {row.employeeId}
                       </TableCell>
                       <TableCell align="left">{row.name}</TableCell>
-                      <TableCell align="left">{row.creationDate}</TableCell>
-                      <TableCell align="left">{row.description}</TableCell>
+                      <TableCell align="left">{avaiableHours[row.employeeId] !== undefined ? avaiableHours[row.employeeId] : ''}</TableCell>
+                      <TableCell align="left">{totalHours[row.employeeId] !== undefined ? totalHours[row.employeeId] : ''}</TableCell>
                       <TableCell align="left">{taskCounts[row.employeeId] !== undefined ? taskCounts[row.employeeId] : ''}</TableCell>
                       <TableCell>{row.employeeId !== undefined && 
                         <Button sx={{ color: 'white', background: '#CA3433', ':hover': { background: '#FF0000' } }} 

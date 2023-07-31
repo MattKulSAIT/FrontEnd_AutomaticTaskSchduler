@@ -1,7 +1,14 @@
 import React, { useState, useEffect } from 'react';
+
 import { useParams, useNavigate } from "react-router-dom";
 
-const EditResourceAdmin = () => {
+/**
+ * Admin Edit Component (ADMIN)
+ *  This is used to edit task details on the selected admin 
+ */
+const AdminEditAdmin = () => {
+
+    // BackEnd //
 
     //Variables
     const [employeeId, setEmployeeId] = useState(0);
@@ -65,6 +72,7 @@ const EditResourceAdmin = () => {
                 break;
         }
     }
+    
     const handleCheckboxSetting = (checkbox) => {
         if (checkbox === 0) {
             return false;
@@ -73,7 +81,7 @@ const EditResourceAdmin = () => {
         }
     } 
 
-
+    // Gathers the current data of the admin
     const fetchData = async () => {
         try {
             const response = await fetch(`http://localhost:8080/resourceEdit/${id}`); //it used id because thats what was using the App.js
@@ -105,6 +113,7 @@ const EditResourceAdmin = () => {
 
     const navigate = useNavigate();
 
+    //Saves the current changes made to the admin
     const saveEdit = async (event) => {
         if (fName === "" || lName === "" || phoneNum === "" || password === "" || role === 0) {
             setErrorMsg("All fields must be filled");
@@ -130,12 +139,13 @@ const EditResourceAdmin = () => {
         }
     };
 
+    //Exits the edit page
     function exitEdit() {
         window.location.href = 'http://localhost:3000/resourceGeneral_Admin';
     }
 
+    // FrontEnd //
 
-    //FrontEnd
     return (
         <div className='editResc'>
             <div className='editTable'>
@@ -148,23 +158,61 @@ const EditResourceAdmin = () => {
                         <div className='rescDetails'>
                             <div className='rescFirstNameDiv'>
                                 <h3>Change First Name</h3>
-                                <input type='text' placeholder='Ex. John' value={fName} name="rescFirstName" onChange={(e) => setFName(e.target.value)}/>
+                                <input 
+                                    type='text' 
+                                    placeholder='Ex. John' 
+                                    value={fName} 
+                                    maxLength="20"
+                                    pattern='[A-Za-z]+'
+                                    name="rescFirstName" 
+                                    onChange={(e) => setFName(e.target.value)}
+                                />
                             </div>
                             <div className='rescLastNameDiv'>
                                 <h3>Change Last Name</h3>
-                                <input type='text' placeholder='Ex. Doe' value={lName} name="rescLastName" onChange={(e) => setLName(e.target.value)}/>
+                                <input 
+                                    type='text' 
+                                    placeholder='Ex. Doe' 
+                                    value={lName} 
+                                    maxLength="20"
+                                    pattern='[A-Za-z]+'
+                                    name="rescLastName" 
+                                    onChange={(e) => setLName(e.target.value)}
+                                />
                             </div>
                             <div className='rescPhoneDiv'>
                                 <h3>Change Phone</h3>
-                                <input type='phone' placeholder='Ex. 123-123-1234' value={phoneNum} name="rescPhone" onChange={(e) => setPhoneNum(e.target.value)}/>
+                                <input 
+                                    type='tel' 
+                                    placeholder='Ex. 123-123-1234' 
+                                    value={phoneNum} 
+                                    pattern="\d{3}[\-]\d{3}[\-]\d{4}"
+                                    name="rescPhone" 
+                                    onChange={(e) => setPhoneNum(e.target.value)}
+                                />
                             </div>
                             <div className='rescEmailDiv'>
                                 <h3>Change Email</h3>
-                                <input type='email' placeholder='Ex. johnd@work.com' value={email} name="rescEmail" onChange={(e) => setEmail(e.target.value)}/>
+                                <input 
+                                    type='email' 
+                                    placeholder='Ex. johnd@work.com' 
+                                    value={email} 
+                                    name="rescEmail" 
+                                    onChange={(e) => setEmail(e.target.value)}
+                                />
                             </div>
                             <div className='passDiv'>
                                 <h3>Change Password</h3>
-                                <input type='password' placeholder='Ex. ***********' value={password} name="rescPassword" onChange={(e) => setPassword(e.target.value)}/>
+                                <input 
+                                    type='password' 
+                                    placeholder='Ex. ***********' 
+                                    value={password} 
+                                    minLength="8"
+                                    maxLength="20"
+                                    pattern='^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$'
+                                    name="rescPassword" 
+                                    onChange={(e) => setPassword(e.target.value)}
+                                />
                             </div>
                         </div>
                         <hr align="left"/>
@@ -182,4 +230,4 @@ const EditResourceAdmin = () => {
     );
 }
 
-export default EditResourceAdmin;
+export default AdminEditAdmin;

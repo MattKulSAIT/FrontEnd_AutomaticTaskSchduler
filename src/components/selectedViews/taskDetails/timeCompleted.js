@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from 'react';
+
 import { useParams } from 'react-router-dom';
 
+/**
+ * taskEdit Component (ADMIN)
+ *  This is used to edit task details on the selected task 
+ */
 function CompDetails() {
 
     

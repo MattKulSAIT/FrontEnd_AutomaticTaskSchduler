@@ -46,7 +46,7 @@ function PageHeader() {
               aria-haspopup="true"
               aria-expanded={isMenuOpen ? 'true' : undefined}
               onClick={handleMenuOpen}
-              sx={{ color: '#CA3433', background: '#FFFFFF', marginRight: '%', ':hover': { background: '#FFFFFF' } }}
+              sx={{ color: '#CA3433',fontFamily: 'bahnschrift',fontWeight: 'bold',background: '#FFFFFF',paddingTop: '10px' , marginRight: '%', ':hover': { background: '#FFFFFF' } }}
           >
               Logout
           </Button>
