@@ -53,19 +53,26 @@ const NewResource = () => {
         phoneNum: phoneNum,
         email: email,
         password: password,
-        deskSkill: deskChecked ? 1 : 0,
-        dataSkill: dataChecked ? 1 : 0,
-        netSkill: netChecked ? 1 : 0,
-        mobileSkill: mobileChecked ? 1 : 0,
+        deskSkill: role === "1" ? 0 : (deskChecked ? 1 : 0),
+        dataSkill: role === "1" ? 0 : (dataChecked ? 1 : 0),
+        netSkill: role === "1" ? 0 : (netChecked ? 1 : 0),
+        mobileSkill: role === "1" ? 0 : (mobileChecked ? 1 : 0),
         role: role,
     };
 
     //The constant to send the contents to the backend
     const createResource = async (event) => {
         event.preventDefault();
+        debugger;
         if (fName === "" || lName === "" || phoneNum === "" || password === "" || role === 0) {
             setErrorMsg("All fields must be filled");
-        } else {
+        }
+        else if (
+            role === "2" &&
+            (deskChecked === false && dataChecked === false && netChecked === false && mobileChecked === false)
+          ){
+            setErrorMsg("Resources Must have at least 1 Skill");
+        }else {
             await fetch("http://localhost:8080/newResource", {
                 method: 'POST',
                 headers: {
@@ -154,7 +161,7 @@ const NewResource = () => {
                             <h3>Password: <span>(One UpperCase, One lowerCase, One number)</span></h3>
                             <input 
                                 type='password' 
-                                placeholder='Ex. password' 
+                                placeholder='Ex. Password1'  
                                 name="rescPassword"  
                                 value={password} 
                                 minLength="8" 
@@ -178,6 +185,7 @@ const NewResource = () => {
                                             checked={deskChecked} 
                                             className='skillsButton' 
                                             onChange={handleCheckboxChange}
+                                            disabled={role === "1"}
                                         />
                                         <h3>Help Desk Support</h3>
                                     </td>
@@ -189,6 +197,7 @@ const NewResource = () => {
                                             checked={dataChecked} 
                                             className='skillsButton' 
                                             onChange={handleCheckboxChange}
+                                            disabled={role === "1"}
                                         />
                                         <h3>Database Support</h3>
                                     </td>
@@ -202,6 +211,7 @@ const NewResource = () => {
                                             checked={netChecked} 
                                             className='skillsButton' 
                                             onChange={handleCheckboxChange}
+                                            disabled={role === "1"}
                                             />
                                         <h3>Network Supoort</h3>
                                     </td>
@@ -213,6 +223,7 @@ const NewResource = () => {
                                             checked={mobileChecked} 
                                             className='skillsButton' 
                                             onChange={handleCheckboxChange}
+                                            disabled={role === "1"}
                                         />
                                         <h3>Mobile Support</h3>
                                     </td>

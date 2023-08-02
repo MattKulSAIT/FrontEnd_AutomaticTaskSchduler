@@ -208,8 +208,8 @@ function RescTable() {
     <div className='rescTable'>
       <div className='resources'>
         <main>
-          
-          <TableContainer style={{ maxHeight: tableHeight, overflow: 'auto', marginTop: '10px', margin: 0 }}>
+        <h1>Resources</h1>
+          <TableContainer style={{ maxHeight: tableHeight, overflow: 'auto', marginTop: '', margin: 0 }}>
             <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
               <TableHead style={tableHeaderStyle}>
                 <TableRow>

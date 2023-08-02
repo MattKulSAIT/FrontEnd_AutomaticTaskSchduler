@@ -176,7 +176,7 @@ const TaskEditAdmin = () =>{
           <div className='titleHeader'>
             <h1>{taskId} - {taskTitle}</h1>
           </div>
-          <hr align="left"/>
+          <hr width='1000000px'/>
           <div className='taskStatusDiv'>
               <h3>Change Task Status:</h3>
               <select name="selectTaskStatus" id="taskStatus">

@@ -87,6 +87,7 @@ const history = useNavigate();
     const tableHeight = numRows <= maxRows ? numRows * rowHeight : `${maxRows * rowHeight}px`;
   return(
     <main>
+      <h1>Assigned Tasks</h1>
             <TableContainer style={{ maxHeight: tableHeight, overflow: 'auto', marginTop: '10px', margin: 0 }}>
             <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
                 <TableHead style={tableHeaderStyle}>

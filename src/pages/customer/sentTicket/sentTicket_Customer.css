@@ -3,7 +3,12 @@
 /*Images*/
 
 /*Page*/
-.body {
+.bodystuff {
     padding-top: 100px;
+    text-align: center;
+}
+
+.body{
+    padding-top: 10px;
     text-align: center;
 }

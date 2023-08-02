@@ -12,7 +12,7 @@ function SentTicketPage() {
     return (
         <div className="sentTicketPage">
             <div className="components">
-                <div className="body">
+                <div className="bodystuff" >
                     <div className="ATlogo">
                         <img
                             src={ATlogo}

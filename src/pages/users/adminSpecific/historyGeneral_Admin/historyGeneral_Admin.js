@@ -1,6 +1,6 @@
 import GeneralHistoryTable from'../../../../components/generalViews/historyGeneralTable';
 import PageHeader from'../../../../components/pageHeader'
-import PageTitle from'../../../../components/generalSearchTitle'
+import PageTitle from'../../../../components/pageTitle'
 
 /**
  * History General Page (ADMIN)
@@ -22,6 +22,7 @@ function HistoryGeneralAdminPage() {
                     <PageTitle currPage={currPage} backButtonLink={backButtonLink}/>
                 </div>
                 <div className='body'>
+                    <h1>Completed Tasks</h1>
                     <GeneralHistoryTable/>
                 </div>
             </div>

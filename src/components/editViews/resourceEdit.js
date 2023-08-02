@@ -204,15 +204,16 @@ const ResourceEditAdmin = () => {
                             <div className='passDiv'>
                                 <h3>Change Password <span>(One UpperCase, One lowerCase, One number)</span></h3>
                                 <input 
-                                    type='password' 
-                                    placeholder='Ex. ***********' 
-                                    value={password} 
-                                    name="rescPassword" 
-                                    minLength="8"
-                                    maxLength="20"
-                                    pattern='^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$'
-                                    onChange={(e) => setPassword(e.target.value)}
-                                />
+                                type='password' 
+                                placeholder='Ex. Password1' 
+                                name="rescPassword"  
+                                value={password} 
+                                minLength="8" 
+                                maxLength="20"
+                                pattern='^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$'
+                                required
+                                onChange={(e) => setPassword(e.target.value)}
+                            />
                             </div>
                         </div>
                         <hr align="left"/>

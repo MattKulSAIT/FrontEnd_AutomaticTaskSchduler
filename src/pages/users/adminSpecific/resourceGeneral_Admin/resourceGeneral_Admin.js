@@ -1,6 +1,7 @@
 import GeneralResourceTable from'../../../../components/generalViews/rescGeneralTable'
 import PageHeader from'../../../../components/pageHeader'
-import PageTitle from'../../../../components/generalSearchTitle'
+import PageTitle from'../../../../components/pageTitle'
+import './resourceGeneral_Admin.css'
 
 //THis page is not tested as i need backend connection
 

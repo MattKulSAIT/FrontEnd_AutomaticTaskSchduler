@@ -2,7 +2,7 @@ import './taskGeneral_Resource.css'
 
 import GeneralTaskTable from'../../../../components/generalViews/taskGeneralTable'
 import PageHeader from'../../../../components/pageHeader'
-import PageTitleSearch from'../../../../components/generalSearchTitle'
+import PageTitleSearch from'../../../../components/pageTitle'
 
 /**
  * Task Edit Page (RESOURCE)
@@ -21,6 +21,7 @@ function TaskGeneralResourcePage() {
                     <PageTitleSearch currPage={currPage} backButtonLink={backButtonLink}/>
                 </div>
                 <div className='body'>
+                    <h1>Active Tasks</h1>
                     <GeneralTaskTable EditPage={"/taskEdit_Resource/"} ViewPage={"/taskSelected_Resource/"}/>
                 </div>
             </div>

@@ -32,6 +32,20 @@ function CompDetails() {
         }
       };
 
+    // Formats date string
+    const formatDate = (dateString) => {
+    if (!dateString) {
+      return ''; // Return empty string for undefined or empty dates
+    }
+  
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    return `${year}-${month}-${day} ${hours}:${minutes}`;
+  };
     return(
         <div className="compTimeDiv">
             <table className="compTimeTable">
@@ -40,8 +54,8 @@ function CompDetails() {
                     <th>Completion Date:</th>
                 </tr>
                 <tr>
-                    <td id='createTime'>{taskCreation}</td>
-                    <td id="compTime">{taskCompletion}</td>
+                    <td id='createTime'>{formatDate(taskCreation)}</td>
+                    <td id="compTime">{formatDate(taskCompletion)}</td>
                 </tr>
             </table>
         </div>
