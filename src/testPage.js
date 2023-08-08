@@ -1,27 +1,39 @@
-import './TestPage.css';
-import TitleDesc from './components/Layout_Display/tables/selectedViews/taskDetails/titleDesc'
-import TaskDetails from './components/Layout_Display/tables/selectedViews/taskDetails/taskDetails'
-import RescAssigned from './components/Layout_Display/tables/selectedViews/taskDetails/rescAssigned'
-import ECTdetails from './components/Layout_Display/tables/selectedViews/taskDetails/ectDetails'
+import * as React from 'react';
 
-import GeneralTaskTable from'./components/Layout_Display/tables/generalViews/resourceDetails/rescGeneralTable'
-import PageHeader from'./components/Layout_Display/pageHeader'
-import PageTitle from'./components/Layout_Display/rescGeneralTitle'
+import './TestPage.css';
+
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { StaticDatePicker } from '@mui/x-date-pickers/StaticDatePicker';
 
 function TestPage() {
+
     return (
-        <div className="testPage">
-            <header className="testPageHeader">
-                    <PageHeader style={{ marginTop: '0' }} />   
-            </header>
-            <div>
-                <PageTitle/>
-            </div>
-            <main>
-                <GeneralTaskTable/>
-            </main>
+
+        <div className='component'>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <StaticDatePicker 
+                    orientation="landscape"
+                    disablePast="true"
+                    sx={{
+                        bgcolor: '#F5F5F5',
+                        WebkitTextFillColor: '#757575',
+                        
+                    }}  
+                />
+            </LocalizationProvider>
         </div>
+        
     );
+
 }
-  
+
 export default TestPage;
+
+/*
+Use the onAccept to gather the date when 'OK' is clicked
+
+OR
+
+Use value to get the selected value
+*/
