@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
-import './resourceSelected_Admin.css'
+import './adminSelected_Admin.css'
 
 import PageHeader from '../../../../components/pageHeader';
 import PageTitle from '../../../../components/pageTitle';
@@ -11,7 +11,7 @@ import RescSkillRole from '../../../../components/selectedViews/rescDetails/resc
 import ResourceDetailsTable from '../../../../components/selectedViews/rescDetails/rescDetails';
 
 /**
- * Resource Selected Page (ADMIN)
+ * Admin Selected Page (ADMIN)
  *  The page that the admin uses to view details of a selected user
  */
 function ResourceSelectedAdminPage() {
@@ -30,11 +30,6 @@ function ResourceSelectedAdminPage() {
                 <div className='body' style={{ display: 'flex' }}>
                     <div style={{width:'60%'}}>
                         <RescBasicDetails/>
-                        <RescHours/>
-                        <RescSkillRole/>
-                    </div>
-                    <div style={{ flex: 1 }}>
-                        <ResourceDetailsTable/>
                     </div>
                 </div>
             </div>

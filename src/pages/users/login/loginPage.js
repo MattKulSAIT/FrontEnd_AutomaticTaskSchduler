@@ -1,18 +1,23 @@
 import './loginPage.css'
+
 import Login from "../../../components/login"
 
+/**
+ * Login Page
+ *  The page that a user uses to login
+ */
 function LoginPage() {
+
     return (
         <div className="loginPage">
             <div className="components">
-                <Login/>
+                <div className='body'>
+                    <Login/>
+                </div>             
             </div>
         </div>
     );
+
 }
   
 export default LoginPage;
-
-/* Notes
-+ Remove <h1>Login Page</h1> when done
-*/

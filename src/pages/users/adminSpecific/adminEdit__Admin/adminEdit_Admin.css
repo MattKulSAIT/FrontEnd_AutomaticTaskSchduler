@@ -1,13 +1,22 @@
 /*Text*/
-h1, h3, p {
+h3, p {
     color: #CA3433;
     font-family: bahnschrift;
 }
 
+/*Img*/
+
+
+
+/*Page
+html, body {
+    margin: 0;
+    padding: 20px;
+}*/
+
 hr {
     border: 2px solid #CA3433;
     border-radius: 5px;
-    max-width: 950px
 }
 
 select, input{
@@ -54,29 +63,4 @@ button{
 .rescFirstNameDiv, .rescLastNameDiv, .rescPhoneDiv, .rescEmailDiv {
     display: inline-block;
     margin-right: 10px;
-}
-
-.skillsButton, .roleButton {
-    width: 25px;
-    background-color: #CA3433;
-}
-
-.roleButton {
-    border-radius: 20px;
-}
-
-input[type=checkbox] {
-    position: relative;
-    vertical-align: middle;
-    margin-right: 10px;
-}
-
-.tdTitle {
-    width: 320px;
-}
-
-
-#helpdesk{
-    accent-color: #CA3433;
-    box-shadow: none;
 }

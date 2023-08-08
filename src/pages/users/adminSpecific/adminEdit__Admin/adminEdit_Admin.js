@@ -1,11 +1,10 @@
 import React from "react";
-import { useParams } from 'react-router-dom';
 
-import './resourceEdit_Admin.css'
+import './adminEdit_Admin.css'
 
 import PageHeader from '../../../../components/pageHeader';
 import PageTitle from '../../../../components/pageTitle';
-import RescEditAdmin from '../../../../components/editViews/resourceEdit';
+import AdminEditAdmin from '../../../../components/editViews/adminEdit';
 
 /**
  * This funcation takes in all components for the resourceEditAdmin page and
@@ -14,23 +13,20 @@ import RescEditAdmin from '../../../../components/editViews/resourceEdit';
  */
 
 /**
- * Resource Edit Page (ADMIN)
- *  The page that the admin uses to edit Resource details
+ * Admin Edit Page (ADMIN)
+ *  The page that the admin uses to edit Admin details
  */
-function ResourceEditAdminPage() {
-    const { userid } = useParams();
-    const currPage = "Edit Resource";
-    const backButtonLink = `http://localhost:3000/resourceGeneral_Admin/` + userid;
+function AdminEditAdminPage() {
+
 
     return (
-        <div className="resourceEditAdminPage">
+        <div className="adminEditAdminPage">
             <div className="components">
                 <div className="headers">
                     <PageHeader/>
-
                 </div>
                 <div className="body">
-                    <RescEditAdmin/>
+                    <AdminEditAdmin/>
                 </div>
             </div>
         </div>
@@ -38,4 +34,4 @@ function ResourceEditAdminPage() {
 
 }
 
-export default ResourceEditAdminPage;
+export default AdminEditAdminPage;
