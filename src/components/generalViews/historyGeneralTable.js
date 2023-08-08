@@ -1,5 +1,7 @@
 import React from 'react';
+
 import { useNavigate } from 'react-router-dom';
+
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -9,6 +11,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Button from '@mui/material/Button';
 
+//Table cell styling
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -19,6 +22,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   },
 }));
 
+//Table row styling
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   '&:nth-of-type(odd)': {
     backgroundColor: theme.palette.action.hover,
@@ -28,6 +32,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
+//Table header styling
 const tableHeaderStyle = {
   position: 'sticky',
   top: 0,
@@ -35,7 +40,11 @@ const tableHeaderStyle = {
   zIndex: 1,
 };
 
-export default function HistoryTable() {
+/**
+ * General History Table Component (ADMIN)
+ *  This component displays the general view of all completed tasks 
+ */
+function HistoryTable() {
   const [rows, setRows] = React.useState([]);
   const [error, setError] = React.useState(null);
   const history = useNavigate();
@@ -44,6 +53,7 @@ export default function HistoryTable() {
     fetchData();
   }, []);
 
+  //Gathers the completed tasks from the database
   const fetchData = async () => {
     try {
       const response = await fetch('http://localhost:8080/generalArchivedTask');
@@ -62,22 +72,19 @@ export default function HistoryTable() {
     return <div>Error: {error}</div>;
   }
 
-  //THESE NEED TO BE CHANGED BUT NO LANDING PAGES
+  // viewTask is used to go to the Selected History view matching the taskID
   const viewTask = (taskId) => {
-    history(`/taskSelected_Resource/${taskId}`);
+    history(`/historySelected_Admin/${taskId}`);
   };
 
-  //THESE NEED TO BE CHANGED BUT NO LANDING PAGES
-  const editTask = (taskId) => {
-    history(`/taskEdit_Resource/${taskId}`);
-  };
-
+  // Table Variables
   const rowHeight = 30; // Height of each row
   const maxRows = 13; // Maximum number of rows to display
 
   const numRows = Math.max(rows.length, maxRows); // Calculate the maximum number of rows
   const tableHeight = numRows <= maxRows ? numRows * rowHeight : `${maxRows * rowHeight}px`;
 
+  // Formats date string
   const formatDate = (dateString) => {
     if (!dateString) {
       return ''; // Return empty string for undefined or empty dates
@@ -92,77 +99,84 @@ export default function HistoryTable() {
     return `${year}-${month}-${day} ${hours}:${minutes}`;
   };
 
+  // FrontEnd //
+
   return (
-    <TableContainer style={{ maxHeight: tableHeight, overflow: 'auto', marginTop: '10px'}}>
-      <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
-        <TableHead style={tableHeaderStyle}>
-          <TableRow>
-            <TableCell sx={{ color: '#CA3433', fontWeight: 'bold' }}>Task #</TableCell>
-            <TableCell align="left" sx={{ color: '#CA3433', fontWeight: 'bold' }}>Title</TableCell>
-            <TableCell align="left" sx={{ color: '#CA3433', fontWeight: 'bold' }}>Date Created</TableCell>
-            <TableCell align="left" sx={{ color: '#CA3433', fontWeight: 'bold' }}>Date Completed</TableCell>
-            <TableCell align="left" sx={{ color: '#CA3433', fontWeight: 'bold' }}>Type</TableCell>
-            <TableCell align="left" sx={{ color: '#CA3433', fontWeight: 'bold' }}>Employee Id</TableCell>
-            <TableCell align="left" sx={{ color: '#CA3433', fontWeight: 'bold' }}>Status</TableCell>
-            <TableCell></TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody sx={{ backgroundColor: '#F5F5F5' }}>
-          {Array.from({ length: numRows }).map((_, index) => {
-            const row = rows[index] || {}; // Get the row if it exists or an empty object
-            return (
-              <TableRow
-                key={index}
-                sx={{
-                  '&:last-child td, &:last-child th': { border: 0 },
-                  height: `${rowHeight}px`,
-                }}
-              >
-                <TableCell component="th" scope="row">
-                  {row.taskNumber}
-                </TableCell>
-                <TableCell align="left">{row.title}</TableCell>
-                <TableCell align="left">{formatDate(row.creationDate)}</TableCell>
-                <TableCell align="left">{formatDate(row.completionDate)}</TableCell>
-                <TableCell align="left">
-                  {row.category === 1
-                    ? 'Desk Side'
-                    : row.category === 2
-                    ? 'Database'
-                    : row.category === 3
-                    ? 'Network'
-                    : row.category === 4
-                    ? 'Mobile Telephone'
-                    : row.category}
-                </TableCell>
-                <TableCell align="left">{row.empId}</TableCell>
-                <TableCell align="left">
-                  {row.status === 1
-                    ? 'Pending'
-                    : row.status === 2
-                    ? 'Assigned'
-                    : row.status === 3
-                    ? 'In Progress'
-                    : row.status === 4
-                    ? 'Complete'
-                    : row.status}
-                </TableCell>
-                <TableCell>
-                  {row.title !== undefined && (
-                    <Button
-                      sx={{ color: 'white', background: '#CA3433', ':hover': { background: '#FF0000' } }}
-                      id={row.taskNumber}
-                      onClick={() => viewTask(row.taskNumber)}
-                    >
-                      View
-                    </Button>
-                  )}
-                </TableCell>
-              </TableRow>
-            );
-          })}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <div className='historyTable'>
+      <TableContainer style={{ maxHeight: tableHeight, overflow: 'auto', marginTop: '10px'}}>
+        <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
+          <TableHead style={tableHeaderStyle}>
+            <TableRow>
+              <TableCell sx={{ color: '#CA3433', fontWeight: 'bold' }}>Task #</TableCell>
+              <TableCell align="left" sx={{ color: '#CA3433', fontWeight: 'bold' }}>Title</TableCell>
+              <TableCell align="left" sx={{ color: '#CA3433', fontWeight: 'bold' }}>Date Created</TableCell>
+              <TableCell align="left" sx={{ color: '#CA3433', fontWeight: 'bold' }}>Date Completed</TableCell>
+              <TableCell align="left" sx={{ color: '#CA3433', fontWeight: 'bold' }}>Type</TableCell>
+              <TableCell align="left" sx={{ color: '#CA3433', fontWeight: 'bold' }}>Employee Id</TableCell>
+              <TableCell align="left" sx={{ color: '#CA3433', fontWeight: 'bold' }}>Status</TableCell>
+              <TableCell></TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody sx={{ backgroundColor: '#F5F5F5' }}>
+            {Array.from({ length: numRows }).map((_, index) => {
+              const row = rows[index] || {}; // Get the row if it exists or an empty object
+              return (
+                <TableRow
+                  key={index}
+                  sx={{
+                    '&:last-child td, &:last-child th': { border: 0 },
+                    height: `${rowHeight}px`,
+                  }}
+                >
+                  <TableCell component="th" scope="row">
+                    {row.taskNumber}
+                  </TableCell>
+                  <TableCell align="left">{row.title}</TableCell>
+                  <TableCell align="left">{formatDate(row.creationDate)}</TableCell>
+                  <TableCell align="left">{formatDate(row.completionDate)}</TableCell>
+                  <TableCell align="left">
+                    {row.category === 1
+                      ? 'Desk Side'
+                      : row.category === 2
+                      ? 'Database'
+                      : row.category === 3
+                      ? 'Network'
+                      : row.category === 4
+                      ? 'Mobile Telephone'
+                      : row.category}
+                  </TableCell>
+                  <TableCell align="left">{row.empId}</TableCell>
+                  <TableCell align="left">
+                    {row.status === 1
+                      ? 'Pending'
+                      : row.status === 2
+                      ? 'Assigned'
+                      : row.status === 3
+                      ? 'In Progress'
+                      : row.status === 4
+                      ? 'Complete'
+                      : row.status}
+                  </TableCell>
+                  <TableCell>
+                    {row.title !== undefined && (
+                      <Button
+                        sx={{ color: 'white', background: '#CA3433', ':hover': { background: '#FF0000' } }}
+                        id={row.taskNumber}
+                        onClick={() => viewTask(row.taskNumber)}
+                      >
+                        View
+                      </Button>
+                    )}
+                  </TableCell>
+                </TableRow>
+              );
+            })}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </div>
   );
+
 }
+
+export default HistoryTable;

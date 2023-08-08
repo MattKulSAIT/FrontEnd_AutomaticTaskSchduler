@@ -38,12 +38,12 @@ function RescBasicDetails() {
                         <th id='rescTableTitle'>Basic Details:</th>
                     </tr>
                     <tr>
-                        <td id='rescName'>{rescName}</td>
-                        <td id='rescID'>{rescID}</td>
+                        <td id='rescName'>Name: {rescName}</td>
+                        <td id='rescID'>EmpID: {rescID}</td>
                     </tr>
                     <tr>
-                        <td id='rescPhone'>{rescPhone}</td>
-                        <td id='rescEmail'>{rescEmail}</td>
+                        <td id='rescPhone'>Phone: {rescPhone}</td>
+                        <td id='rescEmail'>Email: {rescEmail}</td>
                     </tr>
                 </table>
             </form>

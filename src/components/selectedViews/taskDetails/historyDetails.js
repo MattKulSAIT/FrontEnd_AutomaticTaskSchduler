@@ -3,10 +3,10 @@ import React, { useEffect, useState } from "react";
 import { useParams } from 'react-router-dom';
 
 /**
- * Task Details
- *  This cointains all of the basic details of the selected task
+ * History Details Component (ADMIN)
+ *  This is used to see the task details in the history view
  */
-function TaskDetails() {
+function HistoryDetails() {
 
   // BackEnd //
 
@@ -14,7 +14,6 @@ function TaskDetails() {
   const [cusName, setcustName] = useState("tempCusName");
   const [cusPhone, setCusPhone] = useState("tempCusPhone");
   const [cusEmail, setCusEmail] = useState("tempCusEmail");
-  const [taskCreation, setTaskCreation] = useState("tempTaskCreation");
   const [taskStatus, setTaskStatus] = useState("tempTaskStatus");
   const [taskType, setTaskType] = useState("tempTaskType");
   const { id } = useParams();
@@ -23,15 +22,15 @@ function TaskDetails() {
     fetchData();
   }, []);
 
+  //Gathers the data of the task using taskID
   const fetchData = async () => {
     try {
-      const response = await fetch(`http://localhost:8080/taskView/${id}`); //it used id because thats what was useing the App.js
+      const response = await fetch(`http://localhost:8080/archiveTask/${id}`); //it used id because thats what was useing the App.js
       if (response.ok) {
         const data = await response.json();
         setcustName(data.name);
         setCusPhone(data.phoneNumber);
         setCusEmail(data.email);
-        setTaskCreation(data.creationDate);
         //setTaskStatus(data.status);
         if(data.status === 1){
             setTaskStatus("Pending");
@@ -62,48 +61,27 @@ function TaskDetails() {
     }
   };
 
-
-  // Formats date string
-  const formatDate = (dateString) => {
-    if (!dateString) {
-      return ''; // Return empty string for undefined or empty dates
-    }
-  
-    const date = new Date(dateString);
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
-    const hours = String(date.getHours()).padStart(2, '0');
-    const minutes = String(date.getMinutes()).padStart(2, '0');
-    return `${year}-${month}-${day} ${hours}:${minutes}`;
-  };
-
   // FrontEnd //
-  
+
   return(
-    <div className="taskDetails">
+    <div className="historyDetails">
       <table>
         <tr>
-            <th>Task Details:</th>
+          <th>Task Details:</th>
         </tr>
         <tr>
-            <td id="cusName">{cusName}</td>
-            <td id="taskStatus">Task Status: {taskStatus}</td>
+          <td id="taskStatus">Task Status: {taskStatus}</td>
         </tr>
         <tr>
-            <td id="cusPhone">{cusPhone}</td>
-            <td id="taskType">Task Type: {taskType}</td>
+          <td id="taskType">Task Type: {taskType}</td>
         </tr>
         <tr>
-            <td id="cusEmail">{cusEmail}</td>
-        </tr>
-        <tr>
-            <td id="taskCreation">{formatDate(taskCreation)}</td>
+          <td id="cusEmail">{cusEmail}</td>
         </tr>
       </table>
     </div>
   );
-
+  
 }
 
-export default TaskDetails;
+export default HistoryDetails;

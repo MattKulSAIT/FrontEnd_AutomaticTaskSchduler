@@ -19,13 +19,12 @@ const Login = () => {
                 },
                 body: JSON.stringify({ employeeId, password }),
             });
-
             if (response.ok) { //We need to add some logic or either send to admin or resource 
                 const loginUser = await response.json();
                 if (loginUser.role === 1) {
-                    window.location.href = 'http://localhost:3000/menu_Admin';
+                    window.location.href = 'http://localhost:3000/menu_Admin/' + employeeId;
                 } else if (loginUser.role === 2) {
-                    window.location.href = 'http://localhost:3000/menu_Resource';
+                    window.location.href = 'http://localhost:3000/menu_Resource/' + employeeId;
                 }
             } else {
                 const errorData = await response.json();

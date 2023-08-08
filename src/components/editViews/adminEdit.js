@@ -3,10 +3,10 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from "react-router-dom";
 
 /**
- * taskEdit Component (ADMIN)
- *  This is used to edit task details on the selected Resource 
+ * Admin Edit Component (ADMIN)
+ *  This is used to edit task details on the selected admin 
  */
-const ResourceEditAdmin = () => {
+const AdminEditAdmin = () => {
 
     // BackEnd //
 
@@ -72,7 +72,7 @@ const ResourceEditAdmin = () => {
                 break;
         }
     }
-
+    
     const handleCheckboxSetting = (checkbox) => {
         if (checkbox === 0) {
             return false;
@@ -81,7 +81,7 @@ const ResourceEditAdmin = () => {
         }
     } 
 
-    // Gathers the current data of the Resource
+    // Gathers the current data of the admin
     const fetchData = async () => {
         try {
             const response = await fetch(`http://localhost:8080/resourceEdit/${id}`); //it used id because thats what was using the App.js
@@ -113,7 +113,7 @@ const ResourceEditAdmin = () => {
 
     const navigate = useNavigate();
 
-    // Saves the current changes of the Resource
+    //Saves the current changes made to the admin
     const saveEdit = async (event) => {
         if (fName === "" || lName === "" || phoneNum === "" || password === "" || role === 0) {
             setErrorMsg("All fields must be filled");
@@ -139,7 +139,7 @@ const ResourceEditAdmin = () => {
         }
     };
 
-    // Exits the edit resource change
+    //Exits the edit page
     function exitEdit() {
         window.location.href = 'http://localhost:3000/resourceGeneral_Admin/' + userid;
     }
@@ -163,7 +163,7 @@ const ResourceEditAdmin = () => {
                                     placeholder='Ex. John' 
                                     value={fName} 
                                     maxLength="20"
-                                    pattern="[A-Za-z]+"
+                                    pattern='[A-Za-z]+'
                                     name="rescFirstName" 
                                     onChange={(e) => setFName(e.target.value)}
                                 />
@@ -175,7 +175,7 @@ const ResourceEditAdmin = () => {
                                     placeholder='Ex. Doe' 
                                     value={lName} 
                                     maxLength="20"
-                                    pattern="[A-Za-z]+"
+                                    pattern='[A-Za-z]+'
                                     name="rescLastName" 
                                     onChange={(e) => setLName(e.target.value)}
                                 />
@@ -202,92 +202,20 @@ const ResourceEditAdmin = () => {
                                 />
                             </div>
                             <div className='passDiv'>
-                                <h3>Change Password <span>(One UpperCase, One lowerCase, One number)</span></h3>
+                                <h3>Change Password</h3>
                                 <input 
-                                type='password' 
-                                placeholder='Ex. Password1' 
-                                name="rescPassword"  
-                                value={password} 
-                                minLength="8" 
-                                maxLength="20"
-                                pattern='^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$'
-                                required
-                                onChange={(e) => setPassword(e.target.value)}
-                            />
+                                    type='password' 
+                                    placeholder='Ex. ***********' 
+                                    value={password} 
+                                    minLength="8"
+                                    maxLength="20"
+                                    pattern='^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$'
+                                    name="rescPassword" 
+                                    onChange={(e) => setPassword(e.target.value)}
+                                />
                             </div>
                         </div>
                         <hr align="left"/>
-                        <div className='taskSkillsDiv'>
-                            <table align='left'>
-                                <tr>
-                                    <td><h3>Skills:</h3></td>
-                                </tr>
-                                <tr>
-                                    <td className='tdButton'>
-                                        <input 
-                                            type='checkbox' 
-                                            id='helpdesk' 
-                                            name='helpdesk' 
-                                            checked={deskChecked} 
-                                            className='skillsButton' 
-                                            onChange={handleCheckboxChange}
-                                        />
-                                        <h3>Help Desk Support</h3>
-                                    </td>
-                                    <td className='tdButton'>
-                                        <input 
-                                            type='checkbox' 
-                                            id='database' 
-                                            name='database'  
-                                            checked={dataChecked} 
-                                            className='skillsButton' 
-                                            onChange={handleCheckboxChange}
-                                        />
-                                        <h3>Database Support</h3>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td className='tdButton'>
-                                        <input 
-                                            type='checkbox' 
-                                            id='network' 
-                                            name='network' 
-                                            checked={netChecked} 
-                                            className='skillsButton' 
-                                            onChange={handleCheckboxChange}
-                                        />
-                                        <h3>Network Support</h3>
-                                    </td>
-                                    <td className='tdButton'>
-                                        <input 
-                                            type='checkbox' 
-                                            id='telecomm' 
-                                            name='telecomm' 
-                                            checked={mobileChecked} 
-                                            className='skillsButton' 
-                                            onChange={handleCheckboxChange}
-                                        />
-                                        <h3>Mobile Support</h3>
-                                    </td>
-                                </tr>
-                            </table>                    
-                        </div>
-                        <div className='rescRoleDiv'>
-                            <table align='left'>
-                                <tr>
-                                    <td><h3>Role:</h3></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                    <select name="role" value={role} id="rescRole" onChange={(e) => setRole(e.target.value)}>
-                                        <option value="" disabled selected>- Select Role -</option>
-                                        <option value="2">Resource</option>
-                                        <option value="1">Admin</option>
-                                    </select> 
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
                         <div className='editButtons'>
                             <button id='saveChanges' type="submit">Save Changes</button>
                             <button id='exitEdit' type="button" onClick={exitEdit}>Exit</button>
@@ -300,7 +228,6 @@ const ResourceEditAdmin = () => {
             </div>
         </div>
     );
-    
 }
 
-export default ResourceEditAdmin;
+export default AdminEditAdmin;
