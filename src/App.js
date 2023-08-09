@@ -8,6 +8,7 @@ import ResourceMenu from './pages/users/resourceSpecific/menu_Resource/menu_Reso
 import ResourceGeneralTaskViewPage from './pages/users/resourceSpecific/taskGeneral_Resource/taskGeneral_Resource';
 import ResourceSelectedTaskViewPage from './pages/users/resourceSpecific/taskSelected_Resource/taskSelected_Resource';
 import ResourceEditTaskView from './pages/users/resourceSpecific/taskEdit_Resource/taskEdit_Resource';
+import ResourceEditSchedule from './pages/users/resourceSpecific/scheduleEdit_Resource/scheduleEdit_Resource';
 import AdminGeneralTaskViewPage from './pages/users/adminSpecific/taskGeneral_Admin/taskGeneral_Admin';
 import AdminGeneralResourceViewPage from './pages/users/adminSpecific/resourceGeneral_Admin/resourceGeneral_Admin';
 import AdminGeneralHistoryViewPage from './pages/users/adminSpecific/historyGeneral_Admin/historyGeneral_Admin';
@@ -31,6 +32,7 @@ const App = () => {
         <Route path="/taskGeneral_Resource/:userid" element={<ResourceGeneralTaskViewPage />} />
         <Route path="/taskSelected_Resource/:userid/:id" element={<ResourceSelectedTaskViewPage />} />
         <Route path="/taskEdit_Resource/:userid/:id" element={<ResourceEditTaskView />} />
+        <Route path="/scheduleEdit_Resource/:userid" element={<ResourceEditSchedule />} />
         <Route path="/taskGeneral_Admin/:userid" element={<AdminGeneralTaskViewPage />} />
         <Route path="/taskSelected_Admin/:userid/:id" element={<AdminSelectedTaskViewPage />} />
         <Route path="/taskEdit_Admin/:userid/:id" element={<AdminEditTaskViewPage />} />
