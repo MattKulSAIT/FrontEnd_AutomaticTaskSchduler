@@ -121,7 +121,7 @@ const TaskEdit = () => {
                         <p>Current Type: {currType === 1 ? "Desk Side" : currType === 2 ? "Database" : currType === 3 ? "Network" : currType === 4 ? "Mobile Telephone" : "Unknown Type"}</p>
                     </div>
                     <div className='ectTimeDiv'>
-                        <h3>Change Eestimated Time:</h3>
+                        <h3>Change Estimated Time:</h3>
                         <input 
                             type='text' 
                             id='ectTime' 

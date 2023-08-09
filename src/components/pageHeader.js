@@ -17,7 +17,7 @@ function PageHeader() {
    * 
    */
   const handleMenuOpen = () => {
-    setIsMenuOpen(true);
+    window.location.href = 'http://localhost:3000';
   };
 
   /** handleMenuClose() Method

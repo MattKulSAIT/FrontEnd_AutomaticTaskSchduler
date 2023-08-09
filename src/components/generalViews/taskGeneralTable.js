@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
@@ -49,6 +49,7 @@ function TaskTable({EditPage, ViewPage}) {
   // BackEnd //
 
   // Variables
+  const { userid } = useParams();
   const [rows, setRows] = React.useState([]);
   const [error, setError] = React.useState(null);
   const history = useNavigate();
@@ -78,12 +79,12 @@ function TaskTable({EditPage, ViewPage}) {
 
   // viewTask is used to go to the Selected Task view matching the taskID
   const viewTask = (taskId) => {
-    history(`${ViewPage}${taskId}`);
+    history(`${ViewPage}${userid}/${taskId}`);
   };
 
   // editTask is used to go to the Edit Task view matching the taskID
   const editTask = (taskId) => {
-    history(`${EditPage}${taskId}`);
+    history(`${EditPage}${userid}/${taskId}`);
   };
 
   // Table Variables

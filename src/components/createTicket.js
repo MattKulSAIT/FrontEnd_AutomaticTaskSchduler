@@ -18,7 +18,7 @@ function CreateTicket() {
     const [taskLastName, setTaskLastName] = useState("");
     const [taskPhone, setTaskPhone] = useState("");
     const [taskEmail, setTaskEmail] = useState("");
-    const [taskType, setTaskType] = useState(0);
+    const [taskType, setTaskType] = useState("");
     const [timeToComplete, setTimeToComplete] = useState(0);
     const [errorMsg, setErrorMsg] = useState("");
     const navigate = useNavigate();
