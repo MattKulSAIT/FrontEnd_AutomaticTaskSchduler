@@ -18,7 +18,7 @@ function TaskSelectedAdminPage() {
     const history = useNavigate ();
     const { userid, id } = useParams();
     const currPage = "Selected Task";
-    const backButtonLink = `http://localhost:3000/taskGeneral_Admin` + userid;
+    const backButtonLink = `http://localhost:3000/taskGeneral_Admin/` + userid;
 
     /** EditPage() Method
      *   The method brings the admin to the edit task page of the selected task
